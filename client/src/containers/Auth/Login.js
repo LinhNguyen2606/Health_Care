@@ -11,7 +11,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            fullname: '',
             password: '',
             isShowPassword: false,
             errMessage: '',
@@ -20,7 +20,7 @@ class Login extends Component {
 
     handleOnChangeUserName = (e) => {
         this.setState({
-            username: e.target.value,
+            fullname: e.target.value,
         });
     };
 
@@ -35,7 +35,7 @@ class Login extends Component {
             errMessage: '',
         });
         try {
-            let data = await handleLoginApi(this.state.username, this.state.password);
+            let data = await handleLoginApi(this.state.fullname, this.state.password);
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message,
@@ -375,7 +375,7 @@ class Login extends Component {
                                                                 className="form-control email"
                                                                 name="username"
                                                                 placeholder="Username"
-                                                                value={this.state.username}
+                                                                value={this.state.fullname}
                                                                 onChange={(e) => this.handleOnChangeUserName(e)}
                                                             />
                                                         </div>

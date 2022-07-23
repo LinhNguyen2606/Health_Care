@@ -64,6 +64,7 @@ const activateEmail = async (req, res) => {
             email: email,
             password: password,
             fullname: fullname,
+            roleId: 'R3',
         });
 
         await newUser.save();

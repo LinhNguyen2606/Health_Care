@@ -5,8 +5,8 @@ import { push } from 'connected-react-router';
 import * as actions from '../../store/actions';
 import { toast } from 'react-toastify';
 import './Login.scss';
-import { handleLoginApi } from '../../services/userService';
-
+import { handleLoginApi, loginFacebook } from '../../services/userService';
+import FacebookLogin from 'react-facebook-login';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +35,7 @@ class Login extends Component {
             errMessage: '',
         });
         try {
-            let data = await handleLoginApi(this.state.fullname, this.state.password);
+            const data = await handleLoginApi(this.state.username, this.state.password);
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message,
@@ -66,6 +66,31 @@ class Login extends Component {
     handleKeyDown = (e) => {
         if (e.key === 'Enter' || e.keyCode === 13) {
             this.handleLogin();
+        }
+    };
+
+    responseFacebook = async (response) => {
+        try {
+            const { accessToken, userID, email, name } = response;
+            const data = await loginFacebook({ email, userID, accessToken, name });
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMessage: data.message,
+                });
+            }
+            if (data && data.errCode === 0) {
+                this.props.userLoginSocialSuccess(data);
+                this.props.history.push('/home');
+                toast.success('Log in successfully');
+            }
+        } catch (e) {
+            if (e.response) {
+                if (e.response.data) {
+                    this.setState({
+                        errMessage: e.response.data.message,
+                    });
+                }
+            }
         }
     };
 
@@ -330,12 +355,15 @@ class Login extends Component {
                                             {/* <!-- social login buttons start --> */}
                                             <div className="row social-buttons">
                                                 <div className="col-xs-4 col-sm-4 col-md-12">
-                                                    <a href="# " className="btn btn-block btn-facebook">
-                                                        <i className="fa fa-facebook"></i>{' '}
-                                                        <span className="hidden-xs hidden-sm">
-                                                            Signin with facebook
-                                                        </span>
-                                                    </a>
+                                                    <FacebookLogin
+                                                        // version="4.0"
+                                                        className="btn btn-block btn-facebook"
+                                                        appId="744512323509710"
+                                                        autoLoad={false}
+                                                        fields="name,email,picture"
+                                                        icon="fa-facebook"
+                                                        callback={this.responseFacebook}
+                                                    />
                                                 </div>
                                                 <div className="col-xs-4 col-sm-4 col-md-12">
                                                     <a href="# " className="btn btn-block btn-google">
@@ -387,6 +415,7 @@ class Login extends Component {
                                                                     }
                                                                     className="form-control password"
                                                                     name="password"
+                                                                    autoComplete="off"
                                                                     placeholder="Password"
                                                                     value={this.state.password}
                                                                     onChange={(e) => this.handleOnChangePassword(e)}
@@ -798,6 +827,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
         userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        userLoginSocialSuccess: (userInfo) => dispatch(actions.userLoginSocialSuccess(userInfo)),
     };
 };
 

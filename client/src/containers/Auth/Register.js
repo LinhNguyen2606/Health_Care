@@ -438,6 +438,7 @@ class Register extends Component {
                                                                     }
                                                                     className="form-control password"
                                                                     name="password"
+                                                                    autoComplete="off"
                                                                     placeholder="Password"
                                                                     value={this.state.password}
                                                                     onChange={(e) => this.handleOnChangePassword(e)}
@@ -464,6 +465,7 @@ class Register extends Component {
                                                                     }
                                                                     className="form-control password"
                                                                     name="password"
+                                                                    autoComplete="off"
                                                                     placeholder="Confirm password"
                                                                     value={this.state.cf_password}
                                                                     onChange={(e) =>
@@ -496,15 +498,15 @@ class Register extends Component {
                                                         </div>
                                                         {/* <!-- ./remember-row --> */}
                                                         <div className="form-group">
-                                                            <button
-                                                                className="btn btn-lg btn-primary btn-block register-btn"
-                                                                type="button"
-                                                                onClick={() => this.handleRegister()}
-                                                            >
-                                                                <Link to="/confirm" style={{ color: 'white' }}>
+                                                            <Link to="/confirm">
+                                                                <button
+                                                                    className="btn btn-lg btn-primary btn-block register-btn"
+                                                                    type="button"
+                                                                    onClick={() => this.handleRegister()}
+                                                                >
                                                                     Register
-                                                                </Link>
-                                                            </button>
+                                                                </button>
+                                                            </Link>
                                                         </div>
                                                     </form>
                                                 </div>

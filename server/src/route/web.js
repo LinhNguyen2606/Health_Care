@@ -17,6 +17,10 @@ let initWebRoutes = (app) => {
     router.post('/api/login', userController.handleLogin);
     router.post('/api/activation', userController.activateEmail);
 
+    //Social login
+    router.post('/api/facebook_login', userController.facebookLogin);
+    router.post('/api/google_login', userController.googleLogin);
+
     return app.use('/', router);
 };
 

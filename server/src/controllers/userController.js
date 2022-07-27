@@ -1,6 +1,11 @@
 import db from '../models/index';
 import userService from '../services/userService';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
+import { google } from 'googleapis';
+import fetch from 'node-fetch';
+const { OAuth2 } = google.auth;
 
 const handleRegister = async (req, res) => {
     try {
@@ -100,6 +105,12 @@ const handleLogin = async (req, res) => {
             raw: true,
         });
 
+        const refresh_token = createRefreshToken({ where: { id: user.id } });
+        res.cookie('refreshtoken', refresh_token, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+
         await db.User.update(
             { refresh_token: createRefreshToken },
             {
@@ -108,19 +119,144 @@ const handleLogin = async (req, res) => {
                 },
             },
         );
-
-        res.cookie('refreshtoken', createRefreshToken, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-        });
-
         const access_token = createAccessToken({ where: { id: user.id } });
+
         return res.status(200).json({
             errCode: userData.errCode,
             message: userData.errMessage,
             user: userData.user ? userData.user : {},
             access_token,
         });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
+const googleLogin = async (req, res) => {
+    try {
+        const { tokenId } = req.body;
+
+        const verify = await client.verifyIdToken({
+            idToken: tokenId,
+            audience: process.env.MAILING_SERVICE_CLIENT_ID,
+        });
+
+        const { email_verified, email, name } = verify.payload;
+
+        const password = email + process.env.GOOGLE_SECRET;
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+        if (!email_verified) return res.status(400).json({ msg: 'Email verification failed.' });
+
+        const user = await db.User.findOne({ where: { email: email } });
+
+        if (user) {
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch)
+                return res.status(400).json({
+                    errCode: 3,
+                    errMessage: 'Password is incorrect.',
+                });
+
+            const refresh_token = createRefreshToken({ id: user.id });
+            res.cookie('refreshtoken', refresh_token, {
+                httpOnly: true,
+                path: '/user/refresh_token',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            });
+
+            return res.status(200).json({
+                errCode: 0,
+                errMessage: 'Login success!',
+            });
+        } else {
+            const newUser = await db.User.create({
+                fullname: name,
+                email: email,
+                password: passwordHash,
+                roleId: 'R3',
+            });
+
+            await newUser.save();
+
+            const refresh_token = createRefreshToken({ id: newUser.id });
+            res.cookie('refreshtoken', refresh_token, {
+                httpOnly: true,
+                path: '/user/refresh_token',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            });
+
+            return res.status(200).json({
+                errCode: 0,
+                errMessage: 'Login success!',
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({ msg: err.message });
+    }
+};
+
+const facebookLogin = async (req, res) => {
+    try {
+        //get access token and userId
+        const { accessToken, userID, email, name } = req.body;
+        const password = email + process.env.FACEBOOK_SECRET;
+
+        const passwordHash = await bcrypt.hash(password, 12);
+
+        const user = await db.User.findOne({ where: { email: email } });
+        // 1. If user exist / sign in
+        if (user) {
+            //check password
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch)
+                return res.status(400).json({
+                    errCode: 3,
+                    errMessage: 'Password is incorrect.',
+                });
+
+            //refresh token
+            const refresh_token = createRefreshToken({ where: { id: user.id } });
+            // store cookie
+            res.cookie('refreshtoken', refresh_token, {
+                httpOnly: true,
+                path: '/user/refresh_token',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            });
+
+            return res.status(200).json({
+                errCode: 0,
+                errMessage: 'Login success!',
+            });
+        } else {
+            // new user / create user
+            const newUser = await db.User.create({
+                fullname: name,
+                email: email,
+                password: passwordHash,
+                roleId: 'R3',
+            });
+
+            await newUser.save();
+
+            //refresh token
+            const refresh_token = createRefreshToken({ where: { id: newUser.id } });
+            // store cookie
+            res.cookie('refreshtoken', refresh_token, {
+                httpOnly: true,
+                // path: '/user/refresh_token',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            });
+            return res.status(200).json({
+                errCode: 0,
+                errMessage: 'Login success!',
+            });
+        }
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -148,4 +284,6 @@ module.exports = {
     handleRegister: handleRegister,
     activateEmail: activateEmail,
     handleLogin: handleLogin,
+    facebookLogin: facebookLogin,
+    googleLogin: googleLogin,
 };

@@ -22,6 +22,15 @@ export const userLoginFail = () => ({
     type: actionTypes.USER_LOGIN_FAIL,
 });
 
+export const userLoginSocialSuccess = (userInfo) => ({
+    type: actionTypes.USER_LOGIN_SOCIAL_SUCCESS,
+    userInfo: userInfo,
+});
+
+export const userLoginSocialFail = () => ({
+    type: actionTypes.USER_LOGIN_SOCIAL_FAIL,
+});
+
 export const processLogout = () => ({
     type: actionTypes.PROCESS_LOGOUT,
 });

@@ -12,4 +12,8 @@ const activationForEmail = (activation_token) => {
     return axios.post('/api/activation', activation_token);
 };
 
-export { handleLoginApi, handleRegisterApi, activationForEmail };
+const loginFacebook = (data) => {
+    return axios.post('/api/facebook_login', data);
+};
+
+export { handleLoginApi, handleRegisterApi, activationForEmail, loginFacebook };

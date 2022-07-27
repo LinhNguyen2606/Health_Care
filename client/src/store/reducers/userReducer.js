@@ -31,6 +31,18 @@ const appReducer = (state = initialState, action) => {
                 isLoggedIn: false,
                 userInfo: null,
             };
+        case actionTypes.USER_LOGIN_SOCIAL_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: action.userInfo,
+            };
+        case actionTypes.USER_LOGIN_SOCIAL_FAIL:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null,
+            };
         case actionTypes.PROCESS_LOGOUT:
             return {
                 ...state,

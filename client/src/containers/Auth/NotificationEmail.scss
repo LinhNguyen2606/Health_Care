@@ -1,9 +1,29 @@
 .active-email {
-    font-size     : 20px;
-    font-weight   : 600;
-    margin-top    : 10%;
-    text-align    : center;
-    text-transform: uppercase;
-    color         : green;
-    letter-spacing: 1.3px;
+    display: flex;
+
+    img {
+        margin-left: 0;
+    }
+
+    .text {
+        font-size   : 20px;
+        margin-right: 28rem;
+        margin-top  : 8rem;
+
+        .text-register {
+            font-size  : 50px;
+            font-weight: bold;
+        }
+
+        .text-check {
+            display       : flex;
+            flex-direction: column;
+            line-height   : 2;
+
+            .text-active {
+                margin-left: 0rem;
+            }
+        }
+
+    }
 }

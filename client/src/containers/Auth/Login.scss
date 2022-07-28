@@ -247,6 +247,18 @@ a:focus {
     opacity: 0.9;
 }
 
+button.kep-login-facebook.metro {
+    padding       : 7px 15px !important;
+    text-transform: none !important;
+    border-radius : 4px !important;
+    margin-left   : 16px !important;
+}
+
+button.kep-login-facebook.metro:hover {
+    color  : white;
+    opacity: 0.9;
+}
+
 .brand-col .social-buttons .btn-facebook {
     background: #3b5998;
 }

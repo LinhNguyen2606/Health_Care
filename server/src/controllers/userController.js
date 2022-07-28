@@ -3,10 +3,6 @@ import userService from '../services/userService';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { google } from 'googleapis';
-import fetch from 'node-fetch';
-const { OAuth2 } = google.auth;
-
 const handleRegister = async (req, res) => {
     try {
         const { fullname, email, password } = req.body;

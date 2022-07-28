@@ -354,10 +354,12 @@ class Login extends Component {
                                             <p>Login using social media to get quick access</p>
                                             {/* <!-- social login buttons start --> */}
                                             <div className="row social-buttons">
-                                                <div className="col-xs-4 col-sm-4 col-md-12">
+                                                <div
+                                                    className="col-xs-4 col-sm-4 col-md-12"
+                                                    style={{ padding: '0.375rem 1.4rem', borderRadius: '4px' }}
+                                                >
                                                     <FacebookLogin
-                                                        // version="4.0"
-                                                        className="btn btn-block btn-facebook"
+                                                        textButton="Login with facebook"
                                                         appId="744512323509710"
                                                         autoLoad={false}
                                                         fields="name,email,picture"
@@ -365,10 +367,10 @@ class Login extends Component {
                                                         callback={this.responseFacebook}
                                                     />
                                                 </div>
-                                                <div className="col-xs-4 col-sm-4 col-md-12">
+                                                <div className="col-xs-4 col-sm-4 col-md-10">
                                                     <a href="# " className="btn btn-block btn-google">
                                                         <i className="fa fa-google-plus"></i>
-                                                        <span className="hidden-xs hidden-sm">Signin with google</span>
+                                                        <span className="hidden-xs hidden-sm">Login with google</span>
                                                     </a>
                                                 </div>
                                             </div>

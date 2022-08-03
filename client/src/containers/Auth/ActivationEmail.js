@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification';
 import { activationForEmail } from '../../services/userService';
 import { useHistory } from 'react-router-dom';
+
 function ActivationEmail() {
     const { activation_token } = useParams();
     const [err, setErr] = useState('');
     const [success, setSuccess] = useState('');
+
     const history = useHistory();
 
     useEffect(() => {

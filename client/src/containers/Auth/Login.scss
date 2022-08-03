@@ -25,10 +25,10 @@
 
 .cont {
     background-color   : #f0f2f5;
-    background-image   : url("https://1.bp.blogspot.com/-fd1WXKk-TAc/XyqfngP4PiI/AAAAAAAAVMw/umQz3tkxtg43uPIy8W5og6gAkpCfjaTvACLcBGAsYHQ/w1563-h1563/bg-snell.png");
+    background-image   : url("../../assets/images/female-doctor-with-smart-glasses-touching-virtual-screen-medical-technology.jpg");
     background-repeat  : no-repeat;
     background-size    : cover;
-    background-position: 100%;
+    background-position: center;
     height             : 100vh;
     text-rendering     : optimizeLegibility;
 }
@@ -190,10 +190,28 @@ a:focus {
     padding: 25px;
 }
 
+// .authfy-panel-left .logo {
+//     background         : url("../../assets/images/logo.svg") center center no-repeat;
+//     background-size    : cover;
+//     background-position: center;
+//     height             : 160px;
+//     width              : 180px;
+//     cursor             : pointer;
+// }
+
 .authfy-panel-left .brand-col .headline {
     display       : table-cell;
     vertical-align: middle;
 }
+
+// .authfy-panel-left .brand-col .headline .logo {
+//     background         : url("../../assets/images/logo.svg") center center no-repeat;
+//     background-size    : cover;
+//     background-position: center;
+//     height             : 160px;
+//     width              : 180px;
+//     font-size          : 14px;
+// }
 
 .authfy-panel-left .brand-col .headline h1,
 .authfy-panel-left .brand-col .headline h2,
@@ -248,7 +266,7 @@ a:focus {
 }
 
 button.kep-login-facebook.metro {
-    padding       : 7px 15px !important;
+    padding       : 6px 15px !important;
     text-transform: none !important;
     border-radius : 4px !important;
     margin-left   : 16px !important;
@@ -292,8 +310,9 @@ button.kep-login-facebook.metro:hover {
 }
 
 .authfy-login .forgotPwd {
-    text-align: center;
-    margin-top: 10px;
+    text-align : left;
+    margin-top : 10px;
+    margin-left: -6.8rem;
 }
 
 .panel-login .form-control,

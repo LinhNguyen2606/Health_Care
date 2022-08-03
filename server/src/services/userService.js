@@ -20,11 +20,11 @@ const hashUserPassword = (password) => {
 const handleUserRegister = (fullname, email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const hashPassWordFromBcrypt = await hashUserPassword(password);
+            const hashPasswordFromBcrypt = await hashUserPassword(password);
             const newUser = {
                 fullname,
                 email,
-                password: hashPassWordFromBcrypt,
+                password: hashPasswordFromBcrypt,
             };
             const activation_token = createActivationToken(newUser);
 
@@ -35,6 +35,7 @@ const handleUserRegister = (fullname, email, password) => {
                 errMessage: 'Register Success! Please activate your email to start.',
             });
         } catch (e) {
+            console.log(e);
             reject(e);
         }
     });

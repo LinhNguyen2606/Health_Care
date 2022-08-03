@@ -6,12 +6,11 @@ import jwt from 'jsonwebtoken';
 const handleRegister = async (req, res) => {
     try {
         const { fullname, email, password } = req.body;
-        if (!fullname || !email || !password) {
+        if (!fullname || !email || !password)
             return res.status(400).json({
                 errCode: 1,
-                message: 'Please fill in all the fields!',
+                message: 'Please fill in all the fields.',
             });
-        }
         if (!validateEmail(email))
             return res.status(400).json({
                 errCode: 2,
@@ -19,7 +18,7 @@ const handleRegister = async (req, res) => {
             });
 
         const user = await db.User.findOne({
-            attributes: ['email', 'fullname', 'password'],
+            attributes: ['email', 'password', 'fullname'],
             where: { email: email },
             raw: true,
         });
@@ -35,7 +34,6 @@ const handleRegister = async (req, res) => {
                 errCode: 4,
                 message: 'Password must be at least 6 characters.',
             });
-
         const userData = await userService.handleUserRegister(fullname, email, password);
         return res.status(200).json({ userData });
     } catch (e) {
@@ -70,7 +68,7 @@ const activateEmail = async (req, res) => {
 
         await newUser.save();
 
-        res.status(200).json({
+        return res.status(200).json({
             errCode: 0,
             message: 'Account has been activated.',
         });
@@ -101,12 +99,6 @@ const handleLogin = async (req, res) => {
             raw: true,
         });
 
-        const refresh_token = createRefreshToken({ where: { id: user.id } });
-        res.cookie('refreshtoken', refresh_token, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-        });
-
         await db.User.update(
             { refresh_token: createRefreshToken },
             {
@@ -115,8 +107,14 @@ const handleLogin = async (req, res) => {
                 },
             },
         );
-        const access_token = createAccessToken({ where: { id: user.id } });
 
+        res.cookie('refreshtoken', createRefreshToken, {
+            httpOnly: true,
+            path: '/user/refresh_token',
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+
+        const access_token = createAccessToken({ where: { id: user.id } });
         return res.status(200).json({
             errCode: userData.errCode,
             message: userData.errMessage,
@@ -129,71 +127,6 @@ const handleLogin = async (req, res) => {
             errCode: -1,
             errMessage: 'Error from the server',
         });
-    }
-};
-
-const googleLogin = async (req, res) => {
-    try {
-        const { tokenId } = req.body;
-
-        const verify = await client.verifyIdToken({
-            idToken: tokenId,
-            audience: process.env.MAILING_SERVICE_CLIENT_ID,
-        });
-
-        const { email_verified, email, name } = verify.payload;
-
-        const password = email + process.env.GOOGLE_SECRET;
-
-        const passwordHash = await bcrypt.hash(password, 12);
-
-        if (!email_verified) return res.status(400).json({ msg: 'Email verification failed.' });
-
-        const user = await db.User.findOne({ where: { email: email } });
-
-        if (user) {
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch)
-                return res.status(400).json({
-                    errCode: 3,
-                    errMessage: 'Password is incorrect.',
-                });
-
-            const refresh_token = createRefreshToken({ id: user.id });
-            res.cookie('refreshtoken', refresh_token, {
-                httpOnly: true,
-                path: '/user/refresh_token',
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            });
-
-            return res.status(200).json({
-                errCode: 0,
-                errMessage: 'Login success!',
-            });
-        } else {
-            const newUser = await db.User.create({
-                fullname: name,
-                email: email,
-                password: passwordHash,
-                roleId: 'R3',
-            });
-
-            await newUser.save();
-
-            const refresh_token = createRefreshToken({ id: newUser.id });
-            res.cookie('refreshtoken', refresh_token, {
-                httpOnly: true,
-                path: '/user/refresh_token',
-                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            });
-
-            return res.status(200).json({
-                errCode: 0,
-                errMessage: 'Login success!',
-            });
-        }
-    } catch (err) {
-        return res.status(500).json({ msg: err.message });
     }
 };
 
@@ -281,5 +214,4 @@ module.exports = {
     activateEmail: activateEmail,
     handleLogin: handleLogin,
     facebookLogin: facebookLogin,
-    googleLogin: googleLogin,
 };

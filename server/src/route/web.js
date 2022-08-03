@@ -14,12 +14,11 @@ let initWebRoutes = (app) => {
     router.delete('/delete-crud', homeController.deleteCRUD);
 
     router.post('/api/register', userController.handleRegister);
-    router.post('/api/login', userController.handleLogin);
     router.post('/api/activation', userController.activateEmail);
+    router.post('/api/login', userController.handleLogin);
 
     //Social login
     router.post('/api/facebook_login', userController.facebookLogin);
-    router.post('/api/google_login', userController.googleLogin);
 
     return app.use('/', router);
 };

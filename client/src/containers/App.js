@@ -16,7 +16,7 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
-import ConfirmModal from '../components/ConfirmModal';
+import HomePage from '../containers/HomePage/HomePage';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -42,15 +42,14 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
-                        <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
-
                         <span className="content-container">
                             <Switch>
                                 <Route path={path.HOME} exact component={Home} />
                                 <Route path={path.REGISTER} component={userIsNotAuthenticated(Register)} />
                                 <Route path={path.ACTIVE_EMAIL} component={ActivationEmail} exact />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />
                             </Switch>

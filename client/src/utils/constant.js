@@ -9,7 +9,7 @@ export const path = {
     CONFIRM_EMAIL: '/confirm',
 };
 
-export const languages = {
+export const LANGUAGES = {
     VI: 'vi',
     EN: 'en',
 };

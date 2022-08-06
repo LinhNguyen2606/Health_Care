@@ -12,8 +12,8 @@
 
     .menu-group {
         &:hover {
-            cursor          : pointer;
-            background-color: darken($colormain, 5);
+            cursor             : pointer;
+            // background-color: darken($colormain, 5);
         }
 
         .menu-group-name {

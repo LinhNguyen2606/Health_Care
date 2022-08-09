@@ -2,40 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from 'react-slick';
 
-class Specialty extends Component {
+class HandBook extends Component {
     render() {
         return (
-            <div className="section-share section-specialty">
+            <div className="section-share section-handbook">
                 <div className="section-container">
                     <div className="section-header">
-                        <span className="title-section">Chuyên khoa phổ biến</span>
+                        <span className="title-section">Cẩm nang</span>
                         <button className="btn-section">Xem thêm</button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 1</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 1</div>
                             </div>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 2</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 2</div>
                             </div>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 3</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 3</div>
                             </div>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 4</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 4</div>
                             </div>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 5</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 5</div>
                             </div>
                             <div className="section-customize">
-                                <div className="bg-image section-specialty" />
-                                <div className="text-section">Cơ xương khớp 6</div>
+                                <img className="bg-image section-handbook" alt="" />
+                                <div className="text-section">Cẩm nang 6</div>
                             </div>
                         </Slider>
                     </div>
@@ -53,4 +53,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook);

@@ -113,7 +113,7 @@ class Login extends Component {
                                                     style={{ padding: '0.375rem 1.4rem', borderRadius: '4px' }}
                                                 >
                                                     <FacebookLogin
-                                                        textButton="Login with facebook"
+                                                        textButton="Login with Facebook"
                                                         appId="744512323509710"
                                                         autoLoad={false}
                                                         fields="name,email,picture"
@@ -124,7 +124,7 @@ class Login extends Component {
                                                 <div className="col-xs-4 col-sm-4 col-md-10">
                                                     <a href="# " className="btn btn-block btn-google">
                                                         <i className="fa fa-google-plus"></i>
-                                                        <span className="hidden-xs hidden-sm">Login with google</span>
+                                                        <span className="hidden-xs hidden-sm">Login with Google</span>
                                                     </a>
                                                 </div>
                                             </div>

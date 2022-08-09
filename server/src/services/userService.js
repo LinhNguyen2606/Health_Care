@@ -82,6 +82,27 @@ const handleUserLogin = (email, password) => {
     });
 };
 
+const getAllCodeService = (typeInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!typeInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters',
+                });
+            } else {
+                const res = {};
+                const allcode = await db.Allcode.findAll({ where: { type: typeInput } });
+                res.errCode = 0;
+                res.data = allcode;
+                resolve(res);
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 const checkUserEmail = (userEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -106,4 +127,5 @@ const createActivationToken = (payload) => {
 module.exports = {
     handleUserRegister: handleUserRegister,
     handleUserLogin: handleUserLogin,
+    getAllCodeService: getAllCodeService,
 };

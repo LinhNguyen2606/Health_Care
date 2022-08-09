@@ -195,6 +195,19 @@ const facebookLogin = async (req, res) => {
     }
 };
 
+const getAllCode = async (req, res) => {
+    try {
+        const data = await userService.getAllCodeService(req.query.type);
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log('Get all code server: ', e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 function validateEmail(email) {
     const re =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -214,4 +227,5 @@ module.exports = {
     activateEmail: activateEmail,
     handleLogin: handleLogin,
     facebookLogin: facebookLogin,
+    getAllCode: getAllCode,
 };

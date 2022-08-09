@@ -16,12 +16,35 @@
         height     : 40px;
         padding    : 0 10px;
 
-        &:hover {
-            background-color: darken($colormain, 5);
-        }
-
         i {
             font-size: $base-size + 1px;
         }
     }
+
+    .languages {
+        .welcome {
+            margin-right: 10px;
+        }
+
+        .language-en {
+            margin-right: -3rem;
+            margin-left : 10px;
+            cursor      : pointer;
+
+            &.active {
+                opacity: 1;
+                color  : #30d663;
+            }
+        }
+
+        .language-vi {
+            cursor: pointer;
+
+            &.active {
+                opacity: 1;
+                color  : orange;
+            }
+        }
+    }
+
 }

@@ -22,27 +22,31 @@
     }
 
     .languages {
+        margin-left: 1.6rem;
+
         .welcome {
-            margin-right: 10px;
+            margin-left: 55rem;
         }
 
         .language-en {
-            margin-right: -3rem;
-            margin-left : 10px;
-            cursor      : pointer;
+            cursor: pointer;
+
 
             &.active {
-                opacity: 1;
-                color  : #30d663;
+                opacity    : 1;
+                color      : #30d663;
+                margin-left: 6px;
             }
         }
 
         .language-vi {
-            cursor: pointer;
+            cursor : pointer;
+            padding: 0 4px;
 
             &.active {
                 opacity: 1;
                 color  : orange;
+                margin : 0 8px;
             }
         }
     }

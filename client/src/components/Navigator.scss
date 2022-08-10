@@ -12,17 +12,16 @@
 
     .menu-group {
         &:hover {
-            cursor             : pointer;
-            // background-color: darken($colormain, 5);
+            cursor: pointer;
         }
 
         .menu-group-name {
-            line-height  : 40px;
-            padding-right: 90rem;
-            border-right : 1px solid $border;
+            line-height : 40px;
+            padding     : 0 15px;
+            border-right: 1px solid $border;
 
             &:first-child {
-                border-right: 1px solid $border;
+                padding-right: 25px;
             }
         }
 
@@ -34,13 +33,22 @@
             color             : $text-in-light;
             position          : absolute;
             padding           : 0;
+            margin-left       : 14px;
 
             .menu {
-                width         : 205px;
+                width         : 100%;
                 padding       : 0 15px;
                 height        : 35px;
                 line-height   : 35px;
                 text-transform: none;
+
+                &.active {
+                    a {
+                        color: orange !important;
+                    }
+
+                    background-color: #ededed;
+                }
 
                 .menu-link {
                     text-decoration: none;

@@ -20,6 +20,18 @@
         "child4": "Ưu tiên kiểm tra"
     },
     "menu": {
+        "admin": {
+            "manage-user": " Người dùng",
+            "manage-doctor": "Quản lý bác sĩ",
+            "manage-admin": "Quản lý admin",
+            "crud": "Quản lý người dùng",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
+            "specialty": "Chuyên khoa",
+            "manage-specialty": "Quản lý chuyên khoa",
+            "handbook": "Cẩm nang",
+            "manage-handbook": "Quản lý cẩm nang"
+        },
         "system": {
             "header": "Hệ thống",
             "system-administrator": {
@@ -27,5 +39,9 @@
                 "user-manage": "Quản lý người sử dụng"
             }
         }
+    },
+
+    "admin": {
+        "manage-user": "Quản lý người dùng"
     }
 }

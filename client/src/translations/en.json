@@ -20,6 +20,19 @@
         "child4": "Examination Priority"
     },
     "menu": {
+        "admin": {
+            "manage-user": "Users System",
+            "manage-doctor": "Manage doctors",
+            "manage-admin": "Manage admins",
+            "crud": "Manage users",
+            "clinic": "Clinics",
+            "manage-clinic": "Manage clinics",
+            "specialty": "Specialties",
+            "manage-specialty": "Manage Specialties",
+            "handbook": "Handbook",
+            "manage-handbook": "Manage handbook"
+        },
+
         "system": {
             "header": "System",
             "system-administrator": {

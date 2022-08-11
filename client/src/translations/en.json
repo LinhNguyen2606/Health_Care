@@ -40,5 +40,20 @@
                 "user-manage": "Manage User"
             }
         }
+    },
+
+    "manage-user": {
+        "add": "Add a new user",
+        "email": "Email",
+        "password": "Password",
+        "full-name": "Full Name",
+        "phone-number": "Phone Number",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "role": "Role",
+        "image": "Image",
+        "save": "Save user",
+        "edit": "Edit user"
     }
 }

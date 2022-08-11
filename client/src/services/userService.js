@@ -16,4 +16,7 @@ const loginFacebook = (data) => {
     return axios.post('/api/facebook_login', data);
 };
 
-export { handleLoginApi, handleRegisterApi, activationForEmail, loginFacebook };
+const getAllCodeService = (inputType) => {
+    return axios.get(`/api/allcode?type=${inputType}`);
+};
+export { handleLoginApi, handleRegisterApi, activationForEmail, loginFacebook, getAllCodeService };

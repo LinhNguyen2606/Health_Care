@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllCodeService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import * as actions from '../../../store/actions';
 
 class UserManage extends Component {
     constructor(props) {
@@ -15,18 +15,16 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
-        try {
-            let res = await getAllCodeService('gender');
-            if (res && res.errCode === 0) {
-                this.setState({
-                    genderArr: res.data,
-                    positonArr: res.data,
-                    roleArr: res.data,
-                });
-            }
-        } catch (e) {}
+        this.props.getGenderStart();
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.gender !== this.props.gender) {
+            this.setState({
+                genderArr: this.props.gender,
+            });
+        }
+    }
     render() {
         const genders = this.state.genderArr;
         let roles = this.state.roleArr;
@@ -142,11 +140,14 @@ class UserManage extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        gender: state.admin.genders,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManage);

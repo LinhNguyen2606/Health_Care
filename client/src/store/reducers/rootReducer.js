@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-
 import appReducer from './appReducer';
 import userReducer from './userReducer';
 import adminReducer from './adminReducer';

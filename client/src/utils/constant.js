@@ -7,6 +7,7 @@ export const path = {
     SYSTEM: '/system',
     ACTIVE_EMAIL: '/api/user/activate/:activation_token',
     CONFIRM_EMAIL: '/confirm',
+    CREATE_NEW_USER: '/crud',
 };
 
 export const LANGUAGES = {

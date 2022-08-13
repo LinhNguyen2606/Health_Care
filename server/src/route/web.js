@@ -17,6 +17,8 @@ let initWebRoutes = (app) => {
     router.post('/api/activation', userController.activateEmail);
     router.post('/api/login', userController.handleLogin);
 
+    router.post('/api/create-new-user', userController.handleCreateNewUser);
+
     router.get('/api/allcode', userController.getAllCode);
 
     //Social login

@@ -195,6 +195,19 @@ const facebookLogin = async (req, res) => {
     }
 };
 
+const handleCreateNewUser = async (req, res) => {
+    try {
+        const message = await userService.createNewUser(req.body);
+        return res.status(200).json(message);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 const getAllCode = async (req, res) => {
     try {
         const data = await userService.getAllCodeService(req.query.type);
@@ -228,4 +241,5 @@ module.exports = {
     handleLogin: handleLogin,
     facebookLogin: facebookLogin,
     getAllCode: getAllCode,
+    handleCreateNewUser: handleCreateNewUser,
 };

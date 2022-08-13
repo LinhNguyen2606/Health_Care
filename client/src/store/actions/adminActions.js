@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService } from '../../services/userService';
+import { getAllCodeService, createNewUserService } from '../../services/userService';
 
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
@@ -30,7 +30,7 @@ export const fetchGenderFailed = () => ({
 export const fetchPositionStart = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllCodeService('POSITION');
+            const res = await getAllCodeService('POSITION');
             if (res && res.errCode === 0) {
                 dispatch(fetchPositionSuccess(res.data));
             } else {
@@ -55,7 +55,7 @@ export const fetchPositionFailed = () => ({
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllCodeService('ROLE');
+            const res = await getAllCodeService('ROLE');
             if (res && res.errCode === 0) {
                 dispatch(fetchRoleSuccess(res.data));
             } else {
@@ -75,4 +75,29 @@ export const fetchRoleSuccess = (roleData) => ({
 
 export const fetchRoleFailed = () => ({
     type: actionTypes.FETCH_ROLE_FAILED,
+});
+
+export const createNewUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await createNewUserService(data);
+            console.log('Check create user: ', res);
+            if (res && res.errCode === 0) {
+                dispatch(saveUserSuccess());
+            } else {
+                dispatch(saveUserFailed());
+            }
+        } catch (e) {
+            dispatch(saveUserFailed());
+            console.log('saveUserFailed error', e);
+        }
+    };
+};
+
+export const saveUserSuccess = () => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+});
+
+export const saveUserFailed = () => ({
+    type: actionTypes.CREATE_USER_FAILED,
 });

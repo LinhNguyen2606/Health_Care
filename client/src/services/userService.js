@@ -19,4 +19,16 @@ const loginFacebook = (data) => {
 const getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`);
 };
-export { handleLoginApi, handleRegisterApi, activationForEmail, loginFacebook, getAllCodeService };
+
+const createNewUserService = (data) => {
+    return axios.post(`/api/create-new-user`, data);
+};
+
+export {
+    handleLoginApi,
+    handleRegisterApi,
+    activationForEmail,
+    loginFacebook,
+    getAllCodeService,
+    createNewUserService,
+};

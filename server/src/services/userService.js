@@ -124,8 +124,58 @@ const createActivationToken = (payload) => {
     return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '5m' });
 };
 
+const createNewUser = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!validateEmail(data.email))
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Invalid email',
+                });
+
+            if (data.password.length < 6)
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Password must be at least 6 characters.',
+                });
+            //check email is exist?
+            const check = await checkUserEmail(data.email);
+            if (check === true) {
+                resolve({
+                    errCode: 3,
+                    errMessage: 'This email is exist, Plz try another email',
+                });
+            } else {
+                const hashPassWordFromBcrypt = await hashUserPassword(data.password);
+                await db.User.create({
+                    email: data.email,
+                    password: hashPassWordFromBcrypt,
+                    fullname: data.fullname,
+                    address: data.address,
+                    phonenumber: data.phonenumber,
+                    gender: data.gender,
+                    roleId: data.roleId,
+                    positionId: data.positionId,
+                });
+                resolve({
+                    errCode: 0,
+                    message: 'Create new user successfully',
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+function validateEmail(email) {
+    const re =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 module.exports = {
     handleUserRegister: handleUserRegister,
     handleUserLogin: handleUserLogin,
     getAllCodeService: getAllCodeService,
+    createNewUser: createNewUser,
 };

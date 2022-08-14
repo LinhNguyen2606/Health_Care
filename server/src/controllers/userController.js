@@ -208,6 +208,50 @@ const handleCreateNewUser = async (req, res) => {
     }
 };
 
+let handleGetUserOrAllUsers = async (req, res) => {
+    try {
+        let id = req.query.id; //ALL(lấy tất cả người dùng), SINGLE(lấy 1 người dùng)
+        if (!id) {
+            return res.status(200).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters',
+                users: [],
+            });
+        }
+        let users = await userService.getUserOrAllUsers(id);
+        return res.status(200).json({
+            errCode: 0,
+            errMessage: 'Ok',
+            users,
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
+let handleDeleteUser = async (req, res) => {
+    try {
+        if (!req.body.id) {
+            return res.status(404).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters!',
+            });
+        }
+        let message = await userService.deleteUser(req.body.id);
+        return res.status(200).json(message);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 const getAllCode = async (req, res) => {
     try {
         const data = await userService.getAllCodeService(req.query.type);
@@ -242,4 +286,6 @@ module.exports = {
     facebookLogin: facebookLogin,
     getAllCode: getAllCode,
     handleCreateNewUser: handleCreateNewUser,
+    handleGetUserOrAllUsers: handleGetUserOrAllUsers,
+    handleDeleteUser: handleDeleteUser,
 };

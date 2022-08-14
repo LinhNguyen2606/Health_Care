@@ -7,7 +7,7 @@ export const path = {
     SYSTEM: '/system',
     ACTIVE_EMAIL: '/api/user/activate/:activation_token',
     CONFIRM_EMAIL: '/confirm',
-    CREATE_NEW_USER: '/crud',
+    PAGE_NOT_FOUND: '/404',
 };
 
 export const LANGUAGES = {
@@ -28,4 +28,10 @@ export const dateFormat = {
 export const YesNoObj = {
     YES: 'Y',
     NO: 'N',
+};
+
+export const USER_ROLE = {
+    ADMIN: 'R1',
+    DOCTOR: 'R2',
+    PATIENT: 'R3',
 };

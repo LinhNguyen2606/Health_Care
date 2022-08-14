@@ -124,6 +124,32 @@ const createActivationToken = (payload) => {
     return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '5m' });
 };
 
+let getUserOrAllUsers = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = '';
+            if (userId === 'ALL') {
+                users = await db.User.findAll({
+                    attributes: {
+                        exclude: ['password'],
+                    },
+                });
+            }
+            if (userId && userId !== 'ALL') {
+                users = await db.User.findOne({
+                    where: { id: userId },
+                    attributes: {
+                        exclude: ['password'],
+                    },
+                });
+            }
+            resolve(users);
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 const createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -168,6 +194,27 @@ const createNewUser = (data) => {
     });
 };
 
+const deleteUser = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let foundUser = await db.User.findOne({ where: { id: userId } });
+            if (!foundUser) {
+                resolve({
+                    errCode: 2,
+                    errMessage: "The user isn't exist.",
+                });
+            }
+            await db.User.destroy({ where: { id: userId } });
+            resolve({
+                errCode: 0,
+                errMessage: 'Delete user successfully',
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 function validateEmail(email) {
     const re =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -178,4 +225,6 @@ module.exports = {
     handleUserLogin: handleUserLogin,
     getAllCodeService: getAllCodeService,
     createNewUser: createNewUser,
+    getUserOrAllUsers: getUserOrAllUsers,
+    deleteUser: deleteUser,
 };

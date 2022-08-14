@@ -1,3 +1,13 @@
+.text-add {
+    font-size          : 20px;
+    color              : #000;
+    font-weight        : 600;
+    height             : 50px;
+    border-bottom      : 1px solid #ddd;
+    border-bottom-width: medium;
+    margin-right       : 24px;
+}
+
 .preview-img-container {
     .label-upload {
         padding      : 5px;
@@ -23,3 +33,7 @@
 .col-3 {
     margin-top: 2px !important;
 }
+
+// .col-12 {
+//     max-width: 98% !important;
+// }

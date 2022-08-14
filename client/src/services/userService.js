@@ -24,6 +24,18 @@ const createNewUserService = (data) => {
     return axios.post(`/api/create-new-user`, data);
 };
 
+const getAllUsers = (inputId) => {
+    return axios.get(`/api/get-all-users?id=${inputId}`);
+};
+
+const deleteUserService = (userId) => {
+    return axios.delete(`/api/delete-user`, {
+        data: {
+            id: userId,
+        },
+    });
+};
+
 export {
     handleLoginApi,
     handleRegisterApi,
@@ -31,4 +43,6 @@ export {
     loginFacebook,
     getAllCodeService,
     createNewUserService,
+    getAllUsers,
+    deleteUserService,
 };

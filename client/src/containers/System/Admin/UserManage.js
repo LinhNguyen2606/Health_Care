@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES } from '../../../utils';
+import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
 import * as actions from '../../../store/actions';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -30,6 +30,9 @@ class UserManage extends Component {
             position: '',
             role: '',
             avatar: '',
+
+            action: '',
+            userEditId: '',
         };
     }
 
@@ -63,16 +66,20 @@ class UserManage extends Component {
         }
 
         if (prevProps.listUsers !== this.props.listUsers) {
+            const arrGenders = this.props.gender;
+            const arrPositions = this.props.position;
+            const arrRoles = this.props.role;
             this.setState({
                 email: '',
                 password: '',
                 fullname: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
+                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
+                role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
                 avatar: '',
+                action: CRUD_ACTIONS.CREATE,
             });
         }
     }
@@ -97,8 +104,13 @@ class UserManage extends Component {
     };
 
     handleSaveUser = () => {
+        this.setState({
+            errMessage: '',
+        });
         const isValid = this.checkValidateInput();
         if (isValid === false) return;
+        const { action } = this.state;
+
         if (isEmpty(this.state.fullname) || isEmpty(this.state.password)) {
             this.setState({
                 email: this.state.email,
@@ -146,19 +158,33 @@ class UserManage extends Component {
             });
             return;
         }
-        //fire redux action
-        this.props.createNewUser({
-            email: this.state.email,
-            password: this.state.password,
-            fullname: this.state.fullname,
-            address: this.state.address,
-            phonenumber: this.state.phoneNumber,
-            gender: this.state.gender,
-            roleId: this.state.role,
-            positionId: this.state.position,
-        });
 
-        this.props.fetchUser();
+        if (action === CRUD_ACTIONS.CREATE) {
+            //fire redux create user
+            this.props.createNewUser({
+                email: this.state.email,
+                password: this.state.password,
+                fullname: this.state.fullname,
+                address: this.state.address,
+                phonenumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                roleId: this.state.role,
+                positionId: this.state.position,
+            });
+        } else if (action === CRUD_ACTIONS.EDIT) {
+            //fire redux edit user
+            this.props.editAUser({
+                id: this.state.userEditId,
+                email: this.state.email,
+                password: this.state.password,
+                fullname: this.state.fullname,
+                address: this.state.address,
+                phonenumber: this.state.phoneNumber,
+                gender: this.state.gender,
+                roleId: this.state.role,
+                positionId: this.state.position,
+            });
+        }
     };
 
     checkValidateInput = () => {
@@ -182,6 +208,22 @@ class UserManage extends Component {
         });
     };
 
+    handleEditUserFromParent = (user) => {
+        this.setState({
+            userEditId: user.id,
+            email: user.email,
+            password: 'HARDCODE',
+            fullname: user.fullname,
+            phoneNumber: user.phonenumber,
+            address: user.address,
+            gender: user.gender,
+            position: user.positionId,
+            role: user.roleId,
+            avatar: '',
+            action: CRUD_ACTIONS.EDIT,
+        });
+    };
+
     render() {
         const genders = this.state.genderArr;
         const roles = this.state.roleArr;
@@ -199,7 +241,11 @@ class UserManage extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12 my-3 text-add">
-                                    <FormattedMessage id="manage-user.add" />
+                                    {this.state.action === CRUD_ACTIONS.EDIT ? (
+                                        <FormattedMessage id="manage-user.edit-user" />
+                                    ) : (
+                                        <FormattedMessage id="manage-user.add-user" />
+                                    )}
                                 </div>
                                 <div className="col-12">{isGetGenders === true ? 'Loading genders' : ''}</div>
                                 <div className="col-12">{isGetPositions === true ? 'Loading positions' : ''}</div>
@@ -213,6 +259,7 @@ class UserManage extends Component {
                                         type="email"
                                         value={email}
                                         onChange={(e) => this.onChangeInput(e, 'email')}
+                                        disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                     />
                                 </div>
                                 <div className="col-3">
@@ -224,6 +271,7 @@ class UserManage extends Component {
                                         type="password"
                                         value={password}
                                         onChange={(e) => this.onChangeInput(e, 'password')}
+                                        disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                     />
                                 </div>
                                 <div className="col-6">
@@ -263,7 +311,11 @@ class UserManage extends Component {
                                     <label>
                                         <FormattedMessage id="manage-user.gender" />
                                     </label>
-                                    <select className="form-control" onChange={(e) => this.onChangeInput(e, 'gender')}>
+                                    <select
+                                        className="form-control"
+                                        value={gender}
+                                        onChange={(e) => this.onChangeInput(e, 'gender')}
+                                    >
                                         {genders &&
                                             genders.length > 0 &&
                                             genders.map((item) => {
@@ -281,6 +333,7 @@ class UserManage extends Component {
                                     </label>
                                     <select
                                         className="form-control"
+                                        value={position}
                                         onChange={(e) => this.onChangeInput(e, 'position')}
                                     >
                                         {positions &&
@@ -298,7 +351,11 @@ class UserManage extends Component {
                                     <label>
                                         <FormattedMessage id="manage-user.role" />
                                     </label>
-                                    <select className="form-control" onChange={(e) => this.onChangeInput(e, 'role')}>
+                                    <select
+                                        className="form-control"
+                                        value={role}
+                                        onChange={(e) => this.onChangeInput(e, 'role')}
+                                    >
                                         {roles &&
                                             roles.length > 0 &&
                                             roles.map((item) => {
@@ -341,12 +398,26 @@ class UserManage extends Component {
                                     {this.state.errMessage}
                                 </div>
                                 <div className="col-12 my-3">
-                                    <button className="btn btn-primary" onClick={() => this.handleSaveUser()}>
-                                        <FormattedMessage id="manage-user.save" />
+                                    <button
+                                        className={
+                                            this.state.action === CRUD_ACTIONS.EDIT
+                                                ? 'btn btn-warning'
+                                                : 'btn btn-primary'
+                                        }
+                                        onClick={() => this.handleSaveUser()}
+                                    >
+                                        {this.state.action === CRUD_ACTIONS.EDIT ? (
+                                            <FormattedMessage id="manage-user.edit" />
+                                        ) : (
+                                            <FormattedMessage id="manage-user.save" />
+                                        )}
                                     </button>
                                 </div>
                                 <div className="col-12 mb-5">
-                                    <TableManageUser />
+                                    <TableManageUser
+                                        handleEditUserFromParentKey={this.handleEditUserFromParent}
+                                        action={this.state.action}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -383,6 +454,7 @@ const mapDispatchToProps = (dispatch) => {
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
         fetchUser: () => dispatch(actions.fetchAllUsersStart()),
+        editAUser: (data) => dispatch(actions.editUser(data)),
     };
 };
 

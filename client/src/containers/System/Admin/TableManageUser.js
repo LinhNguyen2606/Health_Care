@@ -28,7 +28,9 @@ class TableManageUser extends Component {
         this.props.deleteAUser(user.id);
     };
 
-    handleEditUser = (user) => {};
+    handleEditUser = (user) => {
+        this.props.handleEditUserFromParentKey(user);
+    };
 
     render() {
         const arrUsers = this.state.getUsers;
@@ -53,7 +55,7 @@ class TableManageUser extends Component {
                                         <td>
                                             <button
                                                 className="btn btn-outline-warning mx-3"
-                                                // onClick={() => this.handleEditUser(item)}
+                                                onClick={() => this.handleEditUser(item)}
                                             >
                                                 <i className="fa-solid fa-pencil"></i>
                                             </button>

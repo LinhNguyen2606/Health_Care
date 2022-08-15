@@ -194,6 +194,45 @@ const createNewUser = (data) => {
     });
 };
 
+const updateUserData = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.id || !data.roleId || !data.positionId || !data.gender) {
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Missing required parameters',
+                });
+            }
+            let user = await db.User.findOne({
+                where: { id: data.id },
+                raw: false,
+            });
+
+            if (user) {
+                user.fullname = data.fullname;
+                user.address = data.address;
+                user.roleId = data.roleId;
+                user.positionId = data.positionId;
+                user.gender = data.gender;
+                user.phonenumber = data.phonenumber;
+
+                await user.save();
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Edit user successfully',
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'User not found',
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 const deleteUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -220,11 +259,13 @@ function validateEmail(email) {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
+
 module.exports = {
     handleUserRegister: handleUserRegister,
     handleUserLogin: handleUserLogin,
     getAllCodeService: getAllCodeService,
     createNewUser: createNewUser,
     getUserOrAllUsers: getUserOrAllUsers,
+    updateUserData: updateUserData,
     deleteUser: deleteUser,
 };

@@ -28,6 +28,10 @@ const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 };
 
+const editUserService = (inputData) => {
+    return axios.put(`/api/edit-user`, inputData);
+};
+
 const deleteUserService = (userId) => {
     return axios.delete(`/api/delete-user`, {
         data: {
@@ -44,5 +48,6 @@ export {
     getAllCodeService,
     createNewUserService,
     getAllUsers,
+    editUserService,
     deleteUserService,
 };

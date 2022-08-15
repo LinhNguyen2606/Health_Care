@@ -233,6 +233,20 @@ let handleGetUserOrAllUsers = async (req, res) => {
     }
 };
 
+let handleEditUser = async (req, res) => {
+    try {
+        let data = req.body;
+        let message = await userService.updateUserData(data);
+        return res.status(200).json(message);
+    } catch (e) {
+        console.log('Get all code server: ', e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 let handleDeleteUser = async (req, res) => {
     try {
         if (!req.body.id) {
@@ -288,4 +302,5 @@ module.exports = {
     handleCreateNewUser: handleCreateNewUser,
     handleGetUserOrAllUsers: handleGetUserOrAllUsers,
     handleDeleteUser: handleDeleteUser,
+    handleEditUser: handleEditUser,
 };

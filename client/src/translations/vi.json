@@ -40,8 +40,19 @@
             }
         }
     },
-
-    "admin": {
-        "manage-user": "Quản lý người dùng"
+    "manage-user": {
+        "add-user": "Thêm người dùng",
+        "edit-user": "Sửa người dùng",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "full-name": "Họ và tên ",
+        "phone-number": "Số điện thoại",
+        "address": "Địa chỉ",
+        "gender": "Giới tính",
+        "position": "Chức danh",
+        "role": "Vai trò",
+        "image": "Ảnh đại diện",
+        "save": "Lưu người dùng",
+        "edit": "Lưu thay đổi"
     }
 }

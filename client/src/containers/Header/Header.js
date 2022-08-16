@@ -6,6 +6,7 @@ import { adminMenu } from './menuApp';
 import './Header.scss';
 import { LANGUAGES } from '../../utils';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
     handleChangeLanguage = (language) => {
@@ -13,37 +14,52 @@ class Header extends Component {
     };
 
     render() {
-        const { processLogout, language, userInfo } = this.props;
+        const { processLogout, language, userInfo, user } = this.props;
         return (
             <div className="header-container">
-                {/* thanh navigator */}
-                <div className="header-tabs-container">
-                    <Navigator menus={adminMenu} />
-                </div>
+                {user?.userInfo?.roleId === 'R3' ? (
+                    <>
+                        {/* nút logout */}
+                        <Link to="/home">
+                            <div className="btn btn-logout" onClick={processLogout} title="Log out">
+                                <i className="fas fa-sign-out-alt" style={{ marginLeft: '104rem ' }}></i>
+                            </div>
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        {/* thanh navigator */}
+                        <div className="header-tabs-container">
+                            <Navigator menus={adminMenu} />
+                        </div>
 
-                <div className="languages">
-                    <span className="welcome">
-                        <FormattedMessage id="homeheader.welcome" />
-                        {userInfo && userInfo.fullname ? userInfo.fullname : ''} !
-                    </span>
-                    <span
-                        className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}
-                        onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
-                    >
-                        VN
-                    </span>
-                    <span
-                        className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}
-                        onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
-                    >
-                        EN
-                    </span>
-                </div>
+                        <div className="languages">
+                            <span className="welcome">
+                                <FormattedMessage id="homeheader.welcome" />
+                                {userInfo && userInfo.fullname ? userInfo.fullname : ''} !
+                            </span>
+                            <span
+                                className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}
+                                onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
+                            >
+                                VN
+                            </span>
+                            <span
+                                className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}
+                                onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
+                            >
+                                EN
+                            </span>
+                        </div>
 
-                {/* nút logout */}
-                <div className="btn btn-logout" onClick={processLogout} title="Log out">
-                    <i className="fas fa-sign-out-alt"></i>
-                </div>
+                        {/* nút logout */}
+                        <Link to="/login">
+                            <div className="btn btn-logout" onClick={processLogout} title="Log out">
+                                <i className="fas fa-sign-out-alt"></i>
+                            </div>
+                        </Link>
+                    </>
+                )}
             </div>
         );
     }
@@ -54,6 +70,7 @@ const mapStateToProps = (state) => {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
         language: state.app.language,
+        user: state.user,
     };
 };
 

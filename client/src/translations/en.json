@@ -32,7 +32,6 @@
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook"
         },
-
         "system": {
             "header": "System",
             "system-administrator": {
@@ -40,5 +39,21 @@
                 "user-manage": "Manage User"
             }
         }
+    },
+
+    "manage-user": {
+        "add-user": "Add new user",
+        "edit-user": "Edit user",
+        "email": "Email",
+        "password": "Password",
+        "full-name": "Full Name",
+        "phone-number": "Phone Number",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "role": "Role",
+        "image": "Image",
+        "save": "Save user",
+        "edit": "Save changes"
     }
 }

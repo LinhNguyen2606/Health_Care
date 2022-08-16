@@ -14,7 +14,8 @@ import Login from './Auth/Login';
 import System from '../routes/System';
 import HomePage from '../containers/HomePage/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
-
+import NotFound from '../containers/NotFound';
+import HomePageManage from '../containers/System/HomePageManage';
 class App extends Component {
     handlePersistorState = () => {
         const { persistor } = this.props;
@@ -49,6 +50,8 @@ class App extends Component {
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />
+                                    <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
+                                    <Route path={path.HOMEPAGEMANAGE} component={HomePageManage} />
                                 </Switch>
                             </CustomScrollbars>
                         </span>

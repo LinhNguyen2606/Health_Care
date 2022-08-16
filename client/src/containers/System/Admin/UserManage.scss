@@ -1,0 +1,39 @@
+.text-add {
+    font-size          : 20px;
+    color              : #000;
+    font-weight        : 600;
+    height             : 50px;
+    border-bottom      : 1px solid #ddd;
+    border-bottom-width: medium;
+    margin-right       : 24px;
+}
+
+.preview-img-container {
+    .label-upload {
+        padding      : 5px;
+        border-radius: 3px;
+        background   : #ddd;
+        cursor       : pointer;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    .preview-image {
+        height         : 50px;
+        width          : 100%;
+        border         : 1px solid #ddd;
+        background     : center center no-repeat;
+        background-size: contain;
+        cursor         : pointer;
+    }
+}
+
+.col-3 {
+    margin-top: 2px !important;
+}
+
+// .col-12 {
+//     max-width: 98% !important;
+// }

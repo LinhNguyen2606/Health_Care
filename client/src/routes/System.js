@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/Admin/UserManage';
 import Header from '../containers/Header/Header';
-
 class System extends Component {
     render() {
         const { systemMenuPath, isLoggedIn, user } = this.props;

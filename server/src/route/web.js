@@ -1,7 +1,6 @@
 import express from 'express';
 import homeController from '../controllers/homeController';
 import userController from '../controllers/userController';
-import { auth, authAdmin } from '../middlewares/middleware';
 
 let router = express.Router();
 //app can be understood here as an application for 1 server

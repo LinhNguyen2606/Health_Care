@@ -55,5 +55,10 @@
         "image": "Image",
         "save": "Save user",
         "edit": "Save changes"
+    },
+
+    "homepage-manage": {
+        "text1": "Welcome to the Health Care Center",
+        "text2": "The best choices for you and your family"
     }
 }

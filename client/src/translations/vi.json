@@ -54,5 +54,10 @@
         "image": "Ảnh đại diện",
         "save": "Lưu người dùng",
         "edit": "Lưu thay đổi"
+    },
+
+    "homepage-manage": {
+        "text1": "Chào mừng đến trung tâm Health Care",
+        "text2": "Sự lựa chọn tốt nhất dành cho bạn và gia đình bạn"
     }
 }

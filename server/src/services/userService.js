@@ -222,7 +222,7 @@ const updateUserData = (data) => {
                 await user.save();
                 resolve({
                     errCode: 0,
-                    errMessage: 'Edit user successfully',
+                    message: 'Edit user successfully',
                 });
             } else {
                 resolve({
@@ -249,7 +249,7 @@ const deleteUser = (userId) => {
             await db.User.destroy({ where: { id: userId } });
             resolve({
                 errCode: 0,
-                errMessage: 'Delete user successfully',
+                message: 'Delete user successfully',
             });
         } catch (e) {
             reject(e);

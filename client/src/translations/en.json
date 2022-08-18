@@ -55,5 +55,14 @@
         "image": "Image",
         "save": "Save user",
         "edit": "Save changes"
+    },
+    "homepage": {
+        "outstanding-doctor": "Last week's outstanding doctor",
+        "more-infor": "More Infor",
+        "specialty-popular": "Popular specialties"
+    },
+    "homepage-manage": {
+        "text1": "Welcome to the Health Care Center",
+        "text2": "The best choices for you and your family"
     }
 }

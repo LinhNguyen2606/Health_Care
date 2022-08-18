@@ -17,6 +17,10 @@
     color      : red !important;
 }
 
+.slick-disabled {
+    display: none !important;
+}
+
 .slick-disabled:before {
     opacity: 0.8 !important;
 }

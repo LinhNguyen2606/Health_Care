@@ -29,3 +29,22 @@
 #TableManageUser td:last-child {
     text-align: center;
 }
+
+.rc-md-editor .rc-md-navigation {
+    width     : 100% !important;
+    // padding: 0 19rem !important;
+}
+
+.rc-md-editor .editor-container .sec-md .input {
+    line-height: 3.7 !important;
+    height     : 32.8rem !important;
+}
+
+.rc-md-editor .editor-container .sec-html .html-wrap {
+    margin-bottom: 27rem !important;
+}
+
+.rc-md-editor .rc-md-navigation .button-wrap,
+.rc-md-editor .rc-md-navigation .navigation-nav {
+    margin: 2px 0rem !important;
+}

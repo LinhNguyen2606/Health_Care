@@ -1,0 +1,44 @@
+.manage-doctor-container {
+    padding: 5px;
+
+    .manage-doctor-title {
+        text-align    : center;
+        margin        : 15px 0;
+        font-size     : 20px;
+        text-transform: uppercase;
+        font-weight   : 600;
+    }
+
+    .more-infor {
+        display       : flex;
+        gap           : 15px;
+        padding-bottom: 15px;
+
+        .content-left {
+            width        : 35%;
+            margin-bottom: 4rem;
+        }
+
+        .content-right {
+            width: 65%;
+        }
+    }
+}
+
+.rc-md-editor .rc-md-navigation {
+    width: 100% !important;
+}
+
+.rc-md-editor .editor-container .sec-md .input {
+    line-height: 3.7 !important;
+    height     : 32.8rem !important;
+}
+
+.rc-md-editor .editor-container .sec-html .html-wrap {
+    margin-bottom: 27rem !important;
+}
+
+.rc-md-editor .rc-md-navigation .button-wrap,
+.rc-md-editor .rc-md-navigation .navigation-nav {
+    margin: 2px 0rem !important;
+}

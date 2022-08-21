@@ -5,10 +5,8 @@ import {
     getAllUsers,
     deleteUserService,
     editUserService,
-    getTopDoctorHomeService,
-    getAllDoctorsService,
-    saveDetailDoctorService,
 } from '../../services/userService';
+import { getTopDoctorHomeService, getAllDoctorsService, saveDetailDoctorService } from '../../services/doctorService';
 import { toast } from 'react-toastify';
 
 export const fetchGenderStart = () => {

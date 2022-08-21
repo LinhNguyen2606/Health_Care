@@ -9,6 +9,9 @@ export const path = {
     ACTIVE_EMAIL: '/api/user/activate/:activation_token',
     CONFIRM_EMAIL: '/confirm',
     PAGE_NOT_FOUND: '/404',
+    USER_MANAGE: '/system/user-manage',
+    MANAGE_DOCTOR: '/system/manage-doctor',
+    DETAIL_DOCTOR: '/detail-doctor/:id',
 };
 
 export const LANGUAGES = {

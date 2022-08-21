@@ -6,7 +6,7 @@ import vnFlag from '../../assets/images/vn-flag.png';
 import enFlag from '../../assets/images/en-flag.png';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
-
+import { Link } from 'react-router-dom';
 class HomeHeader extends Component {
     changeLanguage = (language) => {
         this.props.changeLanguageForApp(language);
@@ -20,7 +20,9 @@ class HomeHeader extends Component {
                     <div className="home-header-content">
                         <div className="left-content">
                             <i className="fa-solid fa-bars"></i>
-                            <div className="header-logo"></div>
+                            <Link to="/home">
+                                <div className="header-logo"></div>
+                            </Link>
                         </div>
                         <div className="center-content">
                             <div className="child-content">
@@ -86,69 +88,73 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="home-header-banner">
-                    <div className="content-up">
-                        <div className="first-title">
-                            <FormattedMessage id="banner.title1" />
+                {this.props.isShowBanner === true && (
+                    <div className="home-header-banner">
+                        <div className="content-up">
+                            <div className="first-title">
+                                <FormattedMessage id="banner.title1" />
+                            </div>
+                            <div className="second-title">
+                                <FormattedMessage id="banner.title2" />
+                            </div>
+                            <div className="search">
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                                <input
+                                    type="text"
+                                    placeholder={
+                                        language === LANGUAGES.VI
+                                            ? 'Tìm chuyên khoa khám bệnh'
+                                            : 'Find a medical specialty'
+                                    }
+                                />
+                            </div>
                         </div>
-                        <div className="second-title">
-                            <FormattedMessage id="banner.title2" />
-                        </div>
-                        <div className="search">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                            <input
-                                type="text"
-                                placeholder={
-                                    language === LANGUAGES.VI ? 'Tìm chuyên khoa khám bệnh' : 'Find a medical specialty'
-                                }
-                            />
+                        <div className="content-down">
+                            <div className="options">
+                                <div className="option-child">
+                                    <div className="border-child">
+                                        <div className="icon-child">
+                                            <i className="fa fa-check" style={{ color: 'green' }}></i>
+                                        </div>
+                                    </div>
+                                    <div className="text-child">
+                                        <FormattedMessage id="banner.child1" />
+                                    </div>
+                                </div>
+                                <div className="option-child">
+                                    <div className="border-child">
+                                        <div className="icon-child">
+                                            <i className="fa fa-thumbs-up" style={{ color: '#004fff' }}></i>
+                                        </div>
+                                    </div>
+                                    <div className="text-child">
+                                        <FormattedMessage id="banner.child2" />
+                                    </div>
+                                </div>
+                                <div className="option-child">
+                                    <div className="border-child">
+                                        <div className="icon-child">
+                                            <i className="fa fa-user-md" style={{ color: '#40b895' }}></i>
+                                        </div>
+                                    </div>
+                                    <div className="text-child">
+                                        <FormattedMessage id="banner.child3" />
+                                    </div>
+                                </div>
+                                <div className="option-child">
+                                    <div className="border-child">
+                                        <div className="icon-child">
+                                            <i className="fa-solid fa-clock" style={{ color: 'red' }}></i>
+                                        </div>
+                                    </div>
+                                    <div className="text-child">
+                                        <FormattedMessage id="banner.child4" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="content-down">
-                        <div className="options">
-                            <div className="option-child">
-                                <div className="border-child">
-                                    <div className="icon-child">
-                                        <i className="fa fa-check" style={{ color: 'green' }}></i>
-                                    </div>
-                                </div>
-                                <div className="text-child">
-                                    <FormattedMessage id="banner.child1" />
-                                </div>
-                            </div>
-                            <div className="option-child">
-                                <div className="border-child">
-                                    <div className="icon-child">
-                                        <i className="fa fa-thumbs-up" style={{ color: '#004fff' }}></i>
-                                    </div>
-                                </div>
-                                <div className="text-child">
-                                    <FormattedMessage id="banner.child2" />
-                                </div>
-                            </div>
-                            <div className="option-child">
-                                <div className="border-child">
-                                    <div className="icon-child">
-                                        <i className="fa fa-user-md" style={{ color: '#40b895' }}></i>
-                                    </div>
-                                </div>
-                                <div className="text-child">
-                                    <FormattedMessage id="banner.child3" />
-                                </div>
-                            </div>
-                            <div className="option-child">
-                                <div className="border-child">
-                                    <div className="icon-child">
-                                        <i className="fa-solid fa-clock" style={{ color: 'red' }}></i>
-                                    </div>
-                                </div>
-                                <div className="text-child">
-                                    <FormattedMessage id="banner.child4" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                )}
             </>
         );
     }

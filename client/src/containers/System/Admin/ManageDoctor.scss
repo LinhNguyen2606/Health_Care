@@ -23,22 +23,12 @@
             width: 65%;
         }
     }
-}
 
-.rc-md-editor .rc-md-navigation {
-    width: 100% !important;
-}
+    .manage-doctor-editor {
 
-.rc-md-editor .editor-container .sec-md .input {
-    line-height: 3.7 !important;
-    height     : 32.8rem !important;
-}
-
-.rc-md-editor .editor-container .sec-html .html-wrap {
-    margin-bottom: 27rem !important;
-}
-
-.rc-md-editor .rc-md-navigation .button-wrap,
-.rc-md-editor .rc-md-navigation .navigation-nav {
-    margin: 2px 0rem !important;
+        .custom-html-style h1 {
+            text-align : left !important;
+            line-height: 0 !important;
+        }
+    }
 }

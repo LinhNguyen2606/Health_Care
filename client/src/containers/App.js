@@ -16,6 +16,7 @@ import HomePage from '../containers/HomePage/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
 import NotFound from '../containers/NotFound';
 import HomePageManage from '../containers/System/HomePageManage';
+import DetailDoctor from '../containers/Patient/Doctor/DetailDoctor';
 class App extends Component {
     handlePersistorState = () => {
         const { persistor } = this.props;
@@ -52,6 +53,7 @@ class App extends Component {
                                     <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />
                                     <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                     <Route path={path.HOMEPAGEMANAGE} component={HomePageManage} />
+                                    <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                                 </Switch>
                             </CustomScrollbars>
                         </span>

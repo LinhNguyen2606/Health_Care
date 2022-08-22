@@ -32,6 +32,10 @@ module.exports = {
                 allowNull: true,
                 type: Sequelize.INTEGER,
             },
+            handbookId: {
+                allowNull: true,
+                type: Sequelize.INTEGER,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

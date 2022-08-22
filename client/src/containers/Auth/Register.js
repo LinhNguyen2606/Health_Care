@@ -140,7 +140,10 @@ class Register extends Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="authfy-container col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
-                                <div className="col-sm-7 authfy-panel-right" style={{ float: 'none', height: '550px' }}>
+                                <div
+                                    className="col-sm-7 authfy-panel-right"
+                                    style={{ float: 'none', height: '550px', marginLeft: '12rem' }}
+                                >
                                     {/* <!-- authfy-login start --> */}
                                     <div className="authfy-login">
                                         {/* <!-- panel-login start --> */}

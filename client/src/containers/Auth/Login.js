@@ -122,7 +122,11 @@ class Login extends Component {
                                                     />
                                                 </div>
                                                 <div className="col-xs-4 col-sm-4 col-md-10">
-                                                    <a href="# " className="btn btn-block btn-google">
+                                                    <a
+                                                        href="# "
+                                                        className="btn btn-block btn-google"
+                                                        style={{ marginLeft: '1.5rem' }}
+                                                    >
                                                         <i className="fa fa-google-plus"></i>
                                                         <span className="hidden-xs hidden-sm">Login with Google</span>
                                                     </a>
@@ -205,6 +209,7 @@ class Login extends Component {
                                                                         className="lnk-toggler"
                                                                         data-panel=".panel-forgot"
                                                                         href="# "
+                                                                        style={{ marginLeft: '7rem' }}
                                                                     >
                                                                         Forgot password?
                                                                     </a>

@@ -1,11 +1,9 @@
 .doctor-detail-container {
     height: 500px;
-    margin: 10px 100px;
-    border: 1px solid red;
 
     .intro-doctor {
         display: flex;
-        border : 1px solid grey;
+        margin : 0 100px;
 
         .content-left {
             width              : 20%;
@@ -31,24 +29,42 @@
             }
 
             .down {
+                white-space: pre;
                 padding-top: 10px;
             }
         }
     }
 
     .detail-info-doctor {
-        padding: 10px 50px;
+        border-top      : 1px solid #e2e2e2;
+        border-bottom   : 1px solid #e2e2e2;
+        padding         : 10px 100px;
+        background-color: #f9f9f9;
 
         h1,
         h2,
         h3 {
-            font-size  : 17px;
+            font-size  : 18px;
+            font-weight: 500;
+            margin-top : 1rem;
+        }
+
+        img {
+            height: 500px;
+            width : 100%;
+        }
+
+        p {
+            margin     : 1rem 0;
             font-weight: bold;
-            margin-top : 4rem;
         }
 
         strong {
-            margin: 0 -2rem !important;
+            margin: 0 -2rem;
         }
+    }
+
+    .comment-doctor {
+        padding: 10px 100px;
     }
 }

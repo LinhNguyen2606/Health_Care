@@ -32,6 +32,10 @@
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook"
         },
+        "doctor": {
+            "manage-schedule": "Manage Doctor's schedule",
+            "manage-patient": "Manage Doctor's patient"
+        },
         "system": {
             "header": "System",
             "system-administrator": {

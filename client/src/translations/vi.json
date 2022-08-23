@@ -59,6 +59,12 @@
         "save": "Lưu người dùng",
         "edit": "Lưu thay đổi"
     },
+    "manage-schedule": {
+        "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
+        "save": "Lưu thông tin"
+    },
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more-infor": "Xem thêm",

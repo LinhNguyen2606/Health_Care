@@ -8,6 +8,7 @@ import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
+import { saveBulkScheduleDoctor } from '../../../services/doctorService';
 
 class ManageSchedule extends Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class ManageSchedule extends Component {
         }
     };
 
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { rangeTime, selectedDoctor, currentDate } = this.state;
         let result = [];
         if (!currentDate) {
@@ -102,6 +103,18 @@ class ManageSchedule extends Component {
                 toast.error('Invalid selected time');
                 return;
             }
+        }
+
+        let res = await saveBulkScheduleDoctor({
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formattedDate: formattedDate,
+        });
+        if (res && res.errCode === 0) {
+            toast.success('Save infor succeed!');
+        } else {
+            toast.error('Error saving schedule');
+            console.log('error saveBulkScheduleDoctor: ', res);
         }
     };
 

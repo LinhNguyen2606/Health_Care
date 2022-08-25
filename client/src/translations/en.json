@@ -66,6 +66,13 @@
         "choose-date": "Choose date",
         "save": "Save infor"
     },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create more information doctos",
+            "select-doctor": "Select doctor",
+            "intro": "Introduction information"
+        }
+    },
     "homepage": {
         "outstanding-doctor": "Last week's outstanding doctor",
         "more-infor": "More Infor",

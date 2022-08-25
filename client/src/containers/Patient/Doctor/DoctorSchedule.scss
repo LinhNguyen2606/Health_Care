@@ -1,0 +1,20 @@
+.doctor-schedule-container {
+    border-right: 1px solid #eee;
+    height      : 100%;
+
+    .all-schedule {
+        select {
+            border       : none;
+            border-bottom: 1px solid #999;
+            cursor       : pointer;
+            outline      : none;
+            padding      : 10px 0;
+            font-weight  : bold;
+            color        : #337ab7;
+
+            option {
+                cursor: pointer;
+            }
+        }
+    }
+}

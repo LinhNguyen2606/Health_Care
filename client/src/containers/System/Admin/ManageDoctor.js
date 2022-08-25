@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './ManageDoctor.scss';
 import * as actions from '../../../store/actions';
@@ -111,10 +112,15 @@ class ManageDoctor extends Component {
         let { hasOldData } = this.state;
         return (
             <div className="manage-doctor-container">
-                <div className="manage-doctor-title">Tạo thêm thông tin bác sĩ</div>
+                <div className="manage-doctor-title">
+                    {' '}
+                    <FormattedMessage id="admin.manage-doctor.title" />
+                </div>
                 <div className="more-infor">
                     <div className="content-left form-group">
-                        <label>Chọn bác sĩ</label>
+                        <label>
+                            <FormattedMessage id="admin.manage-doctor.select-doctor" />
+                        </label>
                         <Select
                             value={this.state.selectedOption}
                             onChange={this.handleChangeSelect}
@@ -122,7 +128,9 @@ class ManageDoctor extends Component {
                         />
                     </div>
                     <div className="content-right">
-                        <label>Thông tin giới thiệu</label>
+                        <label>
+                            <FormattedMessage id="admin.manage-doctor.intro" />
+                        </label>
                         <textarea
                             className="form-control"
                             rows="4"

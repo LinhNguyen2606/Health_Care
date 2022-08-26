@@ -17,6 +17,7 @@ import CustomScrollbars from '../components/CustomScrollbars';
 import NotFound from '../containers/NotFound';
 import HomePageManage from '../containers/System/HomePageManage';
 import DetailDoctor from '../containers/Patient/Doctor/DetailDoctor';
+import Doctor from '../routes/Doctor';
 class App extends Component {
     handlePersistorState = () => {
         const { persistor } = this.props;
@@ -54,6 +55,7 @@ class App extends Component {
                                     <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                     <Route path={path.HOMEPAGEMANAGE} component={HomePageManage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                    <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
                                 </Switch>
                             </CustomScrollbars>
                         </span>

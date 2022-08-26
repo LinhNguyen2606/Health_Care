@@ -11,7 +11,9 @@ export const path = {
     PAGE_NOT_FOUND: '/404',
     USER_MANAGE: '/system/user-manage',
     MANAGE_DOCTOR: '/system/manage-doctor',
+    DOCTOR: '/doctor/',
     DETAIL_DOCTOR: '/detail-doctor/:id',
+    MANAGE_SCHEDULE: '/doctor/manage-schedule',
 };
 
 export const LANGUAGES = {

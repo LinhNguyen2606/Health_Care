@@ -1,4 +1,8 @@
 import db from '../models/index';
+require('dotenv').config();
+import _ from 'lodash';
+
+const MAX_NUMBER_SCHEDULES = process.env.MAX_NUMBER_SCHEDULES;
 
 let getTopDoctorHome = (limitInput) => {
     return new Promise(async (resolve, reject) => {
@@ -145,9 +149,92 @@ let getDetailDoctorById = (inputId) => {
     });
 };
 
+let bulkCreateSchedule = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.arrSchedule || !data.doctorId || !data.formattedDate) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters!',
+                });
+            } else {
+                //build một cục data
+                let schedule = data.arrSchedule;
+                if (schedule && schedule.length > 0) {
+                    schedule = schedule.map((item) => {
+                        item.maxNumber = MAX_NUMBER_SCHEDULES;
+                        return item;
+                    });
+                }
+
+                //get all existing data
+                let existing = await db.Schedule.findAll({
+                    where: { doctorId: data.doctorId, date: data.formattedDate },
+                    attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
+                    raw: true,
+                });
+
+                //compare different
+                let toCreate = _.differenceWith(schedule, existing, (a, b) => {
+                    return a.timeType === b.timeType && +a.date === +b.date;
+                });
+
+                // create data
+                if (toCreate && toCreate.length > 0) {
+                    await db.Schedule.bulkCreate(toCreate);
+                }
+                resolve({
+                    errCode: 0,
+                    message: 'Create schedule successfully',
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+let getScheduleByDate = (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!doctorId || !date) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters!',
+                });
+            } else {
+                let dataSchedule = await db.Schedule.findAll({
+                    where: { doctorId: doctorId, date: date },
+                    include: [
+                        {
+                            model: db.Allcode,
+                            as: 'timeTypeData',
+                            attributes: ['valueEn', 'valueVi'],
+                        },
+                    ],
+                    raw: false,
+                    nest: true,
+                });
+
+                if (!dataSchedule) dataSchedule = [];
+
+                resolve({
+                    errCode: 0,
+                    message: 'Get schedule by date successfully',
+                    data: dataSchedule,
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
     getDetailDoctorById: getDetailDoctorById,
+    bulkCreateSchedule: bulkCreateSchedule,
+    getScheduleByDate: getScheduleByDate,
 };

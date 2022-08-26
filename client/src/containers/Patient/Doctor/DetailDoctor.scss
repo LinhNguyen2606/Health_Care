@@ -35,6 +35,21 @@
         }
     }
 
+    .schedule-doctor {
+        margin    : 0 100px;
+        display   : flex;
+        padding   : 10px;
+        min-height: 150px;
+
+        .content-left {
+            width: 50%;
+        }
+
+        .content-right {
+            width: 50px;
+        }
+    }
+
     .detail-info-doctor {
         border-top      : 1px solid #e2e2e2;
         border-bottom   : 1px solid #e2e2e2;

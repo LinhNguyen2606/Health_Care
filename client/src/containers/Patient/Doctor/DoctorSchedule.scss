@@ -1,5 +1,5 @@
 .doctor-schedule-container {
-    border-right: 1px solid #17a2b8;
+    border-right: 1px solid #ddd;
     height      : 100%;
 
     .all-schedule {
@@ -11,6 +11,7 @@
             padding      : 10px 0;
             color        : #337ab7;
             font-weight  : bold;
+            margin-left  : 2px;
 
             option {
                 cursor: pointer;
@@ -22,6 +23,11 @@
         .text-calendar {
             margin: 10px 0;
             color : #333;
+
+            i {
+                color      : #000;
+                margin-left: 2px;
+            }
 
             span {
                 text-transform: uppercase;
@@ -39,11 +45,10 @@
                 flex-wrap: wrap;
 
                 button {
-                    padding         : 8px 15px;
+                    padding         : 8px 16px;
                     border          : none;
                     outline         : none;
                     background-color: #ffeb0c;
-                    min-width       : 125px;
                     border-radius   : 3px;
                     color           : #333;
                     font-weight     : bold;
@@ -63,6 +68,16 @@
             .btn-en {
                 min-width: 170px;
             }
+        }
+
+        .no-schedule {
+            font-style : italic;
+            font-weight: bold;
+            font-size  : 14px
+        }
+
+        .book-free {
+            margin-top: 15px;
         }
     }
 }

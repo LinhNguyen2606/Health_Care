@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import './DoctorSchedule.scss';
 import moment from 'moment';
+// eslint-disable-next-line
 import localization from 'moment/locale/vi';
 import { LANGUAGES } from '../../../utils';
 import { getScheduleDoctorByDate } from '../../../services/doctorService';
@@ -16,41 +17,60 @@ class DoctorSchedule extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let { language } = this.props;
-        this.setArrDays(language);
+        let allDays = this.getArrDays(language);
+        this.setState({
+            allDays: allDays,
+        });
     }
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    setArrDays = async (language) => {
+    getArrDays = (language) => {
         let allDays = [];
         for (let i = 0; i < 7; i++) {
             let object = {};
             if (language === LANGUAGES.VI) {
-                let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                object.label = this.capitalizeFirstLetter(labelVi);
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Hôm nay - ${ddMM}`;
+                    object.label = today;
+                } else {
+                    let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    object.label = this.capitalizeFirstLetter(labelVi);
+                }
             } else {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Today - ${ddMM}`;
+                    object.label = today;
+                } else {
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                }
             }
+            //startOf day giúp lấy đầu ngày, valueOf giúp convert miliseconds sang Unix Timestamp
             object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
-
             allDays.push(object);
         }
-
-        let res = await getScheduleDoctorByDate(60, 1661446800000);
-        console.log('Check res :', res);
-
-        this.setState({
-            allDays: allDays,
-        });
+        return allDays;
     };
 
-    componentDidUpdate(prevProps) {
+    async componentDidUpdate(prevProps) {
         if (this.props.language !== prevProps.language) {
-            this.setArrDays(this.props.language);
+            let allDays = this.getArrDays(this.props.language);
+            this.setState({
+                allDays: allDays,
+            });
+        }
+        if (this.props.doctorIdFromDetailDoctor !== prevProps.doctorIdFromDetailDoctor) {
+            let allDays = this.getArrDays(this.props.language);
+            let res = await getScheduleDoctorByDate(this.props.doctorIdFromDetailDoctor, allDays[0].value);
+            this.setState({
+                allAvailableTime: res.data ? res.data : [],
+            });
         }
     }
 
@@ -70,49 +90,65 @@ class DoctorSchedule extends Component {
         let { allDays, allAvailableTime } = this.state;
         let { language } = this.props;
         return (
-            <div className="doctor-schedule-container">
-                <div className="all-schedule">
-                    <select onChange={(e) => this.handleOnChangeSelect(e)}>
-                        {allDays &&
-                            allDays.length > 0 &&
-                            allDays.map((item, index) => {
-                                return (
-                                    <option key={index} value={item.value}>
-                                        {item.label}
-                                    </option>
-                                );
-                            })}
-                    </select>
-                </div>
-                <div className="all-available-time">
-                    <div className="text-calendar">
-                        <i className="fa-solid fa-calendar-days"></i>
-                        <span>Lịch khám</span>
-                    </div>
-                    <div className="time-content">
-                        <div className="time-content-btns">
-                            {allAvailableTime && allAvailableTime.length > 0 ? (
-                                allAvailableTime.map((item) => {
-                                    let timeDisplay =
-                                        language === LANGUAGES.VI
-                                            ? item.timeTypeData.valueVi
-                                            : item.timeTypeData.valueEn;
+            <>
+                <div className="doctor-schedule-container">
+                    <div className="all-schedule">
+                        <select onChange={(e) => this.handleOnChangeSelect(e)}>
+                            {allDays &&
+                                allDays.length > 0 &&
+                                allDays.map((item) => {
                                     return (
-                                        <button
-                                            key={item.id}
-                                            className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
-                                        >
-                                            {timeDisplay}
-                                        </button>
+                                        <option key={item.id} value={item.value}>
+                                            {item.label}
+                                        </option>
                                     );
-                                })
+                                })}
+                        </select>
+                    </div>
+                    <div className="all-available-time">
+                        <div className="text-calendar">
+                            <i className="fa-solid fa-calendar-days"></i>
+                            <span>
+                                <FormattedMessage id="patient.detail-doctor.schedule" />
+                            </span>
+                        </div>
+                        <div className="time-content">
+                            {allAvailableTime && allAvailableTime.length > 0 ? (
+                                <>
+                                    <div className="time-content-btns">
+                                        {allAvailableTime.map((item, index) => {
+                                            let timeDisplay =
+                                                language === LANGUAGES.VI
+                                                    ? item.timeTypeData.valueVi
+                                                    : item.timeTypeData.valueEn;
+                                            return (
+                                                <button
+                                                    key={index}
+                                                    className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                >
+                                                    {timeDisplay}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <div className="book-free">
+                                        <span>
+                                            <FormattedMessage id="patient.detail-doctor.choose" />
+                                            <i className="far fa-hand-point-up"></i>
+                                            <FormattedMessage id="patient.detail-doctor.book-free" />
+                                        </span>
+                                    </div>
+                                </>
                             ) : (
-                                <div>Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!</div>
+                                <div className="no-schedule">
+                                    <FormattedMessage id="patient.detail-doctor.no-schedule" />
+                                </div>
                             )}
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

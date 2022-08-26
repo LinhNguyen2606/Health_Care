@@ -66,11 +66,20 @@
         "choose-date": "Choose date",
         "save": "Save infor"
     },
+
     "admin": {
         "manage-doctor": {
             "title": "Create more information doctos",
             "select-doctor": "Select doctor",
             "intro": "Introduction information"
+        }
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Schedule",
+            "no-schedule": "The doctor does not have an appointment at this time, please choose another time!",
+            "choose": "Choose ",
+            "book-free": " and book (free)"
         }
     },
     "homepage": {

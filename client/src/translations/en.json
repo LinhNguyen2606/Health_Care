@@ -71,7 +71,15 @@
         "manage-doctor": {
             "title": "Create more information doctos",
             "select-doctor": "Select doctor",
-            "intro": "Introduction information"
+            "intro": "Introduction information",
+            "add": "Create infor",
+            "save": "Save infor",
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "nameClinic": "Clinic's name",
+            "addressClinic": "Clinic's address",
+            "note": "Note"
         }
     },
     "patient": {

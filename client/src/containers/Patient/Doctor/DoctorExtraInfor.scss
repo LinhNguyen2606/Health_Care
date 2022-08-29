@@ -27,15 +27,15 @@
     .content-down {
         .short-infor {
             .detail {
-                margin-left: 5px;
                 cursor     : pointer;
-                color      : rgb(38, 160, 231)
+                color      : rgb(38, 160, 231);
+                margin-left: 4px;
             }
 
             .currency {
-                margin: 0 5px;
+                margin-left: 4px;
+                color      : #000;
             }
-
         }
 
         .title-price {

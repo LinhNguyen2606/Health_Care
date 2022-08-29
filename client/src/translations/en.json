@@ -71,7 +71,15 @@
         "manage-doctor": {
             "title": "Create more information doctos",
             "select-doctor": "Select doctor",
-            "intro": "Introduction information"
+            "intro": "Introduction information",
+            "add": "Create infor",
+            "save": "Save infor",
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "nameClinic": "Clinic's name",
+            "addressClinic": "Clinic's address",
+            "note": "Note"
         }
     },
     "patient": {
@@ -80,6 +88,13 @@
             "no-schedule": "The doctor does not have an appointment at this time, please choose another time!",
             "choose": "Choose ",
             "book-free": " and book (free)"
+        },
+        "extra-infor-doctor": {
+            "text-address": "Address of medical examination",
+            "price": "Medical examination price: ",
+            "detail": "See details",
+            "payment": "The clinic has payment in the form of:",
+            "hide-price": "Hide price"
         }
     },
     "homepage": {

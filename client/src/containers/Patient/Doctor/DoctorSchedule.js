@@ -116,14 +116,14 @@ class DoctorSchedule extends Component {
                             {allAvailableTime && allAvailableTime.length > 0 ? (
                                 <>
                                     <div className="time-content-btns">
-                                        {allAvailableTime.map((item, index) => {
+                                        {allAvailableTime.map((item) => {
                                             let timeDisplay =
                                                 language === LANGUAGES.VI
                                                     ? item.timeTypeData.valueVi
                                                     : item.timeTypeData.valueEn;
                                             return (
                                                 <button
-                                                    key={index}
+                                                    key={item.id}
                                                     className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
                                                 >
                                                     {timeDisplay}

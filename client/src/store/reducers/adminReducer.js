@@ -4,6 +4,7 @@ const initialState = {
     isLoadingGender: false,
     isLoadingRole: false,
     isLoadingPosition: false,
+    isLoadingAllRequiredData: false,
     genders: [],
     roles: [],
     positions: [],
@@ -11,6 +12,8 @@ const initialState = {
     topDoctors: [],
     allDoctors: [],
     allScheduleTime: [],
+
+    allRequiredDoctorInfor: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -106,6 +109,24 @@ const adminReducer = (state = initialState, action) => {
             };
         case actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED:
             state.allScheduleTime = [];
+            return {
+                ...state,
+            };
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_START:
+            const copyAllRequiredDataState = { ...state };
+            copyAllRequiredDataState.isLoadingAllRequiredData = true;
+            return {
+                ...copyAllRequiredDataState,
+            };
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_SUCCESS:
+            state.allRequiredDoctorInfor = action.data;
+            state.isLoadingAllRequiredData = false;
+            return {
+                ...state,
+            };
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAILED:
+            state.isLoadingAllRequiredData = true;
+            state.allRequiredDoctorInfor = [];
             return {
                 ...state,
             };

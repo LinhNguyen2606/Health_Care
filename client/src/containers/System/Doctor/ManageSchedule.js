@@ -47,7 +47,8 @@ class ManageSchedule extends Component {
     buildDataInputSelect = (inputData) => {
         let result = [];
         if (inputData && inputData.length > 0) {
-            inputData.forEach((item) => {
+            // eslint-disable-next-line
+            inputData.map((item) => {
                 let object = {};
                 object.label = item.fullname;
                 object.value = item.id;
@@ -92,7 +93,8 @@ class ManageSchedule extends Component {
         if (rangeTime && rangeTime.length > 0) {
             let selectedTime = rangeTime.filter((item) => item.isSelected === true);
             if (selectedTime && selectedTime.length > 0) {
-                selectedTime.forEach((schedule) => {
+                // eslint-disable-next-line
+                selectedTime.map((schedule) => {
                     let object = {};
                     object.doctorId = selectedDoctor.value;
                     object.date = formattedDate;

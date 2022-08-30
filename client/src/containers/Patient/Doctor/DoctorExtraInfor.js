@@ -59,35 +59,18 @@ class DoctorExtraInfor extends Component {
                                     value={extraInfor.priceTypeData.valueVi}
                                     displayType={'text'}
                                     thousandSeparator={true}
+                                    suffix={'VND'}
                                 />
                             )}
-                            <span
-                                style={{
-                                    verticalAlign: 'super',
-                                    fontSize: '12px',
-                                    color: '#000',
-                                }}
-                            >
-                                {language === LANGUAGES.VI ? 'đ' : ''}
-                            </span>
                             {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN && (
                                 <NumberFormat
                                     className="currency"
                                     value={extraInfor.priceTypeData.valueEn}
                                     displayType={'text'}
                                     thousandSeparator={true}
+                                    suffix={'$'}
                                 />
                             )}
-                            <span
-                                style={{
-                                    verticalAlign: 'super',
-                                    fontSize: '12px',
-                                    color: '#000',
-                                }}
-                            >
-                                {language === LANGUAGES.EN ? '$' : ''}
-                            </span>
-                            .
                             <span className="detail" onClick={() => this.showHideDetailInfor(true)}>
                                 <FormattedMessage id="patient.extra-infor-doctor.detail" />
                             </span>
@@ -109,34 +92,18 @@ class DoctorExtraInfor extends Component {
                                                 value={extraInfor.priceTypeData.valueVi}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
+                                                suffix={'VND'}
                                             />
                                         )}
-                                        <span
-                                            style={{
-                                                verticalAlign: 'super',
-                                                fontSize: '12px',
-                                                color: '#000',
-                                            }}
-                                        >
-                                            {language === LANGUAGES.VI ? 'đ' : ''}
-                                        </span>
                                         {extraInfor && extraInfor.priceTypeData && language === LANGUAGES.EN && (
                                             <NumberFormat
                                                 className="currency"
                                                 value={extraInfor.priceTypeData.valueEn}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
+                                                suffix={'$'}
                                             />
                                         )}
-                                        <span
-                                            style={{
-                                                verticalAlign: 'super',
-                                                fontSize: '12px',
-                                                color: '#000',
-                                            }}
-                                        >
-                                            {language === LANGUAGES.EN ? '$' : ''}
-                                        </span>
                                     </span>
                                 </div>
                                 <div className="note">

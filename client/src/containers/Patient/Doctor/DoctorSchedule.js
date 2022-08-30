@@ -7,13 +7,15 @@ import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { LANGUAGES } from '../../../utils';
 import { getScheduleDoctorByDate } from '../../../services/doctorService';
-
+import BookingModal from './Modal/BookingModal';
 class DoctorSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
             allDays: [],
             allAvailableTime: [],
+            isOpenModalBooking: false,
+            dataScheduleTimeModal: {},
         };
     }
 
@@ -86,8 +88,22 @@ class DoctorSchedule extends Component {
             }
         }
     };
+
+    handleClickScheduleTime = (time) => {
+        this.setState({
+            isOpenModalBooking: true,
+            dataScheduleTimeModal: time,
+        });
+    };
+
+    closeModalBooking = () => {
+        this.setState({
+            isOpenModalBooking: false,
+        });
+    };
+
     render() {
-        let { allDays, allAvailableTime } = this.state;
+        let { allDays, allAvailableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state;
         let { language } = this.props;
         return (
             <>
@@ -125,6 +141,7 @@ class DoctorSchedule extends Component {
                                                 <button
                                                     key={item.id}
                                                     className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                                    onClick={() => this.handleClickScheduleTime(item)}
                                                 >
                                                     {timeDisplay}
                                                 </button>
@@ -148,6 +165,12 @@ class DoctorSchedule extends Component {
                         </div>
                     </div>
                 </div>
+
+                <BookingModal
+                    isOpenModal={isOpenModalBooking}
+                    closeModalBooking={this.closeModalBooking}
+                    dataTime={dataScheduleTimeModal}
+                />
             </>
         );
     }

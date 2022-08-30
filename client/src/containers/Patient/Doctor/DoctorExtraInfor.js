@@ -64,7 +64,7 @@ class DoctorExtraInfor extends Component {
                             <span
                                 style={{
                                     verticalAlign: 'super',
-                                    fontSize: '10px',
+                                    fontSize: '12px',
                                     color: '#000',
                                 }}
                             >
@@ -81,7 +81,7 @@ class DoctorExtraInfor extends Component {
                             <span
                                 style={{
                                     verticalAlign: 'super',
-                                    fontSize: '10px',
+                                    fontSize: '12px',
                                     color: '#000',
                                 }}
                             >
@@ -114,7 +114,7 @@ class DoctorExtraInfor extends Component {
                                         <span
                                             style={{
                                                 verticalAlign: 'super',
-                                                fontSize: '10px',
+                                                fontSize: '12px',
                                                 color: '#000',
                                             }}
                                         >
@@ -131,7 +131,7 @@ class DoctorExtraInfor extends Component {
                                         <span
                                             style={{
                                                 verticalAlign: 'super',
-                                                fontSize: '10px',
+                                                fontSize: '12px',
                                                 color: '#000',
                                             }}
                                         >

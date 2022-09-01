@@ -1,0 +1,121 @@
+{
+    "homeheader": {
+        "speciality": "Chuyên khoa",
+        "search-doctor": "Tìm bác sĩ theo chuyên khoa",
+        "health-facility": "Cơ sở y tế",
+        "select-room": "Chọn bệnh viện phòng khám",
+        "doctor": "Bác sĩ",
+        "select-doctor": "Chọn bác sĩ giỏi",
+        "fee": "Gói khám",
+        "check-health": "Khám sức khoẻ tổng quát",
+        "support": "Hỗ trợ",
+        "welcome": "Xin chào, "
+    },
+    "banner": {
+        "title1": "Nền tảng y tế",
+        "title2": "Chăm sóc sức khoẻ toàn diện",
+        "child1": "Bệnh viện uy tín",
+        "child2": "Phòng khám tốt",
+        "child3": "Bác sĩ ưu tú",
+        "child4": "Ưu tiên kiểm tra"
+    },
+    "menu": {
+        "admin": {
+            "manage-user": " Người dùng",
+            "manage-doctor": "Quản lý bác sĩ",
+            "manage-admin": "Quản lý admin",
+            "crud": "Quản lý người dùng",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
+            "specialty": "Chuyên khoa",
+            "manage-specialty": "Quản lý chuyên khoa",
+            "handbook": "Cẩm nang",
+            "manage-handbook": "Quản lý cẩm nang"
+        },
+        "doctor": {
+            "manage-schedule": "Quản lý kế hoạch khám bệnh",
+            "manage-patient": "Quản lý bệnh nhân khám bệnh"
+        },
+        "system": {
+            "header": "Hệ thống",
+            "system-administrator": {
+                "header": "Quản trị hệ thống",
+                "user-manage": "Quản lý người sử dụng"
+            }
+        }
+    },
+    "manage-user": {
+        "add-user": "Thêm người dùng",
+        "edit-user": "Sửa người dùng",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "full-name": "Họ và tên ",
+        "phone-number": "Số điện thoại",
+        "address": "Địa chỉ",
+        "gender": "Giới tính",
+        "position": "Chức danh",
+        "role": "Vai trò",
+        "image": "Ảnh đại diện",
+        "save": "Lưu người dùng",
+        "edit": "Lưu thay đổi"
+    },
+    "manage-schedule": {
+        "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
+        "save": "Lưu thông tin"
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Tạo thêm thông tin doctors",
+            "select-doctor": "Chọn bác sĩ",
+            "intro": "Thông tin giới thiệu",
+            "add": "Tạo thông tin",
+            "save": "Lưu thông tin",
+            "price": "Giá khám bệnh",
+            "payment": "Phương thức thanh toán",
+            "province": "Tỉnh thành",
+            "nameClinic": "Tên phòng khám",
+            "addressClinic": "Địa chỉ phòng khám",
+            "note": "Ghi chú"
+        }
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Lịch khám",
+            "no-schedule": "Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
+            "choose": "Chọn ",
+            "book-free": " và đặt (miễn phí)"
+        },
+        "extra-infor-doctor": {
+            "text-address": "Địa chỉ khám",
+            "price": "Giá khám: ",
+            "detail": "Xem chi tiết",
+            "payment": "Phòng khám có thanh toán bằng hình thức:",
+            "hide-price": "Ẩn bảng giá"
+        },
+        "booking-modal": {
+            "title": "Thông tin đặt lịch khám bệnh",
+            "fullName": "Họ và tên",
+            "phoneNumber": "Số điện thoại",
+            "email": "Địa chỉ email",
+            "address": "Địa chỉ liên lạc",
+            "reason": "Lý do khám",
+            "birthday": "Ngày sinh",
+            "gender": "Giới tính",
+            "btnConfirm": "Xác nhận",
+            "btnCancel": "Huỷ bỏ",
+            "priceBooking": "Miễn phí đặt lịch",
+            "price": "Giá khám:"
+        }
+    },
+    "homepage": {
+        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "more-infor": "Xem thêm",
+        "specialty-popular": "Chuyên khoa phổ biến"
+    },
+    "homepage-manage": {
+        "text1": "Chào mừng đến trung tâm Health Care",
+        "text2": "Sự lựa chọn tốt nhất dành cho bạn và gia đình bạn"
+    }
+}

@@ -1,0 +1,30 @@
+.active-email {
+    display: flex;
+
+    img {
+        margin-left: 0;
+    }
+
+    .text {
+        font-size   : 20px;
+        margin-right: 26rem;
+        margin-top  : 8rem;
+
+        .text-register {
+            font-size  : 50px;
+            font-weight: bold;
+            margin-left: 25px;
+        }
+
+        .text-check {
+            display       : flex;
+            flex-direction: column;
+            line-height   : 2;
+
+            .text-active {
+                margin-left: 0rem;
+            }
+        }
+
+    }
+}

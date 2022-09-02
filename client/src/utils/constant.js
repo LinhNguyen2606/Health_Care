@@ -8,7 +8,7 @@ export const path = {
     SYSTEM: '/system',
     ACTIVE_EMAIL: '/api/user/activate/:activation_token',
     CONFIRM_EMAIL: '/confirm',
-    PAGE_NOT_FOUND: '/404',
+    PAGE_NOT_FOUND: '*',
     USER_MANAGE: '/system/user-manage',
     MANAGE_DOCTOR: '/system/manage-doctor',
     DOCTOR: '/doctor/',

@@ -52,10 +52,10 @@ class App extends Component {
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />
-                                    <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                     <Route path={path.HOMEPAGEMANAGE} component={HomePageManage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                                     <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                 </Switch>
                             </CustomScrollbars>
                         </span>

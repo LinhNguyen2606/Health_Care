@@ -10,9 +10,9 @@ class System extends Component {
         const { systemMenuPath, isLoggedIn, user } = this.props;
         return (
             <>
-                {isLoggedIn && <Header />}
                 <div className="system-container">
                     <div className="system-list">
+                        {isLoggedIn && <Header />}
                         {user?.userInfo?.roleId === 'R1' ? (
                             <Switch>
                                 <Route path={path.USER_MANAGE} component={UserManage} />
@@ -24,7 +24,7 @@ class System extends Component {
                                 />
                             </Switch>
                         ) : (
-                            <Redirect to="/404" />
+                            <Redirect to="*" />
                         )}
                     </div>
                 </div>

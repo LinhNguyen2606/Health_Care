@@ -107,8 +107,14 @@
             "btnCancel": "Huỷ bỏ",
             "priceBooking": "Miễn phí đặt lịch",
             "price": "Giá khám:"
+        },
+        "verify-email": {
+            "loading-data": "Đang tải dữ liệu...",
+            "verify-success": "Xác nhận lịch hẹn thành công.",
+            "verify-failed": "Lịch hẹn không tồn tại hoặc đã được xác nhận!"
         }
     },
+
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more-infor": "Xem thêm",

@@ -12,6 +12,11 @@ export const isEmail = (email) => {
     return re.test(email);
 };
 
+export const validatePhoneNumber = (phoneNumber) => {
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im; /* eslint-disable-line */
+    return re.test(phoneNumber);
+};
+
 export const isLength = (password) => {
     if (password.length < 6) {
         return true;

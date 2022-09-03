@@ -1,0 +1,29 @@
+.verify-email-container {
+    .verify-email {
+        display: flex;
+
+        .text-success {
+            margin-top : 16rem;
+            margin-left: 12rem;
+
+            .text-verify-success {
+                font-size     : 24px;
+                font-weight   : 600;
+                text-transform: uppercase;
+                color         : red
+            }
+        }
+
+        .text-failed {
+            margin-top : 16rem;
+            margin-left: 4rem;
+
+            .text-verify-failed {
+                font-size     : 24px;
+                font-weight   : 600;
+                text-transform: uppercase;
+                color         : red
+            }
+        }
+    }
+}

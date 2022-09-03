@@ -109,6 +109,11 @@
             "btnCancel": "Cancel",
             "priceBooking": "Free booking",
             "price": "Price:"
+        },
+        "verify-email": {
+            "loading-data": "Loading data...",
+            "verify-success": "Appointment confirmed successfully",
+            "verify-failed": "Appointment does not exist or has been confirmed!"
         }
     },
     "homepage": {

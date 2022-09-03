@@ -11,6 +11,11 @@ let buildUrlEmail = (doctorId, token) => {
 let postBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            if (!validatePhoneNumber(data.phoneNumber))
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Invalid phone number',
+                });
             if (!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName) {
                 resolve({
                     errCode: 1,
@@ -100,6 +105,11 @@ let postVerifyBookAppointment = (data) => {
         }
     });
 };
+
+function validatePhoneNumber(phoneNumber) {
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return re.test(phoneNumber);
+}
 
 module.exports = {
     postBookAppointment: postBookAppointment,

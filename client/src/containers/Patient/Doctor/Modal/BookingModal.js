@@ -9,7 +9,7 @@ import DatePicker from '../../../../components/Input/DatePicker';
 import * as actions from '../../../../store/actions';
 import Select from 'react-select';
 import { LANGUAGES } from '../../../../utils';
-import { isEmail } from '../../../../utils/validation/Validation';
+import { isEmail, validatePhoneNumber } from '../../../../utils/validation/Validation';
 import { postPatientBookAppointment } from '../../../../services/patientService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
@@ -128,6 +128,19 @@ class BookingModal extends Component {
                 birthday: this.state.birthday,
                 selectedGender: this.state.selectedGender,
                 errMessage: 'Invalid email.',
+            });
+        }
+
+        if (!validatePhoneNumber(this.state.phoneNumber)) {
+            this.setState({
+                fullname: this.state.fullName,
+                phoneNumber: this.state.phoneNumber,
+                email: this.state.email,
+                address: this.state.address,
+                reason: this.state.reason,
+                birthday: this.state.birthday,
+                selectedGender: this.state.selectedGender,
+                errMessage: 'Invalid phone number.',
             });
         }
 

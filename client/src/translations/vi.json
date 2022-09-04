@@ -65,6 +65,13 @@
         "choose-date": "Chọn ngày",
         "save": "Lưu thông tin"
     },
+    "manage-specialty": {
+        "title": "Quản lý chuyên khoa",
+        "specialty-name": "Tên chuyên khoa",
+        "specialty-img": "Ảnh chuyên khoa",
+        "save": "Lưu chuyên khoa",
+        "upload-img": "Tải ảnh"
+    },
     "admin": {
         "manage-doctor": {
             "title": "Tạo thêm thông tin doctors",

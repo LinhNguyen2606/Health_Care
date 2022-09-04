@@ -15,6 +15,7 @@ export const path = {
     DETAIL_DOCTOR: '/detail-doctor/:id',
     MANAGE_SCHEDULE: '/doctor/manage-schedule',
     VERIFY_EMAIL_BOOKING: '/verify-booking',
+    MANAGE_SPECIALTY: '/system/manage-specialty',
 };
 
 export const LANGUAGES = {

@@ -67,10 +67,12 @@
     },
     "manage-specialty": {
         "title": "Quản lý chuyên khoa",
-        "specialty-name": "Tên chuyên khoa",
+        "specialty-name-vi": "Tên chuyên khoa tiếng việt",
+        "specialty-name-en": "Tên chuyên khoa tiếng anh",
         "specialty-img": "Ảnh chuyên khoa",
         "save": "Lưu chuyên khoa",
-        "upload-img": "Tải ảnh"
+        "upload-img": "Tải ảnh",
+        "select-specialty": "Chọn chuyên ngành"
     },
     "admin": {
         "manage-doctor": {

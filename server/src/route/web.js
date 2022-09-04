@@ -42,7 +42,8 @@ let initWebRoutes = (app) => {
     router.post('/api/patient-book-appointment', patientController.postBookAppointment);
     router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment);
     //specialty
-    router.post('/api/create-new-specialty', specialtyController.createSpecialty);
+    router.post('/api/create-new-specialty', specialtyController.saveSpecialty);
+    router.get('/api/get-all-specialties', specialtyController.getAllSpecialties);
 
     //Social login
     router.post('/api/facebook_login', userController.facebookLogin);

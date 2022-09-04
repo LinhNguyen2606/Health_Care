@@ -62,10 +62,12 @@
     },
     "manage-specialty": {
         "title": "Manage specialty",
-        "specialty-name": "Specialty Name",
+        "specialty-name-vi": "Specialty name by VN",
+        "specialty-name-en": "Specialty name by EN",
         "specialty-img": "Specialty image",
         "save": "Save specialty",
-        "upload-img": "Upload image"
+        "upload-img": "Upload image",
+        "select-specialty": "Select specialty"
     },
     "manage-schedule": {
         "title": "Manage doctor's examination plan",

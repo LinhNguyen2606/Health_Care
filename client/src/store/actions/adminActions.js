@@ -7,6 +7,7 @@ import {
     editUserService,
 } from '../../services/userService';
 import { getTopDoctorHomeService, getAllDoctorsService, saveDetailDoctorService } from '../../services/doctorService';
+import { saveSpecialtyService, getAllSpecialties } from '../../services/specialtyService';
 import { toast } from 'react-toastify';
 
 export const fetchGenderStart = () => {
@@ -333,3 +334,51 @@ export const fetchRequiredDoctorInforSuccess = (allRequiredData) => ({
 export const fetchRequiredDoctorInforFailed = () => ({
     type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAILED,
 });
+
+export const fetchAllSpecialties = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllSpecialties();
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SPECIALTIES_SUCCESS,
+                    dataSpecialty: res.data,
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+                });
+            }
+        } catch (e) {
+            console.log('FETCH_ALL_SPECIALTIES_FAILED', e);
+            dispatch({
+                type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+            });
+        }
+    };
+};
+
+export const saveSpecialty = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveSpecialtyService(data);
+            if (res && res.errCode === 0) {
+                toast.success('Save specialty succeeded');
+                dispatch({
+                    type: actionTypes.SAVE_SPECIALTY_SUCCESS,
+                });
+            } else {
+                toast.error('Save specialty error!');
+                dispatch({
+                    type: actionTypes.SAVE_SPECIALTY_FAILED,
+                });
+            }
+        } catch (e) {
+            toast.error('Save specialty error!');
+            console.log('SAVE_SPECIALTY_FAILED', e);
+            dispatch({
+                type: actionTypes.SAVE_SPECIALTY_FAILED,
+            });
+        }
+    };
+};

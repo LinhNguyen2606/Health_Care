@@ -1,7 +1,11 @@
 import axios from '../axios';
 
-const createNewSpecialty = (data) => {
+const saveSpecialtyService = (data) => {
     return axios.post('/api/create-new-specialty', data);
 };
 
-export { createNewSpecialty };
+const getAllSpecialties = () => {
+    return axios.get('/api/get-all-specialties');
+};
+
+export { saveSpecialtyService, getAllSpecialties };

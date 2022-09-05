@@ -170,6 +170,7 @@ class ManageDoctor extends Component {
             selectedPrice: '',
             selectedPayment: '',
             selectedProvince: '',
+            selectedSpecialty: '',
             nameClinic: '',
             addressClinic: '',
             note: '',
@@ -267,7 +268,7 @@ class ManageDoctor extends Component {
         });
     };
     render() {
-        let { hasOldData, listSpecialty } = this.state;
+        let { hasOldData, listSpecialty, selectedSpecialty } = this.state;
         let { language } = this.props;
         const isGetAllRequiredData = this.props.isLoadingAllRequiredData;
         return (
@@ -377,7 +378,7 @@ class ManageDoctor extends Component {
                             <FormattedMessage id="admin.manage-doctor.select-specialty" />
                         </label>
                         <Select
-                            value={this.state.selectedSpecialty}
+                            value={selectedSpecialty}
                             onChange={this.handleChangeSelectDoctorInfor}
                             options={listSpecialty}
                             placeholder={<FormattedMessage id="manage-specialty.select-specialty" />}

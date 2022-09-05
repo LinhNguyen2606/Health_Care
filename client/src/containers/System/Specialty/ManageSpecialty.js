@@ -29,9 +29,9 @@ class ManageSpecialty extends Component {
         };
     }
 
-    componentDidMount() {
-        this.props.fetchAllSpecialties();
-    }
+    // componentDidMount() {
+    //     this.props.fetchAllSpecialties();
+    // }
 
     buildDataInputSelect = (inputData) => {
         let result = [];
@@ -135,7 +135,7 @@ class ManageSpecialty extends Component {
                     <FormattedMessage id="manage-specialty.title" />
                 </div>
                 <div className="row">
-                    <div className="col-3 form-group">
+                    {/* <div className="col-3 form-group">
                         <label>
                             <FormattedMessage id="manage-specialty.select-specialty" />
                         </label>
@@ -145,8 +145,8 @@ class ManageSpecialty extends Component {
                             options={this.state.listSpecialties}
                             placeholder={<FormattedMessage id="manage-specialty.select-specialty" />}
                         />
-                    </div>
-                    <div className="col-3 form-group">
+                    </div> */}
+                    <div className="col-4 form-group">
                         <label>
                             <FormattedMessage id="manage-specialty.specialty-name-vi" />
                         </label>
@@ -157,7 +157,7 @@ class ManageSpecialty extends Component {
                             onChange={(e) => this.handleOnChangeInput(e, 'nameVi')}
                         />
                     </div>
-                    <div className="col-3 form-group">
+                    <div className="col-4 form-group">
                         <label>
                             <FormattedMessage id="manage-specialty.specialty-name-en" />
                         </label>
@@ -168,7 +168,7 @@ class ManageSpecialty extends Component {
                             onChange={(e) => this.handleOnChangeInput(e, 'nameEn')}
                         />
                     </div>
-                    <div className="col-3 form-group">
+                    <div className="col-4 form-group">
                         <label>
                             <FormattedMessage id="manage-specialty.specialty-img" />
                         </label>
@@ -233,7 +233,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAllSpecialties: () => dispatch(actions.fetchAllSpecialties()),
         saveSpecialty: (data) => dispatch(actions.saveSpecialty(data)),
     };
 };

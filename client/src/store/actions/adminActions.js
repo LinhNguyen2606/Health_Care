@@ -302,18 +302,22 @@ export const getRequiredDoctorInfor = () => {
             const resPrice = await getAllCodeService('PRICE');
             const resPayment = await getAllCodeService('PAYMENT');
             const resProvince = await getAllCodeService('PROVINCE');
+            const resSpecialty = await getAllSpecialties();
             if (
                 resPrice &&
                 resPrice.errCode === 0 &&
                 resPayment &&
                 resPayment.errCode === 0 &&
                 resProvince &&
-                resProvince.errCode === 0
+                resProvince.errCode === 0 &&
+                resSpecialty &&
+                resSpecialty.errCode === 0
             ) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
                     resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data,
                 };
                 dispatch(fetchRequiredDoctorInforSuccess(data));
             } else {
@@ -334,29 +338,6 @@ export const fetchRequiredDoctorInforSuccess = (allRequiredData) => ({
 export const fetchRequiredDoctorInforFailed = () => ({
     type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAILED,
 });
-
-export const fetchAllSpecialties = () => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await getAllSpecialties();
-            if (res && res.errCode === 0) {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_SPECIALTIES_SUCCESS,
-                    dataSpecialty: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
-                });
-            }
-        } catch (e) {
-            console.log('FETCH_ALL_SPECIALTIES_FAILED', e);
-            dispatch({
-                type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
-            });
-        }
-    };
-};
 
 export const saveSpecialty = (data) => {
     return async (dispatch, getState) => {

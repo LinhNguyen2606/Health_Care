@@ -17,6 +17,7 @@ import CustomScrollbars from '../components/CustomScrollbars';
 import NotFound from '../containers/NotFound';
 import HomePageManage from '../containers/System/HomePageManage';
 import DetailDoctor from '../containers/Patient/Doctor/DetailDoctor';
+import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 import Doctor from '../routes/Doctor';
 import VerifyEmail from './Patient/VerifyEmail';
 
@@ -56,6 +57,7 @@ class App extends Component {
                                     <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />
                                     <Route path={path.HOMEPAGEMANAGE} component={HomePageManage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                    <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
                                     <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                                     <Route path={path.PAGE_NOT_FOUND} component={NotFound} />

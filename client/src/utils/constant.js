@@ -13,6 +13,7 @@ export const path = {
     MANAGE_DOCTOR: '/system/manage-doctor',
     DOCTOR: '/doctor/',
     DETAIL_DOCTOR: '/detail-doctor/:id',
+    DETAIL_SPECIALTY: '/detail-specialty/:id',
     MANAGE_SCHEDULE: '/doctor/manage-schedule',
     VERIFY_EMAIL_BOOKING: '/verify-booking',
     MANAGE_SPECIALTY: '/system/manage-specialty',

@@ -85,6 +85,7 @@ class ManageDoctor extends Component {
         }
 
         if (type === 'SPECIALTY') {
+            // eslint-disable-next-line
             inputData.map((item) => {
                 let object = {};
                 let labelVi = `${item.nameVi}`;
@@ -121,16 +122,18 @@ class ManageDoctor extends Component {
 
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
-            let { resPayment, resPrice, resProvince } = this.props.allRequiredDoctorInfor;
+            let { resPayment, resPrice, resProvince, resSpecialty } = this.props.allRequiredDoctorInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
 
             this.setState({
                 listDoctors: dataSelect,
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
                 listProvince: dataSelectProvince,
+                listSpecialty: dataSelectSpecialty,
             });
         }
     }

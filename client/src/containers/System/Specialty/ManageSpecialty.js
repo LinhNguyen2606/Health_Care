@@ -4,11 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import './ManageSpecialty.scss';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-import { CommonUtils, LANGUAGES, CRUD_ACTIONS } from '../../../utils';
+import { CommonUtils } from '../../../utils';
 import Lightbox from 'react-image-lightbox';
 import { toast } from 'react-toastify';
-import Select from 'react-select';
-import * as actions from '../../../store/actions';
+// import * as actions from '../../../store/actions';
 import { saveSpecialtyService } from '../../../services/specialtyService';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -27,42 +26,6 @@ class ManageSpecialty extends Component {
             isOpen: false,
             hasOldData: false,
         };
-    }
-
-    // componentDidMount() {
-    //     this.props.fetchAllSpecialties();
-    // }
-
-    buildDataInputSelect = (inputData) => {
-        let result = [];
-        let { language } = this.props;
-        if (inputData && inputData.length > 0) {
-            // eslint-disable-next-line
-            inputData.map((item) => {
-                let object = {};
-                let labelVi = `${item.nameVi}`;
-                let labelEn = `${item.nameEn}`;
-                object.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                object.value = item.id;
-                result.push(object);
-            });
-        }
-        return result;
-    };
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.allSpecialties !== this.props.allSpecialties) {
-            let dataSelect = this.buildDataInputSelect(this.props.allSpecialties);
-            this.setState({
-                listSpecialties: dataSelect,
-            });
-        }
-        if (prevProps.language !== this.props.language) {
-            let dataSelect = this.buildDataInputSelect(this.props.allSpecialties);
-            this.setState({
-                listSpecialties: dataSelect,
-            });
-        }
     }
 
     handleOnChangeInput = (e, id) => {
@@ -103,15 +66,6 @@ class ManageSpecialty extends Component {
     };
 
     handleSaveNewSpecialty = async () => {
-        // let { hasOldData } = this.state;
-        // this.props.saveSpecialty({
-        //     nameVi: this.state.nameVi,
-        //     nameEn: this.state.nameEn,
-        //     imageBase64: this.state.imageBase64,
-        //     descriptionHTML: this.state.descriptionHTML,
-        //     descriptionMarkdown: this.state.descriptionMarkdown,
-        //     // specialtyId: this.state.
-        // });
         let res = await saveSpecialtyService(this.state);
         if (res && res.errCode === 0) {
             toast.success('Add new specialty succeed');
@@ -135,17 +89,6 @@ class ManageSpecialty extends Component {
                     <FormattedMessage id="manage-specialty.title" />
                 </div>
                 <div className="row">
-                    {/* <div className="col-3 form-group">
-                        <label>
-                            <FormattedMessage id="manage-specialty.select-specialty" />
-                        </label>
-                        <Select
-                            value={this.state.selectedOption}
-                            onChange={this.handleChangeSelect}
-                            options={this.state.listSpecialties}
-                            placeholder={<FormattedMessage id="manage-specialty.select-specialty" />}
-                        />
-                    </div> */}
                     <div className="col-4 form-group">
                         <label>
                             <FormattedMessage id="manage-specialty.specialty-name-vi" />
@@ -227,14 +170,11 @@ class ManageSpecialty extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
-        allSpecialties: state.admin.allSpecialties,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        saveSpecialty: (data) => dispatch(actions.saveSpecialty(data)),
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty);

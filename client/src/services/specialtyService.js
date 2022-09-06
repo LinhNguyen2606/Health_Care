@@ -8,4 +8,8 @@ const getAllSpecialties = () => {
     return axios.get('/api/get-all-specialties');
 };
 
-export { saveSpecialtyService, getAllSpecialties };
+const getAllDetailSpecialtyById = (data) => {
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`);
+};
+
+export { saveSpecialtyService, getAllSpecialties, getAllDetailSpecialtyById };

@@ -71,6 +71,7 @@
         "specialty-name-en": "Tên chuyên khoa tiếng anh",
         "specialty-img": "Ảnh chuyên khoa",
         "save": "Lưu chuyên khoa",
+        "edit": "Lưu thay đổi",
         "upload-img": "Tải ảnh",
         "select-specialty": "Chọn chuyên ngành"
     },
@@ -87,8 +88,11 @@
             "nameClinic": "Tên phòng khám",
             "addressClinic": "Địa chỉ phòng khám",
             "note": "Ghi chú",
-            "select-specialty": "Chọn chuyên khoa",
-            "select-clinic": "Chọn phòng khám"
+            "select-clinic": "Chọn phòng khám",
+            "select-specialty": "Chọn chuyên khoa"
+        },
+        "manage-specialty": {
+            "select-specialty": "Chọn chuyên khoa"
         }
     },
     "patient": {
@@ -96,7 +100,8 @@
             "schedule": "Lịch khám",
             "no-schedule": "Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
             "choose": "Chọn ",
-            "book-free": " và đặt (miễn phí)"
+            "book-free": " và đặt (miễn phí)",
+            "more": "Xem thêm"
         },
         "extra-infor-doctor": {
             "text-address": "Địa chỉ khám",

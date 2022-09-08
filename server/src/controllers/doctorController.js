@@ -42,6 +42,25 @@ let postInforDoctor = async (req, res) => {
     }
 };
 
+let handleDeleteDoctor = async (req, res) => {
+    try {
+        if (!req.body.id) {
+            return res.status(404).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters!',
+            });
+        }
+        let infor = await doctorService.handleDeleteDoctor(req.body.id);
+        return res.status(200).json(infor);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 let getDetailDoctorById = async (req, res) => {
     try {
         let infor = await doctorService.getDetailDoctorById(req.query.id);
@@ -116,4 +135,5 @@ module.exports = {
     getScheduleByDate: getScheduleByDate,
     getExtraInforDoctorById: getExtraInforDoctorById,
     getProfileDoctorById: getProfileDoctorById,
+    handleDeleteDoctor: handleDeleteDoctor,
 };

@@ -1,7 +1,19 @@
 import axios from '../axios';
 
-const saveSpecialtyService = (data) => {
+const createSpecialtyService = (data) => {
     return axios.post('/api/create-new-specialty', data);
+};
+
+const editSpecialtyService = (data) => {
+    return axios.put(`/api/edit-specialty`, data);
+};
+
+const deleteSpecialtyService = (specialtyId) => {
+    return axios.delete(`/api/delete-specialty`, {
+        data: {
+            id: specialtyId,
+        },
+    });
 };
 
 const getAllSpecialties = () => {
@@ -12,4 +24,10 @@ const getAllDetailSpecialtyById = (data) => {
     return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`);
 };
 
-export { saveSpecialtyService, getAllSpecialties, getAllDetailSpecialtyById };
+export {
+    createSpecialtyService,
+    getAllSpecialties,
+    getAllDetailSpecialtyById,
+    editSpecialtyService,
+    deleteSpecialtyService,
+};

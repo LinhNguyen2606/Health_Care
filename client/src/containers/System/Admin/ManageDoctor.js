@@ -9,6 +9,7 @@ import MdEditor from 'react-markdown-editor-lite';
 import Select from 'react-select';
 import { getDetailInforDoctorsService } from '../../../services/doctorService';
 import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
+import TableManageDoctor from './TableManageDoctor';
 const mdParser = new MarkdownIt();
 
 class ManageDoctor extends Component {
@@ -423,6 +424,12 @@ class ManageDoctor extends Component {
                         </span>
                     )}
                 </button>
+                <div className="row">
+                    <span className="table-doctor">Table Manage Doctors</span>
+                    <div className="col-12 mb-5">
+                        <TableManageDoctor />
+                    </div>
+                </div>
             </div>
         );
     }

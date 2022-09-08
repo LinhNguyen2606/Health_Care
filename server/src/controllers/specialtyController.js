@@ -1,6 +1,6 @@
 import specialtyService from '../services/specialtyService';
 
-let saveSpecialty = async (req, res) => {
+let createSpecialty = async (req, res) => {
     try {
         let infor = await specialtyService.createSpecialty(req.body);
         return res.status(200).json(infor);
@@ -39,8 +39,43 @@ let getDetailSpecialtyById = async (req, res) => {
     }
 };
 
+let handleEditSpecialty = async (req, res) => {
+    try {
+        let data = req.body;
+        let infor = await specialtyService.handleEditSpecialty(data);
+        return res.status(200).json(infor);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
+let handleDeleteSpecialty = async (req, res) => {
+    try {
+        if (!req.body.id) {
+            return res.status(404).json({
+                errCode: 1,
+                errMessage: 'Missing required parameters!',
+            });
+        }
+        let infor = await specialtyService.handleDeleteSpecialty(req.body.id);
+        return res.status(200).json(infor);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 module.exports = {
-    saveSpecialty: saveSpecialty,
+    createSpecialty: createSpecialty,
     getAllSpecialties: getAllSpecialties,
     getDetailSpecialtyById: getDetailSpecialtyById,
+    handleEditSpecialty: handleEditSpecialty,
+    handleDeleteSpecialty: handleDeleteSpecialty,
 };

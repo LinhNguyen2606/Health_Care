@@ -4,42 +4,43 @@ import { FormattedMessage } from 'react-intl';
 import './ManageSpecialty.scss';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-import { CommonUtils } from '../../../utils';
+import { CommonUtils, CRUD_ACTIONS } from '../../../utils';
 import Lightbox from 'react-image-lightbox';
-import { toast } from 'react-toastify';
-// import * as actions from '../../../store/actions';
-import { saveSpecialtyService } from '../../../services/specialtyService';
+import TableManageSpecialty from './TableManageSpecialty';
+import * as actions from '../../../store/actions';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 class ManageSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nameVi: '',
-            nameEn: '',
-            selectedOption: '',
-            listSpecialties: [],
-            imageBase64: '',
-            descriptionHTML: '',
-            descriptionMarkdown: '',
             previewImgURL: '',
             isOpen: false,
-            hasOldData: false,
+
+            nameVi: '',
+            nameEn: '',
+            descriptionHTML: '',
+            descriptionMarkdown: '',
+            imageBase64: '',
+
+            action: '',
+            specialtyEditId: '',
         };
     }
 
-    handleOnChangeInput = (e, id) => {
-        let stateCopy = { ...this.state };
-        stateCopy[id] = e.target.value;
-        this.setState({ ...stateCopy });
-    };
-
-    handleEditorChange = ({ html, text }) => {
-        this.setState({
-            descriptionHTML: html,
-            descriptionMarkdown: text,
-        });
-    };
+    componentDidUpdate(prevProps) {
+        if (prevProps.allSpecialties !== this.props.allSpecialties) {
+            this.setState({
+                nameVi: '',
+                nameEn: '',
+                descriptionHTML: '',
+                descriptionMarkdown: '',
+                imageBase64: '',
+                action: CRUD_ACTIONS.CREATE,
+                previewImgURL: '',
+            });
+        }
+    }
 
     handleOnChangeImage = async (e) => {
         let data = e.target.files;
@@ -54,10 +55,6 @@ class ManageSpecialty extends Component {
         }
     };
 
-    handleChangeSelect = (selectedOption) => {
-        this.setState({ selectedOption });
-    };
-
     openPreviewImage = () => {
         if (!this.state.previewImgURL) return;
         this.setState({
@@ -65,21 +62,52 @@ class ManageSpecialty extends Component {
         });
     };
 
-    handleSaveNewSpecialty = async () => {
-        let res = await saveSpecialtyService(this.state);
-        if (res && res.errCode === 0) {
-            toast.success('Add new specialty succeed');
-            this.setState({
-                nameVi: '',
-                nameEn: '',
-                descriptionHTML: '',
-                descriptionMarkdown: '',
-                previewImgURL: '',
+    handleSaveNewSpecialty = () => {
+        let { action } = this.state;
+        if (action === CRUD_ACTIONS.CREATE) {
+            this.props.createSpecialty({
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                descriptionHTML: this.state.descriptionHTML,
+                descriptionMarkdown: this.state.descriptionMarkdown,
+                imageBase64: this.state.imageBase64,
             });
-        } else {
-            toast.error('Something wrong...');
-            console.log('Check res: ', res);
+        } else if (action === CRUD_ACTIONS.EDIT) {
+            this.props.editSpecialty({
+                id: this.state.specialtyEditId,
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                descriptionHTML: this.state.descriptionHTML,
+                descriptionMarkdown: this.state.descriptionMarkdown,
+                imageBase64: this.state.imageBase64,
+            });
         }
+    };
+
+    handleOnChangeInput = (e, id) => {
+        let stateCopy = { ...this.state };
+        stateCopy[id] = e.target.value;
+        this.setState({ ...stateCopy });
+    };
+
+    handleEditSpecialty = (specialty) => {
+        this.setState({
+            specialtyEditId: specialty.id,
+            nameVi: specialty.nameVi,
+            nameEn: specialty.nameEn,
+            descriptionHTML: specialty.descriptionHTML,
+            descriptionMarkdown: specialty.descriptionMarkdown,
+            imageBase64: specialty.image,
+            previewImgURL: specialty.image,
+            action: CRUD_ACTIONS.EDIT,
+        });
+    };
+
+    handleEditorChange = ({ html, text }) => {
+        this.setState({
+            descriptionHTML: html,
+            descriptionMarkdown: text,
+        });
     };
 
     render() {
@@ -117,8 +145,8 @@ class ManageSpecialty extends Component {
                         </label>
                         <div className="preview-img-container">
                             <input
-                                id="previewImg"
                                 style={{ marginTop: '5px' }}
+                                id="previewImg"
                                 type="file"
                                 hidden
                                 className="form-control-file"
@@ -130,9 +158,7 @@ class ManageSpecialty extends Component {
                             </label>
                             <div
                                 className="preview-image"
-                                style={{
-                                    backgroundImage: `url(${this.state.previewImgURL})`,
-                                }}
+                                style={{ backgroundImage: `url(${this.state.previewImgURL})` }}
                                 onClick={() => this.openPreviewImage()}
                             ></div>
                         </div>
@@ -147,12 +173,23 @@ class ManageSpecialty extends Component {
                     </div>
                     <div className="col-12 my-4">
                         <button
-                            className="btn btn-warning"
+                            className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning' : 'btn btn-primary'}
                             style={{ textTransform: 'capitalize' }}
                             onClick={() => this.handleSaveNewSpecialty()}
                         >
-                            <FormattedMessage id="manage-specialty.save" />
+                            {this.state.action === CRUD_ACTIONS.EDIT ? (
+                                <FormattedMessage id="manage-specialty.edit" />
+                            ) : (
+                                <FormattedMessage id="manage-specialty.save" />
+                            )}
                         </button>
+                    </div>
+                    <span className="table-specialty">Table Manage Specialty</span>
+                    <div className="col-12 mb-5">
+                        <TableManageSpecialty
+                            handleEditSpecialtyFromParentKey={this.handleEditSpecialty}
+                            action={this.state.action}
+                        />
                     </div>
                 </div>
 
@@ -170,11 +207,16 @@ class ManageSpecialty extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        allSpecialties: state.admin.allSpecialties,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        createSpecialty: (data) => dispatch(actions.createSpecialty(data)),
+        editSpecialty: (data) => dispatch(actions.editSpecialty(data)),
+        fetchAllSpecialties: () => dispatch(actions.fetchAllSpecialties()),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty);

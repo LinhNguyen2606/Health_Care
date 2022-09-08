@@ -166,6 +166,27 @@ let saveDetailInforDoctor = (inputData) => {
     });
 };
 
+let handleDeleteDoctor = (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let foundDoctor = await db.User.findOne({ where: { id: doctorId } });
+            if (!foundDoctor) {
+                resolve({
+                    errCode: 2,
+                    errMessage: "The doctor isn't exist.",
+                });
+            }
+            await db.User.destroy({ where: { id: doctorId } });
+            resolve({
+                errCode: 0,
+                message: 'Delete doctor successfully',
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 let getDetailDoctorById = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -452,6 +473,7 @@ module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
+    handleDeleteDoctor: handleDeleteDoctor,
     getDetailDoctorById: getDetailDoctorById,
     bulkCreateSchedule: bulkCreateSchedule,
     getScheduleByDate: getScheduleByDate,

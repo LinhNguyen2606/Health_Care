@@ -1,6 +1,13 @@
 .manage-specialty-container {
     padding: 0 15px;
 
+    .table-specialty {
+        margin        : 8px auto;
+        font-size     : 20px;
+        text-transform: uppercase;
+        font-weight   : 600;
+    }
+
     .ms-title {
         text-align    : center;
         margin        : 10px 0;

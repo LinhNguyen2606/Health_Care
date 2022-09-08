@@ -6,7 +6,18 @@ import {
     deleteUserService,
     editUserService,
 } from '../../services/userService';
-import { getTopDoctorHomeService, getAllDoctorsService, saveDetailDoctorService } from '../../services/doctorService';
+import {
+    getTopDoctorHomeService,
+    getAllDoctorsService,
+    saveDetailDoctorService,
+    deleteDoctorService,
+} from '../../services/doctorService';
+import {
+    createSpecialtyService,
+    editSpecialtyService,
+    deleteSpecialtyService,
+    getAllSpecialties,
+} from '../../services/specialtyService';
 import { toast } from 'react-toastify';
 
 export const fetchGenderStart = () => {
@@ -228,7 +239,7 @@ export const fetchAllDoctors = () => {
                 dispatch({
                     //action
                     type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
-                    dataDr: res.data,
+                    dataDr: res.data.reverse(),
                 });
             } else {
                 dispatch({
@@ -249,23 +260,43 @@ export const saveDetailDoctor = (data) => {
         try {
             let res = await saveDetailDoctorService(data);
             if (res && res.errCode === 0) {
-                toast.success('Save Infor Detail Doctor succeeded');
+                toast.success('Create Infor Detail Doctor succeeded');
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
                 });
             } else {
                 console.log('Error: ', res);
-                toast.error('Save Infor Detail Doctor error!');
+                toast.error('Create Infor Detail Doctor error!');
                 dispatch({
                     type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
                 });
             }
         } catch (e) {
-            toast.error('Save Infor Detail Doctor error!');
+            toast.error('Create Infor Detail Doctor error!');
             console.log('SAVE_DETAIL_DOCTOR_FAILED', e);
             dispatch({
                 type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
             });
+        }
+    };
+};
+
+export const deleteDoctor = (doctorId) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await deleteDoctorService(doctorId);
+            if (res && res.errCode === 0) {
+                toast.success('Delete doctor successfully');
+                dispatch({ type: actionTypes.DELETE_DOCTOR_SUCCESS });
+                dispatch(fetchAllDoctors());
+            } else {
+                dispatch({ type: actionTypes.DELETE_DOCTOR_FAILED });
+                toast.error('Delete doctor unsuccessfully');
+            }
+        } catch (e) {
+            dispatch({ type: actionTypes.DELETE_DOCTOR_FAILED });
+            console.log('DELETE_DOCTOR_FAILED error', e);
+            toast.error('Delete doctor unsuccessfully');
         }
     };
 };
@@ -301,18 +332,22 @@ export const getRequiredDoctorInfor = () => {
             const resPrice = await getAllCodeService('PRICE');
             const resPayment = await getAllCodeService('PAYMENT');
             const resProvince = await getAllCodeService('PROVINCE');
+            const resSpecialty = await getAllSpecialties();
             if (
                 resPrice &&
                 resPrice.errCode === 0 &&
                 resPayment &&
                 resPayment.errCode === 0 &&
                 resProvince &&
-                resProvince.errCode === 0
+                resProvince.errCode === 0 &&
+                resSpecialty &&
+                resSpecialty.errCode === 0
             ) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
                     resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data,
                 };
                 dispatch(fetchRequiredDoctorInforSuccess(data));
             } else {
@@ -333,3 +368,99 @@ export const fetchRequiredDoctorInforSuccess = (allRequiredData) => ({
 export const fetchRequiredDoctorInforFailed = () => ({
     type: actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_FAILED,
 });
+
+export const createSpecialty = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createSpecialtyService(data);
+            if (res && res.errCode === 0) {
+                toast.success('Create specialty succeeded');
+                dispatch({
+                    type: actionTypes.CREATE_SPECIALTY_SUCCESS,
+                });
+                dispatch(fetchAllSpecialties());
+            } else {
+                toast.error('Create specialty error!');
+                dispatch({
+                    type: actionTypes.CREATE_SPECIALTY_FAILED,
+                });
+            }
+        } catch (e) {
+            toast.error('Create specialty error!');
+            console.log('CREATE_SPECIALTY_FAILED', e);
+            dispatch({
+                type: actionTypes.CREATE_SPECIALTY_FAILED,
+            });
+        }
+    };
+};
+
+export const editSpecialty = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await editSpecialtyService(data);
+            if (res && res.errCode === 0) {
+                toast.success('Edit user successfully');
+                dispatch({
+                    type: actionTypes.EDIT_SPECIALTY_SUCCESS,
+                });
+                dispatch(fetchAllSpecialties());
+            } else {
+                toast.error('Edit user unsuccessfully');
+                dispatch({
+                    type: actionTypes.EDIT_SPECIALTY_FAILED,
+                });
+            }
+        } catch (e) {
+            toast.error('Edit user unsuccessfully');
+            console.log('EDIT_SPECIALTY_FAILED error', e);
+            dispatch({
+                type: actionTypes.EDIT_SPECIALTY_FAILED,
+            });
+        }
+    };
+};
+
+export const deleteSpecialty = (specialtyId) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await deleteSpecialtyService(specialtyId);
+            if (res && res.errCode === 0) {
+                toast.success('Delete specialty successfully');
+                dispatch({ type: actionTypes.DELETE_SPECIALTY_SUCCESS });
+                dispatch(fetchAllSpecialties());
+            } else {
+                dispatch({ type: actionTypes.DELETE_SPECIALTY_FAILED });
+                toast.error('Delete specialty unsuccessfully');
+            }
+        } catch (e) {
+            dispatch({ type: actionTypes.DELETE_SPECIALTY_FAILED });
+            console.log('DELETE_SPECIALTY_FAILED error', e);
+            toast.error('Delete specialty unsuccessfully');
+        }
+    };
+};
+
+export const fetchAllSpecialties = () => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await getAllSpecialties();
+            if (res && res.errCode === 0) {
+                dispatch({
+                    //action
+                    type: actionTypes.FETCH_ALL_SPECIALTIES_SUCCESS,
+                    dataSpecialty: res.data.reverse(),
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+                });
+            }
+        } catch (e) {
+            console.log('FETCH_ALL_SPECIALTIES_FAILED: ', e);
+            dispatch({
+                type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+            });
+        }
+    };
+};

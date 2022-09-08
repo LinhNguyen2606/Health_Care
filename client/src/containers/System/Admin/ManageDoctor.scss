@@ -1,6 +1,13 @@
 .manage-doctor-container {
     padding: 5px;
 
+    .table-doctor {
+        margin        : 8px auto;
+        font-size     : 20px;
+        text-transform: uppercase;
+        font-weight   : 600;
+    }
+
     .manage-doctor-title {
         text-align    : center;
         margin        : 15px 0;

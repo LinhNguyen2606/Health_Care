@@ -26,7 +26,9 @@ class OutStandingDoctor extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        this.props.history.push(`/detail-doctor/${doctor.id}`);
+        if (this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`);
+        }
     };
 
     render() {
@@ -73,7 +75,6 @@ class OutStandingDoctor extends Component {
                                                     <div className="position-doctor">
                                                         {language === LANGUAGES.VI ? nameVi : nameEn}
                                                     </div>
-                                                    <div className="specialty-doctor">Cơ xương khớp 1</div>
                                                 </div>
                                             </div>
                                         </div>

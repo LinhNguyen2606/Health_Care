@@ -60,6 +60,16 @@
         "save": "Save user",
         "edit": "Save changes"
     },
+    "manage-specialty": {
+        "title": "Manage specialty",
+        "specialty-name-vi": "Specialty name by VN",
+        "specialty-name-en": "Specialty name by EN",
+        "specialty-img": "Specialty image",
+        "save": "Save specialty",
+        "edit": "Save changes",
+        "upload-img": "Upload image",
+        "select-specialty": "Select specialty"
+    },
     "manage-schedule": {
         "title": "Manage doctor's examination plan",
         "choose-doctor": "Choose doctor",
@@ -79,7 +89,12 @@
             "province": "Province",
             "nameClinic": "Clinic's name",
             "addressClinic": "Clinic's address",
-            "note": "Note"
+            "note": "Note",
+            "select-clinic": "Select clinic",
+            "select-specialty": "Select specialty"
+        },
+        "manage-specialty": {
+            "select-specialty": "Select specialty"
         }
     },
     "patient": {
@@ -87,7 +102,8 @@
             "schedule": "Schedule",
             "no-schedule": "The doctor does not have an appointment at this time, please choose another time!",
             "choose": "Choose ",
-            "book-free": " and book (free)"
+            "book-free": " and book (free)",
+            "more": "More details"
         },
         "extra-infor-doctor": {
             "text-address": "Address of medical examination",

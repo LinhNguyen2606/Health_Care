@@ -17,6 +17,7 @@ export const path = {
     MANAGE_SCHEDULE: '/doctor/manage-schedule',
     VERIFY_EMAIL_BOOKING: '/verify-booking',
     MANAGE_SPECIALTY: '/system/manage-specialty',
+    MANAGE_CLINIC: '/system/manage-clinic',
 };
 
 export const LANGUAGES = {

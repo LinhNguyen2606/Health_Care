@@ -18,6 +18,12 @@ import {
     deleteSpecialtyService,
     getAllSpecialties,
 } from '../../services/specialtyService';
+import {
+    createClinicService,
+    // editSpecialtyService,
+    // deleteSpecialtyService,
+    // getAllSpecialties,
+} from '../../services/clinicService';
 import { toast } from 'react-toastify';
 
 export const fetchGenderStart = () => {
@@ -460,6 +466,32 @@ export const fetchAllSpecialties = () => {
             console.log('FETCH_ALL_SPECIALTIES_FAILED: ', e);
             dispatch({
                 type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+            });
+        }
+    };
+};
+
+export const createClinic = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createClinicService(data);
+            if (res && res.errCode === 0) {
+                toast.success('Create clinic succeeded');
+                dispatch({
+                    type: actionTypes.CREATE_CLINIC_SUCCESS,
+                });
+                // dispatch(fetchAllSpecialties());
+            } else {
+                toast.error('Create clinic error!');
+                dispatch({
+                    type: actionTypes.CREATE_CLINIC_FAILED,
+                });
+            }
+        } catch (e) {
+            toast.error('Create clinic error!');
+            console.log('CREATE_CLINIC_FAILED', e);
+            dispatch({
+                type: actionTypes.CREATE_CLINIC_FAILED,
             });
         }
     };

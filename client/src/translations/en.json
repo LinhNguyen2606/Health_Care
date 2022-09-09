@@ -70,6 +70,16 @@
         "upload-img": "Upload image",
         "select-specialty": "Select specialty"
     },
+    "manage-clinic": {
+        "title": "Manage Clinic",
+        "name-vi": "Name clinic by Vi",
+        "name-en": "Name clinic by En",
+        "clinic-img": "Image",
+        "upload-img": "Upload image",
+        "address-clinic": "Address Clinic",
+        "save": "Save clinic",
+        "edit": "Save changes"
+    },
     "manage-schedule": {
         "title": "Manage doctor's examination plan",
         "choose-doctor": "Choose doctor",

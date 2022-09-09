@@ -1,0 +1,50 @@
+.manage-clinic-container {
+    padding: 0 15px;
+
+    .table-clinic {
+        margin        : 8px auto;
+        font-size     : 20px;
+        text-transform: uppercase;
+        font-weight   : 600;
+    }
+
+    .ms-title {
+        text-align    : center;
+        margin        : 10px 0;
+        text-transform: uppercase;
+        font-size     : 17px;
+        font-weight   : 600;
+    }
+
+    .custom-html-style h1,
+    .custom-html-style h2 {
+        text-align : left !important;
+        line-height: 0 !important;
+    }
+
+    .preview-img-container {
+        .label-upload {
+            padding      : 5px;
+            border-radius: 3px;
+            background   : #ddd;
+            cursor       : pointer;
+
+            i {
+                margin-left: 4px;
+            }
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+        .preview-image {
+            height         : 50px;
+            width          : 100%;
+            border         : 1px solid #ddd;
+            background     : center center no-repeat;
+            background-size: contain;
+            cursor         : pointer;
+        }
+    }
+}

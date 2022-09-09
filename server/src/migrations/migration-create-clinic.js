@@ -11,7 +11,10 @@ module.exports = {
             address: {
                 type: Sequelize.STRING,
             },
-            name: {
+            nameVi: {
+                type: Sequelize.STRING,
+            },
+            nameEn: {
                 type: Sequelize.STRING,
             },
             descriptionMarkdown: {

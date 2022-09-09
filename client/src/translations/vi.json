@@ -75,6 +75,16 @@
         "upload-img": "Tải ảnh",
         "select-specialty": "Chọn chuyên ngành"
     },
+    "manage-clinic": {
+        "title": "Quản lý phòng khám",
+        "name-vi": "Tên phòng khám tiếng việt",
+        "name-en": "Tên phòng khám tiếng anh",
+        "clinic-img": "Ảnh phòng khám",
+        "upload-img": "Tải ảnh",
+        "address-clinic": "Địa chỉ phòng khám",
+        "save": "Lưu phòng khám",
+        "edit": "Lưu thay đổi"
+    },
     "admin": {
         "manage-doctor": {
             "title": "Tạo thêm thông tin doctors",

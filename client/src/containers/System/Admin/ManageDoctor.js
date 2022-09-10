@@ -96,6 +96,18 @@ class ManageDoctor extends Component {
                 result.push(object);
             });
         }
+
+        if (type === 'CLINIC') {
+            // eslint-disable-next-line
+            inputData.map((item) => {
+                let object = {};
+                let labelVi = `${item.nameVi}`;
+                let labelEn = `${item.nameEn}`;
+                object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                object.value = item.id;
+                result.push(object);
+            });
+        }
         return result;
     };
 
@@ -108,26 +120,29 @@ class ManageDoctor extends Component {
         }
 
         if (prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor) {
-            let { resPayment, resPrice, resProvince, resSpecialty } = this.props.allRequiredDoctorInfor;
+            let { resPayment, resPrice, resProvince, resSpecialty, resClinic } = this.props.allRequiredDoctorInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
             let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
+            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
                 listProvince: dataSelectProvince,
                 listSpecialty: dataSelectSpecialty,
+                listClinic: dataSelectClinic,
             });
         }
 
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
-            let { resPayment, resPrice, resProvince, resSpecialty } = this.props.allRequiredDoctorInfor;
+            let { resPayment, resPrice, resProvince, resSpecialty, resClinic } = this.props.allRequiredDoctorInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
             let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
+            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
 
             this.setState({
                 listDoctors: dataSelect,
@@ -135,6 +150,7 @@ class ManageDoctor extends Component {
                 listPayment: dataSelectPayment,
                 listProvince: dataSelectProvince,
                 listSpecialty: dataSelectSpecialty,
+                listClinic: dataSelectClinic,
             });
         }
     }
@@ -158,6 +174,7 @@ class ManageDoctor extends Component {
             selectedPrice: this.state.selectedPrice.value,
             selectedPayment: this.state.selectedPayment.value,
             selectedProvince: this.state.selectedProvince.value,
+            selectedClinic: this.state.selectedClinic.value,
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
             note: this.state.note,
@@ -175,6 +192,7 @@ class ManageDoctor extends Component {
             selectedPayment: '',
             selectedProvince: '',
             selectedSpecialty: '',
+            selectedClinic: '',
             nameClinic: '',
             addressClinic: '',
             note: '',
@@ -187,7 +205,7 @@ class ManageDoctor extends Component {
         let res = await getDetailInforDoctorsService(selectedOption.value);
         if (res && res.errCode === 0 && res.data && res.data.Markdown) {
             let markdown = res.data.Markdown;
-            let { listPayment, listPrice, listProvince, listSpecialty } = this.state;
+            let { listPayment, listPrice, listProvince, listSpecialty, listClinic } = this.state;
             let addressClinic = '',
                 nameClinic = '',
                 note = '',
@@ -195,10 +213,12 @@ class ManageDoctor extends Component {
                 priceId = '',
                 provinceId = '',
                 specialtyId = '',
+                clinicId = '',
                 selectedPayment = '',
                 selectedPrice = '',
                 selectedProvince = '',
-                selectedSpecialty = '';
+                selectedSpecialty = '',
+                selectedClinic = '';
 
             if (res.data.Doctor_Infor) {
                 addressClinic = res.data.Doctor_Infor.addressClinic;
@@ -208,6 +228,7 @@ class ManageDoctor extends Component {
                 priceId = res.data.Doctor_Infor.priceId;
                 provinceId = res.data.Doctor_Infor.provinceId;
                 specialtyId = res.data.Doctor_Infor.specialtyId;
+                clinicId = res.data.Doctor_Infor.clinicId;
 
                 selectedPayment = listPayment.find((item) => {
                     return item && item.value === paymentId;
@@ -224,6 +245,10 @@ class ManageDoctor extends Component {
                 selectedSpecialty = listSpecialty.find((item) => {
                     return item && item.value === specialtyId;
                 });
+
+                selectedClinic = listClinic.find((item) => {
+                    return item && item.value === clinicId;
+                });
             }
             this.setState({
                 contentHTML: markdown.contentHTML,
@@ -237,6 +262,7 @@ class ManageDoctor extends Component {
                 selectedPrice: selectedPrice,
                 selectedProvince: selectedProvince,
                 selectedSpecialty: selectedSpecialty,
+                selectedClinic: selectedClinic,
             });
         } else {
             this.setState({
@@ -251,6 +277,7 @@ class ManageDoctor extends Component {
                 selectedPrice: '',
                 selectedProvince: '',
                 selectedSpecialty: '',
+                selectedClinic: '',
             });
         }
     };

@@ -144,7 +144,8 @@
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more-infor": "Xem thêm",
-        "specialty-popular": "Chuyên khoa phổ biến"
+        "specialty-popular": "Chuyên khoa phổ biến",
+        "clinic-popular": "Phòng khám phổ biến"
     },
     "homepage-manage": {
         "text1": "Chào mừng đến trung tâm Health Care",

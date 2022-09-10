@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import './ManageClinic.scss';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-import { CommonUtils } from '../../../utils';
+import { CommonUtils, CRUD_ACTIONS } from '../../../utils';
 import Lightbox from 'react-image-lightbox';
-import { createClinicService } from '../../../services/clinicService';
-import { toast } from 'react-toastify';
+import TableManageClinic from './TableManageClinic';
+import * as actions from '../../../store/actions';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -30,18 +30,20 @@ class ManageSpecialty extends Component {
         };
     }
 
-    handleOnChangeInput = (e, id) => {
-        let stateCopy = { ...this.state };
-        stateCopy[id] = e.target.value;
-        this.setState({ ...stateCopy });
-    };
-
-    handleEditorChange = ({ html, text }) => {
-        this.setState({
-            descriptionHTML: html,
-            descriptionMarkdown: text,
-        });
-    };
+    componentDidUpdate(prevProps) {
+        if (prevProps.allClinics !== this.props.allClinics) {
+            this.setState({
+                nameVi: '',
+                nameEn: '',
+                address: '',
+                descriptionHTML: '',
+                descriptionMarkdown: '',
+                imageBase64: '',
+                action: CRUD_ACTIONS.CREATE,
+                previewImgURL: '',
+            });
+        }
+    }
 
     handleOnChangeImage = async (e) => {
         let data = e.target.files;
@@ -63,23 +65,55 @@ class ManageSpecialty extends Component {
         });
     };
 
-    handleSaveNewClinic = async () => {
-        let res = await createClinicService(this.state);
-        if (res && res.errCode === 0) {
-            toast.success('Add new clinic succeed');
-            this.setState({
-                nameVi: '',
-                nameEn: '',
-                address: '',
-                imageBase64: '',
-                descriptionHTML: '',
-                descriptionMarkdown: '',
-                previewImgURL: '',
+    handleSaveNewClinic = () => {
+        let { action } = this.state;
+        if (action === CRUD_ACTIONS.CREATE) {
+            this.props.createClinic({
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                address: this.state.address,
+                descriptionHTML: this.state.descriptionHTML,
+                descriptionMarkdown: this.state.descriptionMarkdown,
+                imageBase64: this.state.imageBase64,
             });
-        } else {
-            toast.error('Something wrong...');
-            console.log('Check res: ', res);
+        } else if (action === CRUD_ACTIONS.EDIT) {
+            this.props.editClinic({
+                id: this.state.clinicEditId,
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                address: this.state.address,
+                descriptionHTML: this.state.descriptionHTML,
+                descriptionMarkdown: this.state.descriptionMarkdown,
+                imageBase64: this.state.imageBase64,
+            });
         }
+    };
+
+    handleOnChangeInput = (e, id) => {
+        let stateCopy = { ...this.state };
+        stateCopy[id] = e.target.value;
+        this.setState({ ...stateCopy });
+    };
+
+    handleEditClinic = (clinic) => {
+        this.setState({
+            clinicEditId: clinic.id,
+            nameVi: clinic.nameVi,
+            nameEn: clinic.nameEn,
+            address: clinic.address,
+            descriptionHTML: clinic.descriptionHTML,
+            descriptionMarkdown: clinic.descriptionMarkdown,
+            imageBase64: clinic.image,
+            previewImgURL: clinic.image,
+            action: CRUD_ACTIONS.EDIT,
+        });
+    };
+
+    handleEditorChange = ({ html, text }) => {
+        this.setState({
+            descriptionHTML: html,
+            descriptionMarkdown: text,
+        });
     };
 
     render() {
@@ -165,6 +199,13 @@ class ManageSpecialty extends Component {
                             <FormattedMessage id="manage-clinic.save" />
                         </button>
                     </div>
+                    <span className="table-clinic">Table Manage Clinic</span>
+                    <div className="col-12 mb-5">
+                        <TableManageClinic
+                            handleEditClinicFromParentKey={this.handleEditClinic}
+                            action={this.state.action}
+                        />
+                    </div>
                 </div>
 
                 {this.state.isOpen === true && (
@@ -181,11 +222,16 @@ class ManageSpecialty extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        allClinics: state.admin.allClinics,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        createClinic: (data) => dispatch(actions.createClinic(data)),
+        editClinic: (data) => dispatch(actions.editClinic(data)),
+        fetchAllClinics: () => dispatch(actions.fetchAllClinics()),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty);

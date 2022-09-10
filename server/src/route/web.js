@@ -51,10 +51,10 @@ let initWebRoutes = (app) => {
     router.get('/api/get-detail-specialty-by-id', specialtyController.getDetailSpecialtyById);
     //clinic
     router.post('/api/create-new-clinic', clinicController.createClinic);
-    //  router.get('/api/get-all-specialties', clinicController.getAllSpecialties);
-    //  router.put('/api/edit-specialty', clinicController.handleEditSpecialty);
-    //  router.delete('/api/delete-specialty', clinicController.handleDeleteSpecialty);
-    //  router.get('/api/get-detail-specialty-by-id', clinicController.getDetailSpecialtyById);
+    router.get('/api/get-all-clinics', clinicController.getAllClinics);
+    router.put('/api/edit-clinic', clinicController.handleEditClinic);
+    router.delete('/api/delete-clinic', clinicController.handleDeleteClinic);
+    router.get('/api/get-detail-clinic-by-id', clinicController.getDetailClinicById);
     //Social login
     router.post('/api/facebook_login', userController.facebookLogin);
 

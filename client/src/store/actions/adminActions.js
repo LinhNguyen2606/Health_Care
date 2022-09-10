@@ -20,9 +20,9 @@ import {
 } from '../../services/specialtyService';
 import {
     createClinicService,
-    // editSpecialtyService,
-    // deleteSpecialtyService,
-    // getAllSpecialties,
+    editClinicService,
+    deleteClinicService,
+    getAllClinics,
 } from '../../services/clinicService';
 import { toast } from 'react-toastify';
 
@@ -339,6 +339,7 @@ export const getRequiredDoctorInfor = () => {
             const resPayment = await getAllCodeService('PAYMENT');
             const resProvince = await getAllCodeService('PROVINCE');
             const resSpecialty = await getAllSpecialties();
+            const resClinic = await getAllClinics();
             if (
                 resPrice &&
                 resPrice.errCode === 0 &&
@@ -347,13 +348,16 @@ export const getRequiredDoctorInfor = () => {
                 resProvince &&
                 resProvince.errCode === 0 &&
                 resSpecialty &&
-                resSpecialty.errCode === 0
+                resSpecialty.errCode === 0 &&
+                resClinic &&
+                resClinic.errCode === 0
             ) {
                 let data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
                     resProvince: resProvince.data,
                     resSpecialty: resSpecialty.data,
+                    resClinic: resClinic.data,
                 };
                 dispatch(fetchRequiredDoctorInforSuccess(data));
             } else {
@@ -406,19 +410,19 @@ export const editSpecialty = (data) => {
         try {
             const res = await editSpecialtyService(data);
             if (res && res.errCode === 0) {
-                toast.success('Edit user successfully');
+                toast.success('Edit specialty successfully');
                 dispatch({
                     type: actionTypes.EDIT_SPECIALTY_SUCCESS,
                 });
                 dispatch(fetchAllSpecialties());
             } else {
-                toast.error('Edit user unsuccessfully');
+                toast.error('Edit specialty unsuccessfully');
                 dispatch({
                     type: actionTypes.EDIT_SPECIALTY_FAILED,
                 });
             }
         } catch (e) {
-            toast.error('Edit user unsuccessfully');
+            toast.error('Edit specialty unsuccessfully');
             console.log('EDIT_SPECIALTY_FAILED error', e);
             dispatch({
                 type: actionTypes.EDIT_SPECIALTY_FAILED,
@@ -480,7 +484,7 @@ export const createClinic = (data) => {
                 dispatch({
                     type: actionTypes.CREATE_CLINIC_SUCCESS,
                 });
-                // dispatch(fetchAllSpecialties());
+                dispatch(fetchAllClinics());
             } else {
                 toast.error('Create clinic error!');
                 dispatch({
@@ -492,6 +496,76 @@ export const createClinic = (data) => {
             console.log('CREATE_CLINIC_FAILED', e);
             dispatch({
                 type: actionTypes.CREATE_CLINIC_FAILED,
+            });
+        }
+    };
+};
+
+export const editClinic = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await editClinicService(data);
+            if (res && res.errCode === 0) {
+                toast.success('Edit clinic successfully');
+                dispatch({
+                    type: actionTypes.EDIT_CLINIC_SUCCESS,
+                });
+                dispatch(fetchAllClinics());
+            } else {
+                toast.error('Edit clinic unsuccessfully');
+                dispatch({
+                    type: actionTypes.EDIT_CLINIC_FAILED,
+                });
+            }
+        } catch (e) {
+            toast.error('Edit clinic unsuccessfully');
+            console.log('EDIT_CLINIC_FAILED error', e);
+            dispatch({
+                type: actionTypes.EDIT_CLINIC_FAILED,
+            });
+        }
+    };
+};
+
+export const deleteClinic = (clinicId) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await deleteClinicService(clinicId);
+            if (res && res.errCode === 0) {
+                toast.success('Delete clinic successfully');
+                dispatch({ type: actionTypes.DELETE_CLINIC_SUCCESS });
+                dispatch(fetchAllClinics());
+            } else {
+                dispatch({ type: actionTypes.DELETE_CLINIC_FAILED });
+                toast.error('Delete clinic unsuccessfully');
+            }
+        } catch (e) {
+            dispatch({ type: actionTypes.DELETE_CLINIC_FAILED });
+            console.log('DELETE_CLINIC_FAILED error', e);
+            toast.error('Delete clinic unsuccessfully');
+        }
+    };
+};
+
+export const fetchAllClinics = () => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await getAllClinics();
+            if (res && res.errCode === 0) {
+                dispatch({
+                    //action
+                    type: actionTypes.FETCH_ALL_CLINICS_SUCCESS,
+                    dataClinic: res.data.reverse(),
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_CLINICS_FAILED,
+                });
+            }
+        } catch (e) {
+            console.log('FETCH_ALL_CLINICS_FAILED: ', e);
+            dispatch({
+                type: actionTypes.FETCH_ALL_CLINICS_FAILED,
             });
         }
     };

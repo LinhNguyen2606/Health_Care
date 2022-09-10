@@ -145,7 +145,8 @@
     "homepage": {
         "outstanding-doctor": "Last week's outstanding doctor",
         "more-infor": "More Infor",
-        "specialty-popular": "Popular specialties"
+        "specialty-popular": "Popular specialties",
+        "clinic-popular": "Popular clinics"
     },
     "homepage-manage": {
         "text1": "Welcome to the Health Care Center",

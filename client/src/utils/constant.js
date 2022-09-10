@@ -14,6 +14,7 @@ export const path = {
     DOCTOR: '/doctor/',
     DETAIL_DOCTOR: '/detail-doctor/:id',
     DETAIL_SPECIALTY: '/detail-specialty/:id',
+    DETAIL_ClINIC: '/detail-clinic/:id',
     MANAGE_SCHEDULE: '/doctor/manage-schedule',
     VERIFY_EMAIL_BOOKING: '/verify-booking',
     MANAGE_SPECIALTY: '/system/manage-specialty',

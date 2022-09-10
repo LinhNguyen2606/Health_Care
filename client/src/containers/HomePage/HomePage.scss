@@ -72,9 +72,9 @@
                 //     // background-image: url('../../assets/specialty/co-xuong-khop.png');
                 // }
 
-                &.section-medical-facility {
-                    background-image: url('../../assets/medical-facility/he-thong-y-te-thu-cuc-cong-bo-nhan-dien-thuong-hieu4.jpg');
-                }
+                // &.section-medical-facility {
+                //     background-image: url('../../assets/medical-facility/he-thong-y-te-thu-cuc-cong-bo-nhan-dien-thuong-hieu4.jpg');
+                // }
 
                 &.section-outstanding-doctor {
                     // background-image: url('../../assets/outstanding-doctor/anh-dai-dien-bs.jpg');
@@ -89,9 +89,8 @@
             }
 
             .text-section {
-                margin-top : 4px;
-                margin-left: 12px;
-                text-align : left;
+                margin-top: 4px;
+                text-align: left;
 
                 &:hover {
                     color: #49bce2;

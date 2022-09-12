@@ -16,7 +16,15 @@ let postBookAppointment = (data) => {
                     errCode: 2,
                     errMessage: 'Invalid phone number',
                 });
-            if (!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName) {
+            if (
+                !data.email ||
+                !data.doctorId ||
+                !data.timeType ||
+                !data.date ||
+                !data.fullName ||
+                !data.selectedGender ||
+                !data.address
+            ) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing required parameters!',
@@ -38,6 +46,9 @@ let postBookAppointment = (data) => {
                     defaults: {
                         email: data.email,
                         roleId: 'R3',
+                        gender: data.selectedGender,
+                        address: data.address,
+                        fullname: data.fullName,
                     },
                     raw: false,
                 });

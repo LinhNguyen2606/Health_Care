@@ -34,7 +34,8 @@
         },
         "doctor": {
             "manage-schedule": "Manage Doctor's schedule",
-            "manage-patient": "Manage Doctor's patient"
+            "manage-patient": "Management of medical examination patients",
+            "choose-day": "Choose a date of examination"
         },
         "system": {
             "header": "System",

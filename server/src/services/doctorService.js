@@ -20,10 +20,23 @@ let getTopDoctorHome = (limitInput) => {
                         as: 'positionData',
                         attributes: ['valueEn', 'valueVi'],
                     },
+
                     {
                         model: db.Allcode,
                         as: 'genderData',
                         attributes: ['valueEn', 'valueVi'],
+                    },
+
+                    {
+                        model: db.Doctor_Infor,
+                        attributes: ['specialtyId'],
+                        include: [
+                            {
+                                model: db.Specialty,
+                                as: 'specialtyTypeData',
+                                attributes: ['nameEn', 'nameVi'],
+                            },
+                        ],
                     },
                 ],
                 raw: true,

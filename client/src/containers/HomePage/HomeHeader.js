@@ -7,13 +7,51 @@ import enFlag from '../../assets/images/en-flag.png';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
 import { Link } from 'react-router-dom';
+import * as actions from '../../store/actions';
+import Card from 'react-bootstrap/Card';
+
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filteredData: [],
+            wordEntered: '',
+            value: '',
+        };
+    }
+
+    componentDidMount() {
+        this.props.fetchAllSpecialties();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.allSpecialties !== this.props.allSpecialties) {
+            this.setState({
+                getSpecialties: this.props.allSpecialties,
+            });
+        }
+    }
+
     changeLanguage = (language) => {
         this.props.changeLanguageForApp(language);
     };
 
+    handleFilter = (e) => {
+        const searchWord = e.target.value;
+        this.setState({ wordEntered: searchWord });
+        const newFilter = this.props.allSpecialties.filter((value) => {
+            return value.nameVi.toLowerCase().includes(searchWord.toLowerCase());
+        });
+        if (searchWord === '') {
+            this.setState({ filteredData: [] });
+        } else {
+            this.setState({ filteredData: newFilter });
+        }
+    };
+
     render() {
         const language = this.props.language;
+        const { wordEntered, filteredData } = this.state;
         return (
             <>
                 <div className="home-header-container">
@@ -101,6 +139,8 @@ class HomeHeader extends Component {
                                 <i className="fa-solid fa-magnifying-glass"></i>
                                 <input
                                     type="text"
+                                    value={wordEntered}
+                                    onChange={(e) => this.handleFilter(e)}
                                     placeholder={
                                         language === LANGUAGES.VI
                                             ? 'Tìm chuyên khoa khám bệnh'
@@ -108,6 +148,40 @@ class HomeHeader extends Component {
                                     }
                                 />
                             </div>
+                            {filteredData.length !== 0 && (
+                                <div>
+                                    {filteredData.slice(0, 15).map((value) => {
+                                        return (
+                                            <div key={value.id} className="border-search-container">
+                                                <Link to={`/detail-specialty/${value.id}`}>
+                                                    <div className="border-search">
+                                                        <Card.Img
+                                                            variant="top"
+                                                            style={{
+                                                                borderRadius: '50%',
+                                                                width: '3rem',
+                                                                height: '3rem',
+                                                                margin: '0 0 -20px 0',
+                                                            }}
+                                                            src={value.image}
+                                                        />
+                                                        <div
+                                                            style={{
+                                                                color: 'black',
+                                                                position: 'relative',
+                                                                left: 65,
+                                                                top: '-10px',
+                                                            }}
+                                                        >
+                                                            {language === LANGUAGES.VI ? value.nameVi : value.nameEn}
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </div>
                         <div className="content-down">
                             <div className="options">
@@ -163,12 +237,14 @@ class HomeHeader extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        allSpecialties: state.admin.allSpecialties,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changeLanguageForApp: (language) => dispatch(changeLanguageApp(language)),
+        fetchAllSpecialties: () => dispatch(actions.fetchAllSpecialties()),
     };
 };
 

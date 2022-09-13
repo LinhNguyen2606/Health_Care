@@ -35,7 +35,15 @@
         "doctor": {
             "manage-schedule": "Manage Doctor's schedule",
             "manage-patient": "Management of medical examination patients",
-            "choose-day": "Choose a date of examination"
+            "choose-day": "Choose a date of examination",
+            "numerical-order": "Numerial Order",
+            "time": "Time",
+            "full-name": "Full Name",
+            "address": "Address",
+            "gender": "Sex",
+            "phone-number": "Phone Number",
+            "btn-confirm": "Confirm",
+            "btn-bill": "Send Invoice"
         },
         "system": {
             "header": "System",

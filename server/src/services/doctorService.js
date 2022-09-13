@@ -497,7 +497,7 @@ let getListPatientForDoctor = (doctorId, date) => {
                         {
                             model: db.User,
                             as: 'patientData',
-                            attributes: ['email', 'fullname', 'address', 'gender'],
+                            attributes: ['email', 'fullname', 'address', 'gender', 'phoneNumber'],
                             include: [
                                 {
                                     model: db.Allcode,

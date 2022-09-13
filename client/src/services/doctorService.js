@@ -40,6 +40,10 @@ const getProfileDoctorById = (doctorId) => {
     return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
 
+const getAllPatientsForDoctor = (data) => {
+    return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`);
+};
+
 export {
     getTopDoctorHomeService,
     getAllDoctorsService,
@@ -50,4 +54,5 @@ export {
     getExtraInforDoctorById,
     getProfileDoctorById,
     deleteDoctorService,
+    getAllPatientsForDoctor,
 };

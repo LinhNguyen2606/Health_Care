@@ -23,7 +23,8 @@ let postBookAppointment = (data) => {
                 !data.date ||
                 !data.fullName ||
                 !data.selectedGender ||
-                !data.address
+                !data.address ||
+                !data.phoneNumber
             ) {
                 resolve({
                     errCode: 1,
@@ -49,6 +50,7 @@ let postBookAppointment = (data) => {
                         gender: data.selectedGender,
                         address: data.address,
                         fullname: data.fullName,
+                        phonenumber: data.phoneNumber,
                     },
                     raw: false,
                 });

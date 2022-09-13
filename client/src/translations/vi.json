@@ -35,7 +35,15 @@
         "doctor": {
             "manage-schedule": "Quản lý kế hoạch khám bệnh",
             "manage-patient": "Quản lý bệnh nhân khám bệnh",
-            "choose-day": "Chọn ngày khám"
+            "choose-day": "Chọn ngày khám",
+            "numerical-order": "Số thứ tự",
+            "time": "Thời gian",
+            "full-name": "Họ và tên ",
+            "address": "Địa chỉ",
+            "gender": "Giới tính",
+            "phone-number": "Số điện thoại",
+            "btn-confirm": "Xác nhận",
+            "btn-bill": "Gửi hoá đơn"
         },
         "system": {
             "header": "Hệ thống",

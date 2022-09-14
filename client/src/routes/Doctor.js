@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import ManageSchedule from '../containers/System/Doctor/ManageSchedule';
+import ManagePatient from '../containers/System/Doctor/ManagePatient';
 import Header from '../containers/Header/Header';
 import { path } from '../utils';
 
@@ -15,6 +16,7 @@ class Doctor extends Component {
                     <div className="system-list">
                         <Switch>
                             <Route path={path.MANAGE_SCHEDULE} component={ManageSchedule} />
+                            <Route path={path.MANAGE_PATIENT} component={ManagePatient} />
                         </Switch>
                     </div>
                 </div>

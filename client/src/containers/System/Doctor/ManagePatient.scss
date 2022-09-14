@@ -1,0 +1,57 @@
+div._loading_overlay_wrapper {
+    position: unset;
+
+    ._loading_overlay_overlay {
+        z-index: 1000000;
+    }
+}
+
+.manage-patient-container {
+    .m-p-title {
+        font-size     : 15px;
+        font-weight   : bold;
+        text-align    : center;
+        text-transform: uppercase;
+        margin        : 10px 0;
+    }
+
+    .manage-patient-body {
+        padding: 0 20px;
+
+        tbody {
+            text-align: center;
+        }
+
+        #TableManagePatient {
+            font-family    : Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width          : 100%;
+        }
+
+        #TableManagePatient td,
+        #TableManagePatient th {
+            border : 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #TableManagePatient tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #TableManagePatient tr:hover {
+            background-color: #ddd;
+        }
+
+        #TableManagePatient th {
+            padding-top     : 12px;
+            padding-bottom  : 12px;
+            text-align      : center;
+            background-color: #212529;
+            color           : white;
+        }
+
+        #TableManagePatient td:last-child {
+            text-align: center;
+        }
+    }
+}

@@ -19,6 +19,7 @@ export const path = {
     VERIFY_EMAIL_BOOKING: '/verify-booking',
     MANAGE_SPECIALTY: '/system/manage-specialty',
     MANAGE_CLINIC: '/system/manage-clinic',
+    MANAGE_PATIENT: '/doctor/manage-patient',
 };
 
 export const LANGUAGES = {

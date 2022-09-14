@@ -6,6 +6,9 @@ import { getDetailInforDoctorsService } from '../../../services/doctorService';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfor from './DoctorExtraInfor';
+import LikeAndShare from '../SocialPlugin/LikeAndShare';
+import Comment from '../SocialPlugin/Comment';
+
 class DetailDoctor extends Component {
     constructor(props) {
         super(props);
@@ -39,6 +42,11 @@ class DetailDoctor extends Component {
             nameVi = `${detailDoctor.positionData.valueVi},  ${detailDoctor.fullname} `;
             nameEn = `${detailDoctor.positionData.valueEn}, ${detailDoctor.fullname}  `;
         }
+
+        let currentURL =
+            process.env.REACT_APP_IS_LOCALHOST === 1
+                ? `https://www.facebook.com/profile.php?id=${process.env.REACT_APP_FACEBOOK_PAGE_ID}`
+                : window.location.href;
         return (
             <>
                 <div>
@@ -59,6 +67,9 @@ class DetailDoctor extends Component {
                                     {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description && (
                                         <span>{detailDoctor.Markdown.description}</span>
                                     )}
+                                    <div className="like-share-plugin" style={{ marginTop: '10px' }}>
+                                        <LikeAndShare dataHref={currentURL} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +90,9 @@ class DetailDoctor extends Component {
                                 ></div>
                             )}
                         </div>
-                        <div className="comment-doctor"></div>
+                        <div className="comment-doctor">
+                            <Comment width={'100%'} />
+                        </div>
                     </div>
                 </div>
             </>

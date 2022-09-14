@@ -34,7 +34,21 @@
         },
         "doctor": {
             "manage-schedule": "Manage Doctor's schedule",
-            "manage-patient": "Manage Doctor's patient"
+            "manage-patient": "Management of medical examination patients",
+            "choose-day": "Choose a date of examination",
+            "numerical-order": "Numerial Order",
+            "time": "Time",
+            "full-name": "Full Name",
+            "address": "Address",
+            "gender": "Sex",
+            "phone-number": "Phone Number",
+            "btn-confirm": "Confirm",
+            "btn-bill": "Send Invoice",
+            "modal-title": "Invoice sent successfully",
+            "email-patient": "Patient email",
+            "medicine-file": "Select the prescription file",
+            "btn-send": "Send",
+            "btn-cancel": "Cancel"
         },
         "system": {
             "header": "System",

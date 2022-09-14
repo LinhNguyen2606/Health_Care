@@ -121,16 +121,6 @@ class Login extends Component {
                                                         callback={this.responseFacebook}
                                                     />
                                                 </div>
-                                                <div className="col-xs-4 col-sm-4 col-md-10">
-                                                    <a
-                                                        href="# "
-                                                        className="btn btn-block btn-google"
-                                                        style={{ marginLeft: '1.5rem' }}
-                                                    >
-                                                        <i className="fa fa-google-plus"></i>
-                                                        <span className="hidden-xs hidden-sm">Login with Google</span>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

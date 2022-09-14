@@ -43,7 +43,12 @@
             "gender": "Sex",
             "phone-number": "Phone Number",
             "btn-confirm": "Confirm",
-            "btn-bill": "Send Invoice"
+            "btn-bill": "Send Invoice",
+            "modal-title": "Invoice sent successfully",
+            "email-patient": "Patient email",
+            "medicine-file": "Select the prescription file",
+            "btn-send": "Send",
+            "btn-cancel": "Cancel"
         },
         "system": {
             "header": "System",

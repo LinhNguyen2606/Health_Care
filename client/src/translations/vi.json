@@ -43,7 +43,12 @@
             "gender": "Giới tính",
             "phone-number": "Số điện thoại",
             "btn-confirm": "Xác nhận",
-            "btn-bill": "Gửi hoá đơn"
+            "btn-bill": "Gửi hoá đơn",
+            "modal-title": "Gửi hoá đơn thành công",
+            "email-patient": "Email bệnh nhân",
+            "medicine-file": "Chọn file đơn thuốc",
+            "btn-send": "Gửi",
+            "btn-cancel": "Huỷ"
         },
         "system": {
             "header": "Hệ thống",

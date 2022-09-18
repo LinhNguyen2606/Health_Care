@@ -5,6 +5,7 @@ import doctorController from '../controllers/doctorController';
 import patientController from '../controllers/patientController';
 import specialtyController from '../controllers/specialtyController';
 import clinicController from '../controllers/clinicController';
+import chatController from '../controllers/chatController';
 
 let router = express.Router();
 
@@ -60,7 +61,13 @@ let initWebRoutes = (app) => {
     router.get('/api/get-detail-clinic-by-id', clinicController.getDetailClinicById);
     //Social login
     router.post('/api/facebook_login', userController.facebookLogin);
-
+    //chat
+    router.post('/api/conversation/', chatController.newConversation);
+    router.get('/api/conversation/search-by-patient/:patientId', chatController.patientChat);
+    router.get('/api/conversation/search-by-doctor/:doctorId', chatController.doctorChat);
+    router.get('/api/conversation/:patientId/:doctorId', chatController.usersChats);
+    router.post('/api/message/', chatController.newMessage);
+    router.get('/api/message/:conversationId', chatController.messageChat);
     return app.use('/', router);
 };
 

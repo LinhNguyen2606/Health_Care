@@ -8,6 +8,7 @@ import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfor from './DoctorExtraInfor';
 import LikeAndShare from '../SocialPlugin/LikeAndShare';
 import Comment from '../SocialPlugin/Comment';
+import { Link } from 'react-router-dom';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -70,6 +71,17 @@ class DetailDoctor extends Component {
                                     <div className="like-share-plugin" style={{ marginTop: '10px' }}>
                                         <LikeAndShare dataHref={currentURL} />
                                     </div>
+                                </div>
+
+                                <div className="btn-chat">
+                                    <Link
+                                        to={{
+                                            pathname: '/messenger',
+                                            state: { id: detailDoctor.id },
+                                        }}
+                                    >
+                                        <button className="btn btn-info">Chat with Doctors</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

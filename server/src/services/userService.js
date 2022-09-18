@@ -49,10 +49,14 @@ const handleUserLogin = (email, password) => {
             if (isExist) {
                 //user already exist
                 const user = await db.User.findOne({
-                    attributes: ['id', 'email', 'roleId', 'password', 'fullname'],
+                    attributes: ['id', 'email', 'roleId', 'password', 'fullname', 'image'],
                     where: { email: email },
                     raw: true,
                 });
+
+                if (user && user.image) {
+                    user.image = Buffer.from(user.image, 'base64').toString('binary');
+                }
                 if (user) {
                     const check = await bcrypt.compare(password, user.password);
 
@@ -134,6 +138,9 @@ let getUserOrAllUsers = (userId) => {
                         exclude: ['password'],
                     },
                 });
+                if (users && users.image) {
+                    users.image = Buffer.from(users.image, 'base64').toString('binary');
+                }
             }
             if (userId && userId !== 'ALL') {
                 users = await db.User.findOne({
@@ -142,6 +149,9 @@ let getUserOrAllUsers = (userId) => {
                         exclude: ['password'],
                     },
                 });
+                if (users && users.image) {
+                    users.image = Buffer.from(users.image, 'base64').toString('binary');
+                }
             }
             resolve(users);
         } catch (e) {

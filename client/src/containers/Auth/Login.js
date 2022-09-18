@@ -43,6 +43,7 @@ class Login extends Component {
                 });
             }
             if (data && data.errCode === 0) {
+                console.log(data);
                 this.props.userLoginSuccess(data.user);
                 toast.success('Log in successfully');
             }

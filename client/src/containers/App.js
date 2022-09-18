@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux';
 import { ToastContainer } from 'react-toastify';
@@ -21,6 +21,7 @@ import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 import DetailClinic from './Patient/Clinic/DetailClinic';
 import Doctor from '../routes/Doctor';
 import VerifyEmail from './Patient/VerifyEmail';
+import Messenger from '../containers/messenger/Messenger';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -42,6 +43,7 @@ class App extends Component {
     }
 
     render() {
+        const { user } = this.props;
         return (
             <Fragment>
                 <Router history={history}>
@@ -62,6 +64,9 @@ class App extends Component {
                                     <Route path={path.DETAIL_ClINIC} component={DetailClinic} />
                                     <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
+                                    <Route path={path.MESSENGER}>
+                                        {!user?.userInfo?.roleId === 'R3' ? <Redirect to="/:id" /> : <Messenger />}
+                                    </Route>
                                     <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                 </Switch>
                             </CustomScrollbars>
@@ -90,6 +95,7 @@ const mapStateToProps = (state) => {
     return {
         started: state.app.started,
         isLoggedIn: state.user.isLoggedIn,
+        user: state.user,
     };
 };
 

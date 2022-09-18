@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 class About extends Component {
     render() {
         return (
@@ -11,9 +11,9 @@ class About extends Component {
                             <h1 className="mt-4">For doctors</h1>
                             <span className="mt-3 mb-1">Build credibility and brand online</span>
                             <span>Increase the number of patients and manage effectively</span>
-                            <a href="/contact" className="mt-5 pd-3 contact-admin text-decoration-none">
+                            {/* <Link to="/messenger" className="mt-5 pd-3 contact-admin text-decoration-none">
                                 CONTACT COOPERATION
-                            </a>
+                            </Link> */}
                         </div>
                         <div className="col-7 d-flex justify-content-end" style={{ paddingTop: '5px' }}>
                             <iframe

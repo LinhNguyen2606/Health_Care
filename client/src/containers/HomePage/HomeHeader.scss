@@ -246,3 +246,19 @@ body {
         }
     }
 }
+
+i.fa-brands.fa-facebook-messenger {
+    font-size       : 40px;
+    color           : #fff;
+    position        : fixed;
+    bottom          : 1.5rem;
+    right           : 1rem;
+    background-color: #004fff;
+    padding         : 14px;
+    border-radius   : 50%;
+    cursor          : pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

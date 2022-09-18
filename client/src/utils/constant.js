@@ -20,6 +20,7 @@ export const path = {
     MANAGE_SPECIALTY: '/system/manage-specialty',
     MANAGE_CLINIC: '/system/manage-clinic',
     MANAGE_PATIENT: '/doctor/manage-patient',
+    MESSENGER: '/messenger',
 };
 
 export const LANGUAGES = {

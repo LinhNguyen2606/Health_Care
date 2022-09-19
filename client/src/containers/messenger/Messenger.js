@@ -8,7 +8,7 @@ import Message from '../../components/message/Message';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
-import { createConversationService } from '../../services/userService';
+import { createConversationService } from '../../services/chatService';
 
 function Messenger(props) {
     const [conversations, setConversations] = useState([]);

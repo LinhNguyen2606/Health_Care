@@ -21,6 +21,7 @@ export const path = {
     MANAGE_CLINIC: '/system/manage-clinic',
     MANAGE_PATIENT: '/doctor/manage-patient',
     MESSENGER: '/messenger',
+    VIDEO_CALL: '/video-call',
 };
 
 export const LANGUAGES = {

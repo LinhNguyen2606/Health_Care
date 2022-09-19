@@ -52,10 +52,6 @@ const saveDetailDoctorService = (data) => {
     return axios.post(`/api/save-infor-doctors`, data);
 };
 
-const createConversationService = (data) => {
-    return axios.post(`/api/conversation/`, data);
-};
-
 export {
     handleLoginApi,
     handleRegisterApi,
@@ -69,5 +65,4 @@ export {
     getTopDoctorHomeService,
     getAllDoctorsService,
     saveDetailDoctorService,
-    createConversationService,
 };

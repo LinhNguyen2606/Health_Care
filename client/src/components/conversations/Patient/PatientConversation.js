@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../Conversation.scss';
 import { getAllUsers } from '../../../services/userService';
 import hacker from '../../../assets/images/hacker-no-avatar.png';
+import { Link } from 'react-router-dom';
 function PatientConversation({ conversation, currentUser }) {
     const [user, setUser] = useState(null);
     useEffect(() => {
@@ -21,6 +22,11 @@ function PatientConversation({ conversation, currentUser }) {
         <div className="conversation">
             <img className="conversationImg" src={user && user.image ? user.image : hacker} alt="" />
             <span className="conversationName">{user?.fullname}</span>
+            <Link to="/video-call">
+                <span className="conversationPhone">
+                    <i className="fa-solid fa-phone"></i>
+                </span>
+            </Link>
         </div>
     );
 }

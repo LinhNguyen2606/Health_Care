@@ -22,6 +22,7 @@ import DetailClinic from './Patient/Clinic/DetailClinic';
 import Doctor from '../routes/Doctor';
 import VerifyEmail from './Patient/VerifyEmail';
 import Messenger from '../containers/messenger/Messenger';
+import VideoCall from './VideoCall';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -67,6 +68,7 @@ class App extends Component {
                                     <Route path={path.MESSENGER}>
                                         {!user?.userInfo?.roleId === 'R3' ? <Redirect to="/:id" /> : <Messenger />}
                                     </Route>
+                                    <Route path={path.VIDEO_CALL} component={VideoCall} />
                                     <Route path={path.PAGE_NOT_FOUND} component={NotFound} />
                                 </Switch>
                             </CustomScrollbars>

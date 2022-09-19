@@ -21,6 +21,17 @@
     .conversationName {
         font-weight: 500;
     }
+
+    .conversationPhone {
+        margin-left: 1rem;
+        font-size  : 16px;
+        color      : blue;
+
+        &:hover {
+            color  : #5aafe6;
+            opacity: 0.8;
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {

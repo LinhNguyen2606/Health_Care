@@ -80,7 +80,7 @@ class DetailDoctor extends Component {
                                             state: { id: detailDoctor.id },
                                         }}
                                     >
-                                        <button className="btn btn-info">Chat with Doctors</button>
+                                        <button className="btn btn-info">Chat with Doctor</button>
                                     </Link>
                                 </div>
                             </div>

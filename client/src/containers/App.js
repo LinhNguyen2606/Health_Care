@@ -23,6 +23,8 @@ import Doctor from '../routes/Doctor';
 import VerifyEmail from './Patient/VerifyEmail';
 import Messenger from '../containers/messenger/Messenger';
 import VideoCall from './VideoCall';
+import ChangePassword from './Auth/ChangePassword';
+import ResetPassword from './Auth/ResetPassword';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -56,6 +58,8 @@ class App extends Component {
                                     <Route path={path.REGISTER} component={userIsNotAuthenticated(Register)} />
                                     <Route path={path.ACTIVE_EMAIL} component={ActivationEmail} exact />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
+                                    <Route path={path.RESET_PASSWORD} component={ResetPassword} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.CONFIRM_EMAIL} component={NotificationEmail} exact />

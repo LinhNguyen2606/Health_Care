@@ -16,6 +16,14 @@ const loginFacebook = (data) => {
     return axios.post('/api/facebook_login', data);
 };
 
+const changePasswordService = (email) => {
+    return axios.post('/api/change', { email });
+};
+
+const resetPasswordService = (data) => {
+    return axios.post('/api/reset', data);
+};
+
 const getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`);
 };
@@ -65,4 +73,6 @@ export {
     getTopDoctorHomeService,
     getAllDoctorsService,
     saveDetailDoctorService,
+    changePasswordService,
+    resetPasswordService,
 };

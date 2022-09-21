@@ -49,7 +49,7 @@ class Comment extends Component {
         return (
             <>
                 <div
-                    class="fb-comments"
+                    className="fb-comments"
                     data-href="http://localhost:3000/detail"
                     data-width="100%"
                     data-numposts="5"

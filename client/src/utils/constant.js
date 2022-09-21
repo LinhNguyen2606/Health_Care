@@ -22,6 +22,8 @@ export const path = {
     MANAGE_PATIENT: '/doctor/manage-patient',
     MESSENGER: '/messenger',
     VIDEO_CALL: '/video-call',
+    CHANGE_PASSWORD: '/change-password',
+    RESET_PASSWORD: '/api/reset/:token',
 };
 
 export const LANGUAGES = {

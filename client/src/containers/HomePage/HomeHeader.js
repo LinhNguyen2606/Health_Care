@@ -105,12 +105,12 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className="right-content">
-                            <div className="support">
+                            {/* <div className="support">
                                 <i className="fa-solid fa-circle-question"></i>
                                 <span>
                                     <FormattedMessage id="homeheader.support" />
                                 </span>
-                            </div>
+                            </div> */}
                             <div className="flag">
                                 <img src={vnFlag} alt="vn-flag" />
                                 <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}>

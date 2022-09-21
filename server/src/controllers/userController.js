@@ -195,6 +195,53 @@ const facebookLogin = async (req, res) => {
     }
 };
 
+const changePassword = async (req, res) => {
+    try {
+        let { email } = req.body;
+        let infor = await userService.changePassword(email);
+        return res.status(200).json(infor);
+    } catch (e) {
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        let { oldPassword, newPassword, token } = req.body;
+        if (oldPassword.length < 6 && newPassword.length < 6)
+            return res.status(400).json({
+                errCode: 2,
+                message: 'Password must be at least 6 characters.',
+            });
+
+        let user = await db.User.findOne({ where: { id: req.user.where.id } });
+
+        bcrypt.compare(oldPassword, user.password).then(async (match) => {
+            if (!match)
+                return res.json({
+                    errCode: 1,
+                    errMessage: 'Wrong Password Entered!',
+                });
+
+            bcrypt.hash(newPassword, 10).then((hash) => {
+                db.User.update({ password: hash }, { where: { id: req.user.where.id } });
+            });
+        });
+        return res.status(200).json({
+            errCode: 0,
+            message: 'Password successfully changed!',
+        });
+    } catch (e) {
+        return res.status(500).json({
+            errCode: -1,
+            errMessage: 'Error from the server',
+        });
+    }
+};
+
 const handleCreateNewUser = async (req, res) => {
     try {
         const message = await userService.createNewUser(req.body);
@@ -303,4 +350,6 @@ module.exports = {
     handleGetUserOrAllUsers: handleGetUserOrAllUsers,
     handleDeleteUser: handleDeleteUser,
     handleEditUser: handleEditUser,
+    changePassword: changePassword,
+    resetPassword: resetPassword,
 };

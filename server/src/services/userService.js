@@ -86,6 +86,31 @@ const handleUserLogin = (email, password) => {
     });
 };
 
+const changePassword = (email) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await db.User.findOne({ where: { email: email } });
+            if (!user) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'This email does not exists,',
+                });
+            }
+            const access_token = createAccessToken({ where: { id: user.id } });
+
+            const url = `${CLIENT_URL}/api/reset/${access_token}`;
+            sendMail(email, url, 'Reset your password');
+
+            resolve({
+                errCode: 0,
+                message: 'Re-send the password, please check your email.',
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 const getAllCodeService = (typeInput) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -267,6 +292,10 @@ const deleteUser = (userId) => {
     });
 };
 
+const createAccessToken = (payload) => {
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+};
+
 function validateEmail(email) {
     const re =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -281,4 +310,5 @@ module.exports = {
     getUserOrAllUsers: getUserOrAllUsers,
     updateUserData: updateUserData,
     deleteUser: deleteUser,
+    changePassword: changePassword,
 };

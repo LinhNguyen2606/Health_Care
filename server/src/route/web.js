@@ -6,6 +6,7 @@ import patientController from '../controllers/patientController';
 import specialtyController from '../controllers/specialtyController';
 import clinicController from '../controllers/clinicController';
 import chatController from '../controllers/chatController';
+import auth from '../middleware/auth';
 
 let router = express.Router();
 
@@ -22,6 +23,8 @@ let initWebRoutes = (app) => {
     router.post('/api/register', userController.handleRegister);
     router.post('/api/activation', userController.activateEmail);
     router.post('/api/login', userController.handleLogin);
+    router.post('/api/change', userController.changePassword);
+    router.post('/api/reset', auth, userController.resetPassword);
 
     //user
     router.post('/api/create-new-user', userController.handleCreateNewUser);

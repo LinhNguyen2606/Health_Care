@@ -196,14 +196,14 @@ class Login extends Component {
                                                         <div className="row remember-row">
                                                             <div className="col-xs-6 col-sm-6">
                                                                 <p className="forgotPwd">
-                                                                    <a
+                                                                    <Link
                                                                         className="lnk-toggler"
                                                                         data-panel=".panel-forgot"
-                                                                        href="# "
+                                                                        to="/change-password"
                                                                         style={{ marginLeft: '7rem' }}
                                                                     >
-                                                                        Forgot password?
-                                                                    </a>
+                                                                        Change password
+                                                                    </Link>
                                                                 </p>
                                                             </div>
                                                         </div>

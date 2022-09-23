@@ -65,7 +65,7 @@ class Header extends Component {
                                 <div className="header-tabs-container">
                                     <Navigator menus={this.state.menuApp} />
                                 </div>
-                                <div className="languages" style={{ marginLeft: '25rem' }}>
+                                <div className="languages" style={{ marginLeft: '20rem' }}>
                                     <span className="welcome">
                                         <FormattedMessage id="homeheader.welcome" />
                                         {userInfo && userInfo.fullname ? userInfo.fullname : ''} !

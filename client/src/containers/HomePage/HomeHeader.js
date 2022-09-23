@@ -57,7 +57,9 @@ class HomeHeader extends Component {
                 <div className="home-header-container">
                     <div className="home-header-content">
                         <div className="left-content">
-                            <i className="fa-solid fa-bars"></i>
+                            <Link to="/login">
+                                <i className="fa-solid fa-bars"></i>
+                            </Link>
                             <Link to="/home">
                                 <div className="header-logo"></div>
                             </Link>

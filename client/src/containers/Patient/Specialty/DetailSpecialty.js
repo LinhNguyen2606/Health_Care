@@ -75,7 +75,6 @@ class DetailSpecialty extends Component {
 
             if (res && res.errCode === 0) {
                 let data = res.data;
-                console.log(data);
                 let arrDoctorId = [];
                 if (data && !_.isEmpty(res.data)) {
                     let arr = data.doctorSpecialty;

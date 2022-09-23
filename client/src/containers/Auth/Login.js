@@ -43,7 +43,6 @@ class Login extends Component {
                 });
             }
             if (data && data.errCode === 0) {
-                console.log(data);
                 this.props.userLoginSuccess(data.user);
                 toast.success('Log in successfully');
             }
@@ -62,7 +61,6 @@ class Login extends Component {
         this.setState({
             isShowPassword: !this.state.isShowPassword,
         });
-        console.log(this.state.isShowPassword);
     };
 
     handleKeyDown = (e) => {
@@ -106,7 +104,9 @@ class Login extends Component {
                                 <div className="col-sm-5 authfy-panel-left">
                                     <div className="brand-col">
                                         <div className="headline">
-                                            <p>Login using social media to get quick access</p>
+                                            <p style={{ marginLeft: '0.25rem' }}>
+                                                Login using social media to get quick access
+                                            </p>
                                             {/* <!-- social login buttons start --> */}
                                             <div className="row social-buttons">
                                                 <div
@@ -202,7 +202,7 @@ class Login extends Component {
                                                                         to="/change-password"
                                                                         style={{ marginLeft: '7rem' }}
                                                                     >
-                                                                        Change password
+                                                                        Change password?
                                                                     </Link>
                                                                 </p>
                                                             </div>

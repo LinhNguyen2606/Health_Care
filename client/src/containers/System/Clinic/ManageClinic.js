@@ -192,11 +192,15 @@ class ManageSpecialty extends Component {
                     </div>
                     <div className="col-12 my-4">
                         <button
-                            className="btn btn-warning"
+                            className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning' : 'btn btn-primary'}
                             style={{ textTransform: 'capitalize' }}
                             onClick={() => this.handleSaveNewClinic()}
                         >
-                            <FormattedMessage id="manage-clinic.save" />
+                            {this.state.action === CRUD_ACTIONS.EDIT ? (
+                                <FormattedMessage id="manage-clinic.edit" />
+                            ) : (
+                                <FormattedMessage id="manage-clinic.save" />
+                            )}
                         </button>
                     </div>
                     <span className="table-clinic">Table Manage Clinic</span>

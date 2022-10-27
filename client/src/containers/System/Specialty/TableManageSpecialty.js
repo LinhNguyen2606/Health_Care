@@ -4,12 +4,14 @@ import './TableManageSpecialty.scss';
 import * as actions from '../../../store/actions';
 import 'react-markdown-editor-lite/lib/index.css';
 import { LANGUAGES } from '../../../utils';
+import ReactPaginate from 'react-paginate';
 
 class TableManageSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
             getSpecialties: [],
+            pageNumber: 0,
         };
     }
 
@@ -33,9 +35,16 @@ class TableManageSpecialty extends Component {
         this.props.handleEditSpecialtyFromParentKey(specialty);
     };
 
+    changePage = ({ selected }) => {
+        this.setState({ pageNumber: selected });
+    };
+
     render() {
         let { getSpecialties } = this.state;
         let { language } = this.props;
+        let specialtiesPerPage = 10;
+        let pagesVisited = this.state?.pageNumber * specialtiesPerPage;
+        let pageCount = Math.ceil(getSpecialties.length / specialtiesPerPage);
         return (
             <>
                 <table id="TableManageSpecialty">
@@ -46,7 +55,7 @@ class TableManageSpecialty extends Component {
                         </tr>
                         {getSpecialties &&
                             getSpecialties.length > 0 &&
-                            getSpecialties.map((item) => {
+                            getSpecialties.slice(pagesVisited, pagesVisited + specialtiesPerPage).map((item) => {
                                 return (
                                     <tr key={item.id}>
                                         <td>{language === LANGUAGES.VI ? item.nameVi : item.nameEn}</td>
@@ -69,6 +78,17 @@ class TableManageSpecialty extends Component {
                             })}
                     </tbody>
                 </table>
+                <ReactPaginate
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
+                    pageCount={pageCount}
+                    onPageChange={this.changePage}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
             </>
         );
     }

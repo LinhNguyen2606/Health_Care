@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import './TableManageDoctor.scss';
 import * as actions from '../../../store/actions';
 import 'react-markdown-editor-lite/lib/index.css';
+import ReactPaginate from 'react-paginate';
 
 class TableManageDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
             getDoctors: [],
+            pageNumber: 0,
         };
     }
 
@@ -28,8 +30,15 @@ class TableManageDoctor extends Component {
         this.props.deleteDoctor(doctor.id);
     };
 
+    changePage = ({ selected }) => {
+        this.setState({ pageNumber: selected });
+    };
+
     render() {
         const arrDoctors = this.state.getDoctors;
+        let doctorsPerPage = 10;
+        let pagesVisited = this.state?.pageNumber * doctorsPerPage;
+        let pageCount = Math.ceil(arrDoctors.length / doctorsPerPage);
         return (
             <>
                 <table id="TableManageDoctor">
@@ -42,7 +51,7 @@ class TableManageDoctor extends Component {
                         </tr>
                         {arrDoctors &&
                             arrDoctors.length > 0 &&
-                            arrDoctors.map((item) => {
+                            arrDoctors.slice(pagesVisited, pagesVisited + doctorsPerPage).map((item) => {
                                 return (
                                     <tr key={item.id}>
                                         <td>{item.email}</td>
@@ -61,6 +70,17 @@ class TableManageDoctor extends Component {
                             })}
                     </tbody>
                 </table>
+                <ReactPaginate
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
+                    pageCount={pageCount}
+                    onPageChange={this.changePage}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
             </>
         );
     }

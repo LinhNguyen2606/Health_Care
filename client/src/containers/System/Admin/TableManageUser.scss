@@ -33,3 +33,38 @@ tbody {
 #TableManageUser td:last-child {
     text-align: center;
 }
+
+.paginationBttns {
+    height         : 40px;
+    list-style     : none;
+    display        : flex;
+    justify-content: center;
+    align-items    : flex-end;
+    margin-top     : 2rem;
+
+    a {
+        padding      : 10px;
+        margin       : 8px;
+        border-radius: 5px;
+        border       : 1px solid #007bff;
+        color        : #007bff;
+        cursor       : pointer;
+
+        &:hover {
+            color           : white;
+            background-color: #007bff;
+        }
+    }
+}
+
+.paginationActive {
+    a {
+        color           : white;
+        background-color: #007bff;
+    }
+}
+
+.paginationDisabled a {
+    color           : #fff;
+    background-color: #007bff;
+}

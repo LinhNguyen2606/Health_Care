@@ -4,12 +4,14 @@ import './TableManageClinic.scss';
 import * as actions from '../../../store/actions';
 import 'react-markdown-editor-lite/lib/index.css';
 import { LANGUAGES } from '../../../utils';
+import ReactPaginate from 'react-paginate';
 
 class TableManageClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
             getClinics: [],
+            pageNumber: 0,
         };
     }
 
@@ -33,9 +35,16 @@ class TableManageClinic extends Component {
         this.props.handleEditClinicFromParentKey(clinic);
     };
 
+    changePage = ({ selected }) => {
+        this.setState({ pageNumber: selected });
+    };
+
     render() {
         let { getClinics } = this.state;
         let { language } = this.props;
+        let clinicsPerPage = 10;
+        let pagesVisited = this.state?.pageNumber * clinicsPerPage;
+        let pageCount = Math.ceil(getClinics.length / clinicsPerPage);
         return (
             <>
                 <table id="TableManageClinic">
@@ -47,7 +56,7 @@ class TableManageClinic extends Component {
                         </tr>
                         {getClinics &&
                             getClinics.length > 0 &&
-                            getClinics.map((item) => {
+                            getClinics.slice(pagesVisited, pagesVisited + clinicsPerPage).map((item) => {
                                 return (
                                     <tr key={item.id}>
                                         <td>{language === LANGUAGES.VI ? item.nameVi : item.nameEn}</td>
@@ -71,6 +80,17 @@ class TableManageClinic extends Component {
                             })}
                     </tbody>
                 </table>
+                <ReactPaginate
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
+                    pageCount={pageCount}
+                    onPageChange={this.changePage}
+                    containerClassName={'paginationBttns'}
+                    previousLinkClassName={'previousBttn'}
+                    nextLinkClassName={'nextBttn'}
+                    disabledClassName={'paginationDisabled'}
+                    activeClassName={'paginationActive'}
+                />
             </>
         );
     }

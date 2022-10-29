@@ -37,10 +37,15 @@ class HomeHeader extends Component {
     };
 
     handleFilter = (e) => {
-        const searchWord = e.target.value;
+        let { language } = this.props;
+        let searchWord = e.target.value;
         this.setState({ wordEntered: searchWord });
-        const newFilter = this.props.allSpecialties.filter((value) => {
-            return value.nameVi.toLowerCase().includes(searchWord.toLowerCase());
+        let newFilter = this.props.allSpecialties.filter((value) => {
+            if (language === LANGUAGES.VI) {
+                return value.nameVi.toLowerCase().includes(searchWord.toLowerCase());
+            } else {
+                return value.nameEn.toLowerCase().includes(searchWord.toLowerCase());
+            }
         });
         if (searchWord === '') {
             this.setState({ filteredData: [] });
@@ -50,8 +55,8 @@ class HomeHeader extends Component {
     };
 
     render() {
-        const language = this.props.language;
-        const { wordEntered, filteredData } = this.state;
+        let language = this.props.language;
+        let { wordEntered, filteredData } = this.state;
         return (
             <>
                 <div className="home-header-container">

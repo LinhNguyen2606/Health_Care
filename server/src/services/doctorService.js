@@ -492,7 +492,7 @@ let getListPatientForDoctor = (doctorId, date) => {
                 });
             } else {
                 let data = await db.Booking.findAll({
-                    where: { doctorId: 'S2', doctorId: doctorId, date: date },
+                    where: { statusId: 'S2', doctorId: doctorId, date: date },
                     include: [
                         {
                             model: db.User,

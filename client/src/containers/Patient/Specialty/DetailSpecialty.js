@@ -30,7 +30,7 @@ class DetailSpecialty extends Component {
 
             let resProvince = await getAllCodeService('PROVINCE');
 
-            if (res && res.errCode === 0) {
+            if (res && res.errCode === 0 && resProvince && resProvince.errCode === 0) {
                 let data = res.data;
                 let arrDoctorId = [];
                 if (data && !_.isEmpty(data)) {
